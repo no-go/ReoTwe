@@ -6,6 +6,7 @@ Twthaar is a very low level just reading twitter client. You can use the code fo
 
 ## Features
 
+- Ads free!
 - get and add your own API key and secret on apps.twitter.com
 - twitter login button to authorize the App
 - lists timeline without images of a given username (+time, likes, retweets)
@@ -48,7 +49,13 @@ I DO NOT collect non-personal information like user's behavior:
  -  to solve App problems
  -  to show personalized ads
 
-The google play store collect non-personal information such as the data of install (country and equipment).
+The google play store collect non-personal information such as the data of install (country and equipment). 
+
+### Twitter Kit and Twitter API
+
+I use both to build the app. I did not add any google or ad keys or codes for marketing feedback, Ads or payment systems. BUT PLEASE read the *Privacy Policy* of the twitter API, too!
+
+[https://dev.twitter.com/overview/terms/agreement-and-policy](https://dev.twitter.com/overview/terms/agreement-and-policy)
 
 ### Privacy Questions.
 
