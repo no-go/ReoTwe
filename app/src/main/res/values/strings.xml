@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Twthaar</string>
+    <string name="flattr_this">Micro-Donate !</string>
+    <string name="projPage">Project Page</string>
+    <string name="ups">nothing found or errors</string>
+    <string name="preferences">PREFERENCES</string>
+    <string name="apihint">get it on http://apps.twitter.com</string>
+    <string name="maxfr">max friends entries</string>
+    <string name="maxtime">max timeline entries</string>
+</resources>

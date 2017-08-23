@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:defaultValue=""
+        android:summary="@string/apihint"
+        android:key="CONSUMER_KEY"
+        android:title="CONSUMER_KEY" />
+
+    <EditTextPreference
+        android:defaultValue=""
+        android:summary="@string/apihint"
+        android:key="CONSUMER_SECRET"
+        android:title="CONSUMER_SECRET" />
+
+    <de.digisocken.twthaar.IntEditPreference
+        android:key="MAXFRIENDS"
+        android:title="@string/maxfr"
+        android:numeric="integer"
+        android:maxLength="2" />
+
+    <de.digisocken.twthaar.IntEditPreference
+        android:key="MAXTIMELINE"
+        android:title="@string/maxtime"
+        android:numeric="integer"
+        android:maxLength="2" />
+
+</PreferenceScreen>
