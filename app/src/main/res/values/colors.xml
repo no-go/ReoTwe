@@ -3,9 +3,5 @@
     <color name="colorPrimary">#3ea6ff</color>
     <color name="colorPrimaryDark">#2087df</color>
     <color name="colorAccent">#3ea6ff</color>
-    <color name="tweetDate">#ffffff</color>
     <color name="tweetText">#000000</color>
-    <color name="tweetBack1">#00ffffff</color>
-    <color name="tweetBack2">#89bababa</color>
-    <color name="appBackground">#ffffff</color>
 </resources>

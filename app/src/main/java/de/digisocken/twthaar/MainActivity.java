@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,32 +20,21 @@ import android.widget.TextView;
 
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.TwitterSession;
-import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.models.User;
 import com.twitter.sdk.android.tweetui.TimelineResult;
 import com.twitter.sdk.android.tweetui.UserTimeline;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Objects;
-
-import retrofit2.Call;
 
 public class MainActivity extends AppCompatActivity {
     LinearLayout list;
     ImageButton button;
     EditText editText;
-    TwitterLoginButton loginButton;
-    TwitterSession session;
-    MyTwitterApiClient twitterApiClient;
-    MyTwitterApiClient.FriendsService fs;
-    String username = "";
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -92,113 +82,35 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         list = (LinearLayout) findViewById(R.id.list);
         button = (ImageButton) findViewById(R.id.button);
         editText = (EditText) findViewById(R.id.editText);
-        loginButton = (TwitterLoginButton) findViewById(R.id.login_button);
-
-        loginButton.setCallback(new Callback<TwitterSession>() {
-            @Override
-            public void success(Result<TwitterSession> result) {
-                session = result.data;
-                username = session.getUserName();
-                editText.setText(username);
-                loginButton.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void failure(TwitterException e) {
-                e.printStackTrace();
-                TextView tv = new TextView(getApplicationContext());
-                tv.setText(getString(R.string.ups));
-                list.addView(tv);
-            }
-        });
-
-        if (TwitterCore.getInstance().getSessionManager().getActiveSession() != null) {
-            username = TwitterCore.getInstance().getSessionManager().getActiveSession().getUserName();
-            editText.setText(username);
-        } else {
-            loginButton.setVisibility(View.VISIBLE);
-        }
-
-        button.setOnClickListener(new MyOnClickListener());
+        editText.setText(TwthaarApp.mPreferences.getString("STARTUSER", TwthaarApp.DEFAULT_STARTUSER));
+        button.setOnClickListener(new MyOnClickListener(""));
+        button.callOnClick();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        loginButton.onActivityResult(requestCode, resultCode, data);
-    }
 
-    class FriendCallback extends Callback<MyTwitterApiClient.UsersCursor> {
-        String _query;
-
-        FriendCallback(String query) {
-            _query = query;
-        }
-
-        @Override
-        public void success(Result<MyTwitterApiClient.UsersCursor> result) {
-            for (final User user: result.data.users) {
-                Button btn = new Button(getApplicationContext());
-                btn.setText(user.screenName);
-                btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        editText.setText(user.screenName);
-                    }
-                });
-                list.addView(btn);
-            }
-            if (result.data.nextCursor > 0) {
-                Call<MyTwitterApiClient.UsersCursor> call = fs.friends(
-                        _query,
-                        (int) result.data.nextCursor,
-                        TwthaarApp.mPreferences.getInt("MAXFRIENDS", TwthaarApp.DEFAULT_MAXFRIENDS),
-                        true,
-                        false
-                );
-                call.enqueue(new FriendCallback(_query));
-            }
-        }
-
-        @Override
-        public void failure(TwitterException e) {
-            e.printStackTrace();
-            TextView tv = new TextView(getApplicationContext());
-            tv.setText(getString(R.string.ups));
-            list.addView(tv);
-        }
-    }
 
     class MyOnClickListener implements View.OnClickListener {
+        String query;
+
+        public MyOnClickListener(String q) {
+            query = q;
+            if (q.equals("")) query = editText.getText().toString();
+        }
 
         @Override
         public void onClick(View v) {
+            editText.setText(query);
             list.removeAllViews();
-            String query = editText.getText().toString().replace("@", "");
+            final ArrayList<View> tweetViews = new ArrayList<>();
+            final ArrayList<String> maybeFriend = new ArrayList<>();
             UserTimeline userTimeline = new UserTimeline.Builder()
                     .screenName(query)
-                    .maxItemsPerRequest(
-                            TwthaarApp.mPreferences.getInt("MAXTIMELINE", TwthaarApp.DEFAULT_MAXTIMELINE)
-                    )
+                    .maxItemsPerRequest(TwthaarApp.DEFAULT_MAXTIMELINE)
                     .build();
-
-            if (!Objects.equals(username, "")) {
-                twitterApiClient = new MyTwitterApiClient(
-                        TwitterCore.getInstance().getSessionManager().getActiveSession()
-                );
-                fs = twitterApiClient.getFriendsService();
-                Call<MyTwitterApiClient.UsersCursor> call = fs.friends(
-                        query,
-                        null,
-                        TwthaarApp.mPreferences.getInt("MAXFRIENDS", TwthaarApp.DEFAULT_MAXFRIENDS),
-                        true,
-                        false
-                );
-                call.enqueue(new FriendCallback(query));
-            }
 
             userTimeline.next(null, new Callback<TimelineResult<Tweet>>() {
                 SimpleDateFormat formatIn = new SimpleDateFormat("EEE MMM dd hh:mm:ss z yyyy", Locale.ENGLISH);
@@ -209,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                     for(final Tweet tweet : result.data.items) {
 
                         TextView td = new TextView(getApplicationContext());
-                        td.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.tweetDate));
+                        td.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
                         td.setTypeface(null, Typeface.BOLD);
                         td.setPadding(10,5,10,5);
 
@@ -218,19 +130,17 @@ public class MainActivity extends AppCompatActivity {
                         tv.setText(tweet.text);
                         tv.setTypeface(null, Typeface.NORMAL);
                         tv.setPadding(15,0,15,10);
-                        tv.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                int rtindex = tweet.text.indexOf("RT @");
-                                if (rtindex >= 0) {
-                                    String rtuser = tweet.text.substring(
-                                            rtindex,
-                                            tweet.text.indexOf(": ",rtindex)
-                                    );
-                                    editText.setText(rtuser.replace("RT @",""));
-                                }
-                            }
-                        });
+
+                        int rtindex = tweet.text.indexOf("RT @");
+                        if (rtindex >= 0) {
+                            String rtuser = tweet.text.substring(
+                                    rtindex,
+                                    tweet.text.indexOf(": ", rtindex)
+                            );
+                            rtuser = rtuser.replace("RT @", "");
+                            maybeFriend.add(rtuser);
+                            tv.setOnClickListener(new MyOnClickListener(rtuser));
+                        }
 
                         Date parsedDate = null;
                         String rtAndLikes = " ⇆ " +
@@ -243,33 +153,24 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                             td.setText(tweet.createdAt + rtAndLikes);
                         }
-                        if (i%2 == 0) {
-                            td.setBackgroundColor(
-                                    ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark)
-                            );
-                            tv.setBackgroundColor(
-                                    ContextCompat.getColor(getApplicationContext(), R.color.tweetBack2)
-                            );
-                        } else {
-                            td.setBackgroundColor(
-                                    ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)
-                            );
-                            tv.setBackgroundColor(
-                                    ContextCompat.getColor(getApplicationContext(), R.color.tweetBack1)
-                            );
-                        }
-                        list.addView(td);
-                        list.addView(tv);
+                        tweetViews.add(td);
+                        tweetViews.add(tv);
 
                         i++;
+                    }
+                    for (String friend : maybeFriend) {
+                        Log.d(TwthaarApp.TAG, friend);
+                        Button btn = new Button(getApplicationContext());
+                        btn.setOnClickListener(new MyOnClickListener(friend));
+                        list.addView(btn);
+                    }
+                    for (View view : tweetViews) {
+                        list.addView(view);
                     }
                 }
                 @Override
                 public void failure(TwitterException e) {
                     e.printStackTrace();
-                    TextView tv = new TextView(getApplicationContext());
-                    tv.setText(getString(R.string.ups));
-                    list.addView(tv);
                 }
             });
         }

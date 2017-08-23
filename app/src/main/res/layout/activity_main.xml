@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="0dp"
-    android:background="@color/appBackground"
     tools:context="de.digisocken.twthaar.MainActivity">
 
     <RelativeLayout
@@ -33,19 +32,6 @@
             android:layout_alignParentTop="true"
             android:background="@android:color/transparent"
             app:srcCompat="@android:drawable/ic_menu_search" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:padding="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.twitter.sdk.android.core.identity.TwitterLoginButton
-            android:id="@+id/login_button"
-            android:visibility="gone"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
     </RelativeLayout>
 

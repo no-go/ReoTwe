@@ -20,8 +20,8 @@ public class TwthaarApp extends Application {
     public static final String FLATTR_ID = "o6wo7q";
     public static String FLATTR_LINK;
 
-    public static final int DEFAULT_MAXFRIENDS  = 15;
-    public static final int DEFAULT_MAXTIMELINE = 90;
+    public static final int DEFAULT_MAXTIMELINE = 60;
+    public static final String DEFAULT_STARTUSER = "go_nix";
 
     public void onCreate() {
         super.onCreate();

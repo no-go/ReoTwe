@@ -7,22 +7,10 @@ Twthaar is a very low level just reading twitter client. You can use the code fo
 ## Features
 
 - Ads free!
-- get and add your own API key and secret on apps.twitter.com
-- twitter login button to authorize the App
+- get and add your own API key and secret on apps.twitter.com to authorize the App
 - lists timeline without images of a given username (+time, likes, retweets)
 - extracts username from `RT @username:` and but it to the search field by click on the tweet
 - very simple android code
-- lists the friendlist of a given username (click on them, to send the username to the search field)
-
-Sometimes the friendlist does not work (15min twitter limits).
-
-## Get the App
-
-You can get a signed APK from here (Android 4.1+): [APK](https://raw.githubusercontent.com/no-go/Twthaar/master/app/app-release.apk)
-
-## Screenshots
-
-![Screenshots of Twthaar](screenshots.png)
 
 ## License
 
