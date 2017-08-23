@@ -1,4 +1,4 @@
-# Twthaar
+# Twthaar (mini)
 
 Twthaar is a very low level just reading twitter client. You can use the code for build your own cool client or to learn how *Twitter Kit* and API works.
 
@@ -11,6 +11,10 @@ Twthaar is a very low level just reading twitter client. You can use the code fo
 - lists timeline without images of a given username (+time, likes, retweets)
 - extracts username from `RT @username:` and but it to the search field by click on the tweet
 - very simple android code
+
+## Screenshots
+
+![Screenshot of Twthaar - mini](screenshot.png)
 
 ## License
 

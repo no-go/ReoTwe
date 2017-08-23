@@ -9,7 +9,9 @@
     tools:context="de.digisocken.twthaar.MainActivity">
 
     <RelativeLayout
-        android:padding="10dp"
+        android:background="@color/tw__blue_default"
+        android:padding="5dp"
+        android:elevation="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -22,6 +24,7 @@
             android:inputType="textPersonName"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
+            android:textColor="@android:color/white"
             android:layout_toStartOf="@+id/button" />
 
         <ImageButton
@@ -35,18 +38,12 @@
 
     </RelativeLayout>
 
-    <ScrollView
-        android:layout_width="wrap_content"
+    <ListView
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:id="@+id/list"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
-
-        <LinearLayout
-            android:id="@+id/list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-        </LinearLayout>
-    </ScrollView>
+        android:layout_width="match_parent">
+    </ListView>
 
 </LinearLayout>
