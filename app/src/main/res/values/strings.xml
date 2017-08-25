@@ -4,4 +4,5 @@
     <string name="projPage">Project Page</string>
     <string name="preferences">PREFERENCES</string>
     <string name="apihint">get it on http://apps.twitter.com</string>
+    <string name="search">search @user or #tag</string>
 </resources>

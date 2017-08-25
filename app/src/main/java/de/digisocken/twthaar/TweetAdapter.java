@@ -15,17 +15,13 @@ import com.twitter.sdk.android.tweetui.TimelineResult;
 import com.twitter.sdk.android.tweetui.UserTimeline;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 
 class TweetAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<Tweet> mDataSource;
-    private SimpleDateFormat formatIn = new SimpleDateFormat("EEE MMM dd hh:mm:ss z yyyy", Locale.ENGLISH);
-    private SimpleDateFormat formatOut = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH);
 
     public TweetAdapter(Context context, ArrayList<Tweet> items) {
         mContext = context;
@@ -58,9 +54,11 @@ class TweetAdapter extends BaseAdapter {
         TextView tDate = (TextView) rowView.findViewById(R.id.tweetDate);
         TextView tStats = (TextView) rowView.findViewById(R.id.tweetStats);
         TextView tText = (TextView) rowView.findViewById(R.id.tweetText);
+        TextView tUser = (TextView) rowView.findViewById(R.id.tweetUser);
 
         Tweet tweet = (Tweet) getItem(position);
         tText.setText(tweet.text);
+        tUser.setText("@" + tweet.user.screenName);
 
         tStats.setText(
                 " ⇆ " +
@@ -69,8 +67,8 @@ class TweetAdapter extends BaseAdapter {
         );
 
         try {
-            Date parsedDate = formatIn.parse(tweet.createdAt);
-            tDate.setText(formatOut.format(parsedDate));
+            Date parsedDate = TwthaarApp.formatIn.parse(tweet.createdAt);
+            tDate.setText(TwthaarApp.formatOut.format(parsedDate));
         } catch (ParseException e) {
             e.printStackTrace();
             tDate.setText(tweet.createdAt);
@@ -108,7 +106,7 @@ class TweetAdapter extends BaseAdapter {
         public void onClick(View v) {
             UserTimeline userTimeline = new UserTimeline.Builder()
                     .screenName(query)
-                    .maxItemsPerRequest(TwthaarApp.DEFAULT_MAXTIMELINE)
+                    .maxItemsPerRequest(TwthaarApp.DEFAULT_MAX)
                     .build();
 
             userTimeline.next(null, new Callback<TimelineResult<Tweet>>() {

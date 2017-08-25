@@ -11,6 +11,8 @@ import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class TwthaarApp extends Application {
     public static final String TAG = TwthaarApp.class.getSimpleName();
@@ -20,8 +22,11 @@ public class TwthaarApp extends Application {
     public static final String FLATTR_ID = "o6wo7q";
     public static String FLATTR_LINK;
 
-    public static final int DEFAULT_MAXTIMELINE = 60;
-    public static final String DEFAULT_STARTUSER = "go_nix";
+    public static final int DEFAULT_MAX = 60;
+    public static final String DEFAULT_STARTUSERS = "@go_nix,@bomelino";
+
+    public static SimpleDateFormat formatIn = new SimpleDateFormat("EEE MMM dd hh:mm:ss z yyyy", Locale.ENGLISH);
+    public static SimpleDateFormat formatOut = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH);
 
     public void onCreate() {
         super.onCreate();

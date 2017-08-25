@@ -2,9 +2,10 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <EditTextPreference
-        android:defaultValue=""
-        android:key="STARTUSER"
-        android:title="Start User" />
+        android:defaultValue="\@go_nix,@adblockfast,@lostincologne,@dierosarotechi,@profiamateurin,@anneschuessler,@Atari_MegaSTe,@natschaska,@kifferbarbie,@zubesuchhier,@Phollux,@SophiePassmann,@UnusuaIlmages,@N3I_3,@The_Pi_Hole,@istdasvegan,@TariTarina,@SenfundKrenn,@steffitalks,@ESP8266COM,@kenshirriff,@co_bebe_,@FeeKKanzler,@cm_krefeld,@Calvinn_Hobbes,@NicolasGassmann,@bomelino,@ayamira_taddi,@Pat130485,@9823"
+        android:key="STARTUSERS"
+        android:summary="separate by commas"
+        android:title="Start Users" />
 
     <EditTextPreference
         android:defaultValue=""

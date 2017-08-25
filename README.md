@@ -10,6 +10,7 @@ Twthaar is a very low level just reading twitter client. You can use the code fo
 - get and add your own API key and secret on apps.twitter.com to authorize the App
 - lists timeline without images of a given username (+time, likes, retweets)
 - extracts username from `RT @username:` and but it to the search field by click on the tweet
+- multisearch (comma separated) for @userTimelines or #otherStuff
 - very simple android code
 
 ## Screenshots
