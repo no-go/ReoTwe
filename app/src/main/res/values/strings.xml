@@ -6,4 +6,6 @@
     <string name="apihint">get it on http://apps.twitter.com</string>
     <string name="search">search @user or #tag</string>
     <string name="imageful">Full image stuff</string>
+    <!-- \@go_nix,@adblockfast,@lostincologne,@dierosarotechi,@profiamateurin,@anneschuessler,@Atari_MegaSTe,@natschaska,@kifferbarbie,@zubesuchhier,@Phollux,@SophiePassmann,@UnusuaIlmages,@N3I_3,@The_Pi_Hole,@istdasvegan,@TariTarina,@SenfundKrenn,@steffitalks,@ESP8266COM,@kenshirriff,@co_bebe_,@FeeKKanzler,@cm_krefeld,@Calvinn_Hobbes,@NicolasGassmann,@bomelino,@ayamira_taddi,@Pat130485,@9823 -->
+    <string name="defaultStarts">\@GeneHunt,@The_Pi_Hole,@amnesty,@adafruit,#Weather,#Friday,@istdasvegan,#wetter,#wochenende,@Der_Postillon</string>
 </resources>

@@ -22,8 +22,7 @@ public class TwthaarApp extends Application {
     public static final String FLATTR_ID = "o6wo7q";
     public static String FLATTR_LINK;
 
-    public static final int DEFAULT_MAX = 60;
-    public static final String DEFAULT_STARTUSERS = "@go_nix,@bomelino";
+    public static final int DEFAULT_MAX = 50;
 
     public static SimpleDateFormat formatIn = new SimpleDateFormat("EEE MMM dd hh:mm:ss z yyyy", Locale.ENGLISH);
     public static SimpleDateFormat formatOut = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH);

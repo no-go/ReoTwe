@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.list);
         button = (ImageButton) findViewById(R.id.button);
         editText = (EditText) findViewById(R.id.editText);
-        editText.setText(TwthaarApp.mPreferences.getString("STARTUSERS", TwthaarApp.DEFAULT_STARTUSERS));
+        editText.setText(TwthaarApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts)));
         button.setOnClickListener(new MyOnClickListener(""));
         button.callOnClick();
 
