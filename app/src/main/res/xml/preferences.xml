@@ -7,6 +7,11 @@
         android:summary="separate by commas"
         android:title="Start Users" />
 
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="imageful"
+        android:title="@string/imageful" />
+
     <EditTextPreference
         android:defaultValue=""
         android:summary="@string/apihint"

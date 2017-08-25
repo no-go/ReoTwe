@@ -28,8 +28,8 @@
         android:textColor="@color/tw__blue_default"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tweetText"
+    <FrameLayout
+        android:id="@+id/tweetContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -39,15 +39,24 @@
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
         android:paddingTop="2dp"
-        android:paddingBottom="10dp"
-        android:text="Velit distinctio aut voluptate hic fugit error voluptatem. Exercitationem atque provident in qui et incidunt exercitationem. Officiis laudantium nam et. Ut est ut maxime nam. Odio aut provident qui voluptatum veritatis. Voluptatem ut quia rem id quae suscipit."
-        android:textColor="@android:color/black" />
+        android:paddingBottom="10dp" >
+
+        <TextView
+            android:id="@+id/tweetText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tweetDate"
+            android:text="Velit distinctio aut voluptate hic fugit error voluptatem. Exercitationem atque provident in qui et incidunt exercitationem. Officiis laudantium nam et. Ut est ut maxime nam. Odio aut provident qui voluptatum veritatis. Voluptatem ut quia rem id quae suscipit."
+            android:textColor="@android:color/black" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/tweetUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tweetText"
+        android:layout_alignBottom="@+id/tweetContent"
         android:layout_alignParentEnd="true"
         android:elevation="1dp"
         android:text="\@example"
