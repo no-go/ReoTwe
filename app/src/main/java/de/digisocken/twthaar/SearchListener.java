@@ -22,14 +22,18 @@ public class SearchListener implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (mainActivity.tweetArrayList != null) mainActivity.tweetArrayList.clear();
+        if (mainActivity.tweetArrayList != null) {
+            mainActivity.tweetArrayList.clear();
+        }
 
         String query = iniQuery;
         if (iniQuery.equals("")) {
             query = mainActivity.editText.getText().toString();
         } else {
             mainActivity.editText.setText(query);
+            mainActivity.history.push(query);
         }
+
         String[] queries = query.split(",");
 
         for (String q : queries) {

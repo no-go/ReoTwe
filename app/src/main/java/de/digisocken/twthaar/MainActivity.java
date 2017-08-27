@@ -1,10 +1,13 @@
 package de.digisocken.twthaar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
+import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity {
     public ListView mListView;
@@ -35,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     public ImageButton button;
     public EditText editText;
     public RelativeLayout searchBox;
+    public Stack< String > history;
+
+    private String iniQuery;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -107,13 +115,17 @@ public class MainActivity extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.list);
         button = (ImageButton) findViewById(R.id.button);
         editText = (EditText) findViewById(R.id.editText);
-        editText.setText(TwthaarApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts)));
+        iniQuery = TwthaarApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts));
+        editText.setText(iniQuery);
         button.setOnClickListener(new SearchListener(this, ""));
-        button.callOnClick();
 
         tweetArrayList = new ArrayList<>();
+        history = new Stack<>();
+        history.push(iniQuery);
         adapter = new TweetAdapter(this, tweetArrayList);
         mListView.setAdapter(adapter);
+
+        button.callOnClick();
     }
 
 
@@ -131,5 +143,29 @@ public class MainActivity extends AppCompatActivity {
                 return 0;
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (history.size() > 0) {
+            editText.setText(history.pop());
+            button.callOnClick();
+        } else {
+            history.push(iniQuery);
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle(String.format(getString(R.string.closing), getString(R.string.app_name)))
+                    .setMessage(getString(R.string.sureToClose))
+                    .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+
+                    })
+                    .setNegativeButton(getString(R.string.no), null)
+                    .show();
+        }
     }
 }

@@ -2,6 +2,7 @@ package de.digisocken.twthaar;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.tweetui.TimelineResult;
 import com.twitter.sdk.android.tweetui.TweetView;
-import com.twitter.sdk.android.tweetui.UserTimeline;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -67,7 +63,8 @@ class TweetAdapter extends BaseAdapter {
         TextView tGoto = (TextView) rowView.findViewById(R.id.tweetGoto);
         FrameLayout tContent = (FrameLayout) rowView.findViewById(R.id.tweetContent);
 
-        tUser.setText("@" + tweet.user.screenName);
+        tUser.setText(tweet.user.name);
+        tUser.setOnClickListener(new SearchListener(mContext, tweet.user.screenName));
 
         tStats.setText(
                 " ⇆ " +
@@ -121,7 +118,7 @@ class TweetAdapter extends BaseAdapter {
                     rtindex,
                     txt.indexOf(": ", rtindex)
             );
-            return rtuser.replace("RT @", "");
+            return rtuser.replace("RT ", "");
         } else {
             return null;
         }
