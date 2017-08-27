@@ -12,5 +12,7 @@
     <string name="no">no</string>
     <string name="yes">yes</string>
     <string name="closing">Closing %1$s ?</string>
-    <string name="sureToClose">"Are you sure you want to close me?</string>
+    <string name="sureToClose">Are you sure you want to close me?</string>
+    <string name="usersAndTags">Home users and tags</string>
+    <string name="usersAndTags_summary">e.g.: @user1,@user32,#tagImportant42,@fails,#epic69,...</string>
 </resources>

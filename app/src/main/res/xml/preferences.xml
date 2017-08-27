@@ -4,8 +4,8 @@
     <EditTextPreference
         android:defaultValue="@string/defaultStarts"
         android:key="STARTUSERS"
-        android:summary="separate by commas"
-        android:title="Start Users" />
+        android:summary="@string/usersAndTags_summary"
+        android:title="@string/usersAndTags" />
 
     <SwitchPreference
         android:defaultValue="false"

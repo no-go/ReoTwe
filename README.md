@@ -18,10 +18,11 @@ Twthaar is a very low level just reading twitter client. You can use the code fo
  -  multisearch (comma separated) for `@userTimelines` or `#otherStuff`
  -  very simple android code
  -  switch images on/off in preferences
+ -  english and german interface
 
 ## Get the App
 
-You can get a signed APK from here (Android 4.4+): [APK](https://raw.githubusercontent.com/no-go/Twthaar/mini01/app/app-release.apk)
+You can get a signed APK from here (Android 4.1+): [APK](https://raw.githubusercontent.com/no-go/Twthaar/mini01/app/app-release.apk)
 
 ## Screenshots
 
