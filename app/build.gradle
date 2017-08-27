@@ -7,8 +7,8 @@ android {
         applicationId "de.digisocken.twthaar"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 161
-        versionName "1.61"
+        versionCode 162
+        versionName "1.62"
     }
     buildTypes {
         release {
@@ -24,5 +24,6 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.twitter.sdk.android:twitter-core:3.1.1'
     compile 'com.twitter.sdk.android:tweet-ui:3.1.1'
+    compile 'com.twitter.sdk.android:tweet-composer:3.1.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
 }

@@ -16,11 +16,18 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
+import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.twitter.sdk.android.core.models.Tweet;
+import com.twitter.sdk.android.core.models.User;
+import com.twitter.sdk.android.tweetcomposer.ComposerActivity;
 import com.twitter.sdk.android.tweetui.SearchTimeline;
 import com.twitter.sdk.android.tweetui.TimelineResult;
 import com.twitter.sdk.android.tweetui.UserTimeline;
@@ -33,6 +40,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Stack;
 
+import retrofit2.Call;
+
 public class MainActivity extends AppCompatActivity {
     public ListView mListView;
     public ArrayList<Tweet> tweetArrayList;
@@ -43,6 +52,13 @@ public class MainActivity extends AppCompatActivity {
     public Stack< String > history;
 
     private String iniQuery;
+
+    TwitterLoginButton loginButton;
+    TwitterSession session = null;
+    MyTwitterApiClient twitterApiClient;
+    MyTwitterApiClient.FriendsService fs;
+    String username = "";
+    String friendlist;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,6 +89,18 @@ public class MainActivity extends AppCompatActivity {
                     searchBox.setVisibility(View.GONE);
                 }
                 break;
+            case R.id.action_makeTweet:
+                if (username.equals("")) {
+                    loginButton.callOnClick();
+                } else {
+                    String[] qeris = editText.getText().toString().split(",");
+                    final Intent intent = new ComposerActivity.Builder(MainActivity.this)
+                            .session(session)
+                            .text(qeris[0])
+                            .createIntent();
+                    startActivity(intent);
+                }
+                break;
             case R.id.action_flattr:
                 Intent intentFlattr = new Intent(Intent.ACTION_VIEW, Uri.parse(TwthaarApp.FLATTR_LINK));
                 startActivity(intentFlattr);
@@ -92,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 ab.setHomeButtonEnabled(true);
                 ab.setDisplayUseLogoEnabled(true);
                 ab.setLogo(R.mipmap.ic_launcher);
-                ab.setTitle(getString(R.string.app_name) + " " + BuildConfig.VERSION_NAME);
+                ab.setTitle(" " + getString(R.string.app_name) + " " + BuildConfig.VERSION_NAME);
                 ab.setElevation(10);
             }
         } catch (Exception e) {
@@ -115,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.list);
         button = (ImageButton) findViewById(R.id.button);
         editText = (EditText) findViewById(R.id.editText);
+        loginButton = new TwitterLoginButton(this);
+
         iniQuery = TwthaarApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts));
         editText.setText(iniQuery);
         button.setOnClickListener(new SearchListener(this, ""));
@@ -125,9 +154,28 @@ public class MainActivity extends AppCompatActivity {
         adapter = new TweetAdapter(this, tweetArrayList);
         mListView.setAdapter(adapter);
 
+        loginButton.setCallback(new Callback<TwitterSession>() {
+            @Override
+            public void success(Result<TwitterSession> result) {
+                session = result.data;
+                username = session.getUserName();
+                startGetFriendlist(username);
+            }
+
+            @Override
+            public void failure(TwitterException e) {
+                e.printStackTrace();
+                Toast.makeText(MainActivity.this, getString(R.string.youNeedApiKey), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        session = TwitterCore.getInstance().getSessionManager().getActiveSession();
+        if (session != null) {
+            username = session.getUserName();
+        }
+
         button.callOnClick();
     }
-
 
     public void sortTweetArrayList() {
         Collections.sort(tweetArrayList, new Comparator<Tweet>() {
@@ -145,6 +193,60 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void startGetFriendlist(String query) {
+        friendlist = "";
+        twitterApiClient = new MyTwitterApiClient(
+                TwitterCore.getInstance().getSessionManager().getActiveSession()
+        );
+        fs = twitterApiClient.getFriendsService();
+        Call<MyTwitterApiClient.UsersCursor> call = fs.friends(
+                query,
+                null,
+                TwthaarApp.DEFAULT_MAX,
+                true,
+                false
+        );
+        call.enqueue(new FriendCallback(query));
+    }
+
+
+    class FriendCallback extends Callback<MyTwitterApiClient.UsersCursor> {
+        String _query;
+
+        FriendCallback(String query) {
+            _query = query;
+        }
+
+        @Override
+        public void success(Result<MyTwitterApiClient.UsersCursor> result) {
+            for (final User user: result.data.users) {
+                friendlist += "@" + user.screenName + ",";
+            }
+            if (result.data.nextCursor > 0) {
+                Call<MyTwitterApiClient.UsersCursor> call = fs.friends(
+                        _query,
+                        (int) result.data.nextCursor,
+                        TwthaarApp.DEFAULT_MAX,
+                        true,
+                        false
+                );
+                call.enqueue(new FriendCallback(_query));
+            } else {
+                // friendlist is ready
+                if (!friendlist.equals("")) {
+                    friendlist = "@" + username + "," + friendlist;
+                    friendlist = friendlist.substring(0, friendlist.lastIndexOf(","));
+                    TwthaarApp.mPreferences.edit().putString("STARTUSERS", friendlist).apply();
+                }
+            }
+        }
+
+        @Override
+        public void failure(TwitterException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void onBackPressed() {
         if (history.size() > 0) {
@@ -160,12 +262,22 @@ public class MainActivity extends AppCompatActivity {
                     {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            finish();
+                            realExit();
                         }
 
                     })
                     .setNegativeButton(getString(R.string.no), null)
                     .show();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        loginButton.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void realExit() {
+        super.onBackPressed();
     }
 }

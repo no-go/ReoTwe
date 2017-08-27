@@ -4,7 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/tw__blue_default</item>
-        <item name="colorPrimaryDark">@color/tw__blue_pressed</item>
+        <item name="colorPrimaryDark">@color/tw__blue_default</item>
         <item name="colorAccent">@android:color/holo_orange_light</item>
     </style>
 

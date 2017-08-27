@@ -16,12 +16,12 @@
         android:defaultValue=""
         android:summary="@string/apihint"
         android:key="CONSUMER_KEY"
-        android:title="CONSUMER_KEY" />
+        android:title="Consumer API KEY" />
 
     <EditTextPreference
         android:defaultValue=""
         android:summary="@string/apihint"
         android:key="CONSUMER_SECRET"
-        android:title="CONSUMER_SECRET" />
+        android:title="Consumer API SECRET" />
 
 </PreferenceScreen>

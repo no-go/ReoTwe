@@ -1,6 +1,6 @@
-# Twthaar (mini)
+# Twthaar
 
-Twthaar is a very low level just reading twitter client. You can use the code for build your own cool client or to learn how *Twitter Kit* and API works.
+Twthaar is a very low level twitter client. You can use the code for build your own cool client or to learn how *Twitter Kit* and API works.
 
 ![logo](app/src/main/res/mipmap-hdpi/ic_launcher.png)
 
@@ -19,6 +19,8 @@ Twthaar is a very low level just reading twitter client. You can use the code fo
  -  very simple android code
  -  switch images on/off in preferences
  -  english and german interface
+ -  it is possible to send text only tweets (you get a login dialog on first try)
+ -  if you are logged in, it gets your friend list and at it to the preferences automaticaly (and yourself)
 
 ## Get the App
 
@@ -26,9 +28,12 @@ You can get a signed APK from here (Android 4.1+): [APK](https://raw.githubuserc
 
 ## Screenshots
 
-![Screenshot of Twthaar - mini](screenshot1.png)
-![Screenshot of Twthaar - mini with images](screenshot2.png)
-![Screenshot of Twthaar - v1.5](screenshot3.png)
+![Twthaar get images on demand](screenshot5.png)
+![Twthaar - old version](screenshot1.png)
+![Twthaar: display all images](screenshot2.png)
+![Twthaar - v1.5](screenshot3.png)
+![Twthaar - send a tweet](screenshot4.png)
+![Twthaar preferences](screenshot6.png)
 
 ## How to get API Codes
 

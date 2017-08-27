@@ -27,7 +27,9 @@
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
             android:textColor="@android:color/white"
-            android:layout_toStartOf="@+id/button" />
+            android:layout_toStartOf="@+id/button"
+            android:layout_toLeftOf="@+id/button"
+            android:layout_alignParentLeft="true" />
 
         <ImageButton
             android:id="@+id/button"
@@ -36,7 +38,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:background="@android:color/transparent"
-            app:srcCompat="@android:drawable/ic_menu_send" />
+            app:srcCompat="@android:drawable/ic_menu_send"
+            android:layout_alignParentRight="true" />
 
     </RelativeLayout>
 

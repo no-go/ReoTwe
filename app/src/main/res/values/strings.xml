@@ -15,4 +15,6 @@
     <string name="sureToClose">Are you sure you want to close me?</string>
     <string name="usersAndTags">Home users and tags</string>
     <string name="usersAndTags_summary">e.g.: @user1,@user32,#tagImportant42,@fails,#epic69,...</string>
+    <string name="makeTweet">make tweet …</string>
+    <string name="youNeedApiKey">You need a valid API Key and Secret, too!</string>
 </resources>
