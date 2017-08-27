@@ -18,7 +18,7 @@ Sometimes the friendlist does not work (15min twitter limits).
 
 ## Get the App
 
-You can get a signed APK from here (Android 4.1+): [APK](https://raw.githubusercontent.com/no-go/Twthaar/master/app/app-release.apk)
+You can get a signed APK from here (Android 5.1+): [APK](https://raw.githubusercontent.com/no-go/Twthaar/master_00/app/app-release.apk)
 
 ## Screenshots
 
