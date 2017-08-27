@@ -29,12 +29,12 @@ import java.util.Comparator;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    private ListView mListView;
-    private ArrayList<Tweet> tweetArrayList;
-    private TweetAdapter adapter;
-    private ImageButton button;
-    private EditText editText;
-    private RelativeLayout searchBox;
+    public ListView mListView;
+    public ArrayList<Tweet> tweetArrayList;
+    public TweetAdapter adapter;
+    public ImageButton button;
+    public EditText editText;
+    public RelativeLayout searchBox;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         button = (ImageButton) findViewById(R.id.button);
         editText = (EditText) findViewById(R.id.editText);
         editText.setText(TwthaarApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts)));
-        button.setOnClickListener(new MyOnClickListener(""));
+        button.setOnClickListener(new SearchListener(this, ""));
         button.callOnClick();
 
         tweetArrayList = new ArrayList<>();
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void sortTweetArrayList() {
+    public void sortTweetArrayList() {
         Collections.sort(tweetArrayList, new Comparator<Tweet>() {
             @Override
             public int compare(Tweet t2, Tweet t1) {
@@ -131,72 +131,5 @@ public class MainActivity extends AppCompatActivity {
                 return 0;
             }
         });
-    }
-
-    class MyOnClickListener implements View.OnClickListener {
-        String iniQuery;
-
-        public MyOnClickListener(String q) {
-            iniQuery = q;
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (tweetArrayList != null) tweetArrayList.clear();
-
-            String query = iniQuery;
-            if (iniQuery.equals("")) {
-                query = editText.getText().toString();
-            }
-            String[] queries = query.split(",");
-
-            for (String q : queries) {
-                q = q.trim();
-                if (q.contains("#")) {
-                    q = q.replace("#","");
-                    SearchTimeline searchTimeline = new SearchTimeline.Builder()
-                            .query(q)
-                            .maxItemsPerRequest(TwthaarApp.DEFAULT_MAX)
-                            .build();
-
-                    searchTimeline.next(null, new Callback<TimelineResult<Tweet>>() {
-                        @Override
-                        public void success(Result<TimelineResult<Tweet>> result) {
-                            for(final Tweet tweet : result.data.items) {
-                                tweetArrayList.add(tweet);
-                            }
-                            sortTweetArrayList();
-                            adapter.notifyDataSetChanged();
-                        }
-                        @Override
-                        public void failure(TwitterException e) {
-                            e.printStackTrace();
-                        }
-                    });
-
-                } else {
-                    q = q.replace("@","");
-                    UserTimeline userTimeline = new UserTimeline.Builder()
-                            .screenName(q)
-                            .maxItemsPerRequest(TwthaarApp.DEFAULT_MAX)
-                            .build();
-
-                    userTimeline.next(null, new Callback<TimelineResult<Tweet>>() {
-                        @Override
-                        public void success(Result<TimelineResult<Tweet>> result) {
-                            for(final Tweet tweet : result.data.items) {
-                                tweetArrayList.add(tweet);
-                            }
-                            sortTweetArrayList();
-                            adapter.notifyDataSetChanged();
-                        }
-                        @Override
-                        public void failure(TwitterException e) {
-                            e.printStackTrace();
-                        }
-                    });
-                }
-            }
-        }
     }
 }

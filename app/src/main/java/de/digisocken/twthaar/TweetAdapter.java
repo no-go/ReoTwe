@@ -1,9 +1,7 @@
 package de.digisocken.twthaar;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +64,7 @@ class TweetAdapter extends BaseAdapter {
         TextView tStats = (TextView) rowView.findViewById(R.id.tweetStats);
         TextView tText = (TextView) rowView.findViewById(R.id.tweetText);
         TextView tUser = (TextView) rowView.findViewById(R.id.tweetUser);
+        TextView tGoto = (TextView) rowView.findViewById(R.id.tweetGoto);
         FrameLayout tContent = (FrameLayout) rowView.findViewById(R.id.tweetContent);
 
         tUser.setText("@" + tweet.user.screenName);
@@ -84,24 +83,24 @@ class TweetAdapter extends BaseAdapter {
             tDate.setText(tweet.createdAt);
         }
 
-        String nextUser = extractRT(text);
-        if (nextUser == null) {
+        String nextHop = extractRT(text);
+        if (nextHop == null) {
             ArrayList<String> dummy = extractUsers(text);
-            if (dummy.size() > 0) nextUser = dummy.get(0);
-        }
-        if (nextUser == null) nextUser = tweet.user.screenName;
 
-        tDate.setOnClickListener(new MyOnClickListener(nextUser));
-        tStats.setOnClickListener(new MyOnClickListener(nextUser));
+            if (dummy.size() > 0) {
+                nextHop = dummy.get(0);
+            } else {
+                dummy = extractTag(text);
+                if (dummy.size() > 0) nextHop = dummy.get(0);
+            }
+        }
+
+        if (nextHop == null) nextHop = "@" + tweet.user.screenName;
+
+        tGoto.setText(String.format(mContext.getString(R.string.gotoHint), nextHop));
+        tGoto.setOnClickListener(new SearchListener(mContext, nextHop));
 
         if (imageful) {
-            tDate.setPadding(10,10,10,10);
-            tDate.setTextColor(Color.WHITE);
-            tDate.setBackgroundColor(ContextCompat.getColor(mContext, R.color.tw__blue_pressed));
-            tStats.setPadding(10,10,10,10);
-            tStats.setTextColor(Color.WHITE);
-            tStats.setBackgroundColor(ContextCompat.getColor(mContext, R.color.tw__blue_pressed));
-
             TweetView orgTweetView = new TweetView(mContext, tweet);
             orgTweetView.setBackgroundColor(Color.TRANSPARENT);
             tContent.addView(orgTweetView);
@@ -109,7 +108,7 @@ class TweetAdapter extends BaseAdapter {
         } else {
             tText.setText(text);
             tText.setVisibility(View.VISIBLE);
-            tText.setOnClickListener(new MyOnClickListener(nextUser));
+            tText.setOnClickListener(new TweetViewOnClick(tContent, tweet));
         }
 
         return rowView;
@@ -137,35 +136,30 @@ class TweetAdapter extends BaseAdapter {
         return allMatches;
     }
 
-    class MyOnClickListener implements View.OnClickListener {
-        String query;
+    public static ArrayList<String> extractTag(String text) {
+        ArrayList<String> allMatches = new ArrayList<String>();
+        Matcher m = Pattern.compile("(.*)(#\\w{1,25})(\\b)").matcher(text);
+        while (m.find()) {
+            allMatches.add(m.group(2));
+        }
+        return allMatches;
+    }
 
-        public MyOnClickListener(String q) {
-            query = q;
+    class TweetViewOnClick implements View.OnClickListener {
+        private Tweet tweet;
+        private FrameLayout tContent;
+
+        public TweetViewOnClick(FrameLayout fl, Tweet tw) {
+            tContent = fl;
+            tweet = tw;
         }
 
         @Override
         public void onClick(View v) {
-            UserTimeline userTimeline = new UserTimeline.Builder()
-                    .screenName(query)
-                    .maxItemsPerRequest(TwthaarApp.DEFAULT_MAX)
-                    .build();
-
-            userTimeline.next(null, new Callback<TimelineResult<Tweet>>() {
-
-                @Override
-                public void success(Result<TimelineResult<Tweet>> result) {
-                    mDataSource.clear();
-                    for(final Tweet tweet : result.data.items) {
-                        mDataSource.add(tweet);
-                    }
-                    notifyDataSetChanged();
-                }
-                @Override
-                public void failure(TwitterException e) {
-                    e.printStackTrace();
-                }
-            });
+            tContent.removeAllViews();
+            TweetView orgTweetView = new TweetView(mContext, tweet);
+            orgTweetView.setBackgroundColor(Color.TRANSPARENT);
+            tContent.addView(orgTweetView);
         }
     }
 }

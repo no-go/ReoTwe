@@ -7,16 +7,18 @@ Twthaar is a very low level just reading twitter client. You can use the code fo
 ## Features
 
  -  Ads free!
+ -  fast and efficient
  -  get and add your own API key and secret on apps.twitter.com to authorize the App
  -  lists timeline without images of a given username (+time, likes, retweets)
  -  Browse timelines
-     -  extracts username from `RT @username:` and but it to the search field by click on the tweetdate
+     -  extracts username from `RT @username:` and got to that user timeline by click on the tweetdate
      -  if it is not a retweet, it try to extract the first `@username`
      -  if there is no `@username`, it uses the username of the posting user / publisher
      -  ATTENTION: there is still no cache, history or browse back function
 - multisearch (comma separated) for `@userTimelines` or `#otherStuff`
 - very simple android code
-- switch images on and of in preferences
+- switch images on/off in preferences
+- tap on the Tweet text to load the full imageful Tweetview
 
 ## Get the App
 
