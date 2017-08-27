@@ -2,9 +2,17 @@
     <string name="app_name">Twthaar</string>
     <string name="flattr_this">Micro-Donate !</string>
     <string name="projPage">Project Page</string>
-    <string name="ups">nothing found or errors</string>
     <string name="preferences">PREFERENCES</string>
     <string name="apihint">get it on http://apps.twitter.com</string>
-    <string name="maxfr">max friends entries</string>
-    <string name="maxtime">max timeline entries</string>
+    <string name="search">search @user or #tag</string>
+    <string name="imageful">Full image stuff</string>
+    <string name="gotoHint">%1$s &gt;</string>
+    <!-- \@go_nix,@adblockfast,@lostincologne,@dierosarotechi,@profiamateurin,@anneschuessler,@Atari_MegaSTe,@natschaska,@kifferbarbie,@zubesuchhier,@Phollux,@SophiePassmann,@UnusuaIlmages,@N3I_3,@The_Pi_Hole,@istdasvegan,@TariTarina,@SenfundKrenn,@steffitalks,@ESP8266COM,@kenshirriff,@co_bebe_,@FeeKKanzler,@cm_krefeld,@Calvinn_Hobbes,@NicolasGassmann,@bomelino,@ayamira_taddi,@Pat130485,@9823 -->
+    <string name="defaultStarts">\@GeneHunt,@The_Pi_Hole,@amnesty,@adafruit,@Princessofwifi,#Friday,@istdasvegan,#wetter,#wochenende,@Der_Postillon</string>
+    <string name="no">no</string>
+    <string name="yes">yes</string>
+    <string name="closing">Closing %1$s ?</string>
+    <string name="sureToClose">Are you sure you want to close me?</string>
+    <string name="usersAndTags">Home users and tags</string>
+    <string name="usersAndTags_summary">e.g.: @user1,@user32,#tagImportant42,@fails,#epic69,...</string>
 </resources>

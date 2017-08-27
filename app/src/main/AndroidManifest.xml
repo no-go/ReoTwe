@@ -19,8 +19,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.twitter.sdk.android.core.identity.OAuthActivity" />
-
         <activity
             android:name=".PreferencesActivity"
             android:parentActivityName=".MainActivity" />

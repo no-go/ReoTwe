@@ -1,4 +1,4 @@
-# Twthaar
+# Twthaar (mini)
 
 Twthaar is a very low level just reading twitter client. You can use the code for build your own cool client or to learn how *Twitter Kit* and API works.
 
@@ -6,15 +6,19 @@ Twthaar is a very low level just reading twitter client. You can use the code fo
 
 ## Features
 
-- Ads free!
-- get and add your own API key and secret on apps.twitter.com
-- twitter login button to authorize the App
-- lists timeline without images of a given username (+time, likes, retweets)
-- extracts username from `RT @username:` and but it to the search field by click on the tweet
-- very simple android code
-- lists the friendlist of a given username (click on them, to send the username to the search field)
-
-Sometimes the friendlist does not work (15min twitter limits).
+ -  Ads free!
+ -  fast and efficient
+ -  tap on the Tweet text to load the full imageful Tweetview
+ -  get and add your own API key and secret on apps.twitter.com to authorize the App
+ -  lists timeline without images of a given username (+time, likes, retweets)
+ -  Browse timelines
+     -  extracts username from `RT @username:` and got to that user timeline by a single click
+     -  if it is not a retweet, it try to extract the first `@username`
+     -  if there is no `@username`, it uses the username of the posting user / publisher
+ -  multisearch (comma separated) for `@userTimelines` or `#otherStuff`
+ -  very simple android code
+ -  switch images on/off in preferences
+ -  english and german interface
 
 ## Get the App
 
@@ -22,7 +26,13 @@ You can get a signed APK from here (Android 4.1+): [APK](https://raw.githubuserc
 
 ## Screenshots
 
-![Screenshots of Twthaar](screenshots.png)
+![Screenshot of Twthaar - mini](screenshot1.png)
+![Screenshot of Twthaar - mini with images](screenshot2.png)
+![Screenshot of Twthaar - v1.5](screenshot3.png)
+
+## How to get API Codes
+
+... to do 
 
 ## License
 

@@ -1,50 +1,48 @@
 package de.digisocken.twthaar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.Uri;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.TwitterSession;
-import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.models.User;
+import com.twitter.sdk.android.tweetui.SearchTimeline;
 import com.twitter.sdk.android.tweetui.TimelineResult;
 import com.twitter.sdk.android.tweetui.UserTimeline;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
-import java.util.Locale;
-import java.util.Objects;
-
-import retrofit2.Call;
+import java.util.List;
+import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity {
-    LinearLayout list;
-    ImageButton button;
-    EditText editText;
-    TwitterLoginButton loginButton;
-    TwitterSession session;
-    MyTwitterApiClient twitterApiClient;
-    MyTwitterApiClient.FriendsService fs;
-    String username = "";
+    public ListView mListView;
+    public ArrayList<Tweet> tweetArrayList;
+    public TweetAdapter adapter;
+    public ImageButton button;
+    public EditText editText;
+    public RelativeLayout searchBox;
+    public Stack< String > history;
+
+    private String iniQuery;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,6 +54,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_toggleSearch:
+                if (searchBox.getVisibility() == View.GONE) {
+                    try {
+                        ActionBar ab = getSupportActionBar();
+                        if(ab != null) ab.setElevation(0);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    searchBox.setVisibility(View.VISIBLE);
+                } else {
+                    try {
+                        ActionBar ab = getSupportActionBar();
+                        if(ab != null) ab.setElevation(10);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    searchBox.setVisibility(View.GONE);
+                }
+                break;
             case R.id.action_flattr:
                 Intent intentFlattr = new Intent(Intent.ACTION_VIEW, Uri.parse(TwthaarApp.FLATTR_LINK));
                 startActivity(intentFlattr);
@@ -88,190 +105,67 @@ public class MainActivity extends AppCompatActivity {
                 ab.setDisplayUseLogoEnabled(true);
                 ab.setLogo(R.mipmap.ic_launcher);
                 ab.setTitle(getString(R.string.app_name) + " " + BuildConfig.VERSION_NAME);
+                ab.setElevation(10);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        list = (LinearLayout) findViewById(R.id.list);
+
+        searchBox = (RelativeLayout) findViewById(R.id.searchBox);
+        mListView = (ListView) findViewById(R.id.list);
         button = (ImageButton) findViewById(R.id.button);
         editText = (EditText) findViewById(R.id.editText);
-        loginButton = (TwitterLoginButton) findViewById(R.id.login_button);
+        iniQuery = TwthaarApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts));
+        editText.setText(iniQuery);
+        button.setOnClickListener(new SearchListener(this, ""));
 
-        loginButton.setCallback(new Callback<TwitterSession>() {
-            @Override
-            public void success(Result<TwitterSession> result) {
-                session = result.data;
-                username = session.getUserName();
-                editText.setText(username);
-                loginButton.setVisibility(View.GONE);
-            }
+        tweetArrayList = new ArrayList<>();
+        history = new Stack<>();
+        history.push(iniQuery);
+        adapter = new TweetAdapter(this, tweetArrayList);
+        mListView.setAdapter(adapter);
 
+        button.callOnClick();
+    }
+
+
+    public void sortTweetArrayList() {
+        Collections.sort(tweetArrayList, new Comparator<Tweet>() {
             @Override
-            public void failure(TwitterException e) {
-                e.printStackTrace();
-                TextView tv = new TextView(getApplicationContext());
-                tv.setText(getString(R.string.ups));
-                list.addView(tv);
+            public int compare(Tweet t2, Tweet t1) {
+                try {
+                    Date parsedDate1 = TwthaarApp.formatIn.parse(t1.createdAt);
+                    Date parsedDate2 = TwthaarApp.formatIn.parse(t2.createdAt);
+                    return parsedDate1.compareTo(parsedDate2);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return 0;
             }
         });
-
-        if (TwitterCore.getInstance().getSessionManager().getActiveSession() != null) {
-            username = TwitterCore.getInstance().getSessionManager().getActiveSession().getUserName();
-            editText.setText(username);
-        } else {
-            loginButton.setVisibility(View.VISIBLE);
-        }
-
-        button.setOnClickListener(new MyOnClickListener());
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        loginButton.onActivityResult(requestCode, resultCode, data);
-    }
-
-    class FriendCallback extends Callback<MyTwitterApiClient.UsersCursor> {
-        String _query;
-
-        FriendCallback(String query) {
-            _query = query;
-        }
-
-        @Override
-        public void success(Result<MyTwitterApiClient.UsersCursor> result) {
-            for (final User user: result.data.users) {
-                Button btn = new Button(getApplicationContext());
-                btn.setText(user.screenName);
-                btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        editText.setText(user.screenName);
-                    }
-                });
-                list.addView(btn);
-            }
-            if (result.data.nextCursor > 0) {
-                Call<MyTwitterApiClient.UsersCursor> call = fs.friends(
-                        _query,
-                        (int) result.data.nextCursor,
-                        TwthaarApp.mPreferences.getInt("MAXFRIENDS", TwthaarApp.DEFAULT_MAXFRIENDS),
-                        true,
-                        false
-                );
-                call.enqueue(new FriendCallback(_query));
-            }
-        }
-
-        @Override
-        public void failure(TwitterException e) {
-            e.printStackTrace();
-            TextView tv = new TextView(getApplicationContext());
-            tv.setText(getString(R.string.ups));
-            list.addView(tv);
-        }
-    }
-
-    class MyOnClickListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View v) {
-            list.removeAllViews();
-            String query = editText.getText().toString().replace("@", "");
-            UserTimeline userTimeline = new UserTimeline.Builder()
-                    .screenName(query)
-                    .maxItemsPerRequest(
-                            TwthaarApp.mPreferences.getInt("MAXTIMELINE", TwthaarApp.DEFAULT_MAXTIMELINE)
-                    )
-                    .build();
-
-            if (!Objects.equals(username, "")) {
-                twitterApiClient = new MyTwitterApiClient(
-                        TwitterCore.getInstance().getSessionManager().getActiveSession()
-                );
-                fs = twitterApiClient.getFriendsService();
-                Call<MyTwitterApiClient.UsersCursor> call = fs.friends(
-                        query,
-                        null,
-                        TwthaarApp.mPreferences.getInt("MAXFRIENDS", TwthaarApp.DEFAULT_MAXFRIENDS),
-                        true,
-                        false
-                );
-                call.enqueue(new FriendCallback(query));
-            }
-
-            userTimeline.next(null, new Callback<TimelineResult<Tweet>>() {
-                SimpleDateFormat formatIn = new SimpleDateFormat("EEE MMM dd hh:mm:ss z yyyy", Locale.ENGLISH);
-                SimpleDateFormat formatOut = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH);
-                @Override
-                public void success(Result<TimelineResult<Tweet>> result) {
-                    int i = 0;
-                    for(final Tweet tweet : result.data.items) {
-
-                        TextView td = new TextView(getApplicationContext());
-                        td.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.tweetDate));
-                        td.setTypeface(null, Typeface.BOLD);
-                        td.setPadding(10,5,10,5);
-
-                        TextView tv = new TextView(getApplicationContext());
-                        tv.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.tweetText));
-                        tv.setText(tweet.text);
-                        tv.setTypeface(null, Typeface.NORMAL);
-                        tv.setPadding(15,0,15,10);
-                        tv.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                int rtindex = tweet.text.indexOf("RT @");
-                                if (rtindex >= 0) {
-                                    String rtuser = tweet.text.substring(
-                                            rtindex,
-                                            tweet.text.indexOf(": ",rtindex)
-                                    );
-                                    editText.setText(rtuser.replace("RT @",""));
-                                }
-                            }
-                        });
-
-                        Date parsedDate = null;
-                        String rtAndLikes = " ⇆ " +
-                                Integer.toString(tweet.retweetCount) +
-                                " ★ " + Integer.toString(tweet.favoriteCount);
-                        try {
-                            parsedDate = formatIn.parse(tweet.createdAt);
-                            td.setText(formatOut.format(parsedDate) + rtAndLikes);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                            td.setText(tweet.createdAt + rtAndLikes);
+    public void onBackPressed() {
+        if (history.size() > 0) {
+            editText.setText(history.pop());
+            button.callOnClick();
+        } else {
+            history.push(iniQuery);
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle(String.format(getString(R.string.closing), getString(R.string.app_name)))
+                    .setMessage(getString(R.string.sureToClose))
+                    .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
                         }
-                        if (i%2 == 0) {
-                            td.setBackgroundColor(
-                                    ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark)
-                            );
-                            tv.setBackgroundColor(
-                                    ContextCompat.getColor(getApplicationContext(), R.color.tweetBack2)
-                            );
-                        } else {
-                            td.setBackgroundColor(
-                                    ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)
-                            );
-                            tv.setBackgroundColor(
-                                    ContextCompat.getColor(getApplicationContext(), R.color.tweetBack1)
-                            );
-                        }
-                        list.addView(td);
-                        list.addView(tv);
 
-                        i++;
-                    }
-                }
-                @Override
-                public void failure(TwitterException e) {
-                    e.printStackTrace();
-                    TextView tv = new TextView(getApplicationContext());
-                    tv.setText(getString(R.string.ups));
-                    list.addView(tv);
-                }
-            });
+                    })
+                    .setNegativeButton(getString(R.string.no), null)
+                    .show();
         }
     }
 }
