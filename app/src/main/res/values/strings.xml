@@ -6,7 +6,7 @@
     <string name="apihint">get it on http://apps.twitter.com</string>
     <string name="search">search @user or #tag</string>
     <string name="imageful">Full image stuff</string>
-    <string name="gotoHint">%1$s &gt;</string>
+    <string name="statsGoto"> ⇆ %1$d ★ %2$d %3$s &gt;</string>
     <!-- \@go_nix,@adblockfast,@lostincologne,@dierosarotechi,@profiamateurin,@anneschuessler,@Atari_MegaSTe,@natschaska,@kifferbarbie,@zubesuchhier,@Phollux,@SophiePassmann,@UnusuaIlmages,@N3I_3,@The_Pi_Hole,@istdasvegan,@TariTarina,@SenfundKrenn,@steffitalks,@ESP8266COM,@kenshirriff,@co_bebe_,@FeeKKanzler,@cm_krefeld,@Calvinn_Hobbes,@NicolasGassmann,@bomelino,@ayamira_taddi,@Pat130485,@9823 -->
     <string name="defaultStarts">\@GeneHunt,@The_Pi_Hole,@amnesty,@adafruit,@Princessofwifi,#Friday,@istdasvegan,#wetter,#wochenende,@Der_Postillon</string>
     <string name="no">no</string>
@@ -17,4 +17,5 @@
     <string name="usersAndTags_summary">e.g.: @user1,@user32,#tagImportant42,@fails,#epic69,...</string>
     <string name="makeTweet">make tweet …</string>
     <string name="youNeedApiKey">You need a valid API Key and Secret, too!</string>
+    <string name="ready">ready.</string>
 </resources>

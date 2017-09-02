@@ -5,7 +5,7 @@
     <string name="defaultStarts">\@GeneHunt,@The_Pi_Hole,@amnesty,@adafruit,@Princessofwifi,#Friday,@istdasvegan,#wetter,#wochenende,@Der_Postillon</string>
     <string name="flattr_this">Mikro Spende !</string>
     <string name="apihint">erstelle es bei http://apps.twitter.com</string>
-    <string name="gotoHint">%1$s &gt;</string>
+    <string name="statsGoto"> ⇆ %1$d ★ %2$d %3$s &gt;</string>
     <string name="imageful">Alle Tweets mit Bildern</string>
     <string name="no">nein</string>
     <string name="yes">ja</string>
@@ -17,4 +17,5 @@
     <string name="usersAndTags_summary">z.B.: @user1,@user32,#tagImportant42,@fails,#epic69,...</string>
     <string name="makeTweet">Neuer Tweet …</string>
     <string name="youNeedApiKey">Du brauchst auch gültigen API Key + Secret!</string>
+    <string name="ready">fertig</string>
 </resources>

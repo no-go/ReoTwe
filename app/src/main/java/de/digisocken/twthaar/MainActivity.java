@@ -68,6 +68,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem mi2 = menu.findItem(R.id.action_allImages);
+        mi2.setChecked(TwthaarApp.mPreferences.getBoolean("imageful", false));
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_toggleSearch:
@@ -99,6 +106,19 @@ public class MainActivity extends AppCompatActivity {
                             .text(qeris[0])
                             .createIntent();
                     startActivity(intent);
+                }
+                break;
+            case R.id.action_allImages:
+                if (item.isChecked()) {
+                    adapter.imageful = false;
+                    TwthaarApp.mPreferences.edit().putBoolean("imageful", false).apply();
+                    item.setChecked(false);
+                    adapter.notifyDataSetChanged();
+                } else {
+                    adapter.imageful = true;
+                    TwthaarApp.mPreferences.edit().putBoolean("imageful", true).apply();
+                    item.setChecked(true);
+                    adapter.notifyDataSetChanged();
                 }
                 break;
             case R.id.action_flattr:

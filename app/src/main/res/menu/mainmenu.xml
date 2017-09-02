@@ -23,6 +23,12 @@
         android:id="@+id/action_flattr"
         android:title="@string/flattr_this"></item>
 
+    <group android:checkableBehavior="all">
+        <item
+            android:id="@+id/action_allImages"
+            android:title="@string/imageful" />
+    </group>
+
     <item
         android:id="@+id/action_preferences"
         android:title="@string/preferences">

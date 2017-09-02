@@ -2,6 +2,7 @@ package de.digisocken.twthaar;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.Toast;
 
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -14,10 +15,12 @@ import com.twitter.sdk.android.tweetui.UserTimeline;
 public class SearchListener implements View.OnClickListener {
     MainActivity mainActivity;
     String iniQuery;
+    volatile int loaded;
 
     public SearchListener(Context mContext, String q) {
         mainActivity = (MainActivity) mContext;
         iniQuery = q;
+        loaded = 0;
     }
 
     @Override
@@ -34,7 +37,8 @@ public class SearchListener implements View.OnClickListener {
             mainActivity.history.push(query);
         }
 
-        String[] queries = query.split(",");
+        final String[] queries = query.split(",");
+        loaded = 0;
 
         for (String q : queries) {
             q = q.trim();
@@ -50,6 +54,10 @@ public class SearchListener implements View.OnClickListener {
                     public void success(Result<TimelineResult<Tweet>> result) {
                         for(final Tweet tweet : result.data.items) {
                             mainActivity.tweetArrayList.add(tweet);
+                        }
+                        loaded++;
+                        if (loaded == queries.length) {
+                            Toast.makeText(mainActivity.getApplicationContext(), R.string.ready, Toast.LENGTH_SHORT).show();
                         }
                         mainActivity.sortTweetArrayList();
                         mainActivity.adapter.notifyDataSetChanged();
@@ -72,6 +80,10 @@ public class SearchListener implements View.OnClickListener {
                     public void success(Result<TimelineResult<Tweet>> result) {
                         for(final Tweet tweet : result.data.items) {
                             mainActivity.tweetArrayList.add(tweet);
+                        }
+                        loaded++;
+                        if (loaded == queries.length) {
+                            Toast.makeText(mainActivity.getApplicationContext(), R.string.ready, Toast.LENGTH_SHORT).show();
                         }
                         mainActivity.sortTweetArrayList();
                         mainActivity.adapter.notifyDataSetChanged();

@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.twitter.sdk.android.core.models.Tweet;
+import com.twitter.sdk.android.tweetcomposer.ComposerView;
 import com.twitter.sdk.android.tweetui.TweetView;
 
 import java.text.ParseException;
@@ -23,7 +25,7 @@ class TweetAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<Tweet> mDataSource;
-    private boolean imageful;
+    public boolean imageful;
 
     public TweetAdapter(Context context, ArrayList<Tweet> items) {
         mContext = context;
@@ -52,25 +54,18 @@ class TweetAdapter extends BaseAdapter {
         Tweet tweet = (Tweet) getItem(position);
         String text = tweet.text;
         View rowView = mInflater.inflate(R.layout.tweet_item, parent, false);
-        if (position == 0) {
-            rowView.setPadding(0,22,0,0);
-        }
 
-        TextView tDate = (TextView) rowView.findViewById(R.id.tweetDate);
+        TextView tDate  = (TextView) rowView.findViewById(R.id.tweetDate);
         TextView tStats = (TextView) rowView.findViewById(R.id.tweetStats);
-        TextView tText = (TextView) rowView.findViewById(R.id.tweetText);
-        TextView tUser = (TextView) rowView.findViewById(R.id.tweetUser);
-        TextView tGoto = (TextView) rowView.findViewById(R.id.tweetGoto);
+        TextView tText  = (TextView) rowView.findViewById(R.id.tweetText);
+        TextView tUser  = (TextView) rowView.findViewById(R.id.tweetUser);
+        TextView trt    = (TextView) rowView.findViewById(R.id.tweetRTname);
+        ImageView tAvatar = (ImageView) rowView.findViewById(R.id.tweetAvatar);
         FrameLayout tContent = (FrameLayout) rowView.findViewById(R.id.tweetContent);
 
         tUser.setText(tweet.user.name);
         tUser.setOnClickListener(new SearchListener(mContext, tweet.user.screenName));
-
-        tStats.setText(
-                " ⇆ " +
-                Integer.toString(tweet.retweetCount) +
-                " ★ " + Integer.toString(tweet.favoriteCount)
-        );
+        trt.setText("");
 
         try {
             Date parsedDate = TwthaarApp.formatIn.parse(tweet.createdAt);
@@ -90,16 +85,42 @@ class TweetAdapter extends BaseAdapter {
                 dummy = extractTag(text);
                 if (dummy.size() > 0) nextHop = dummy.get(0);
             }
+        } else {
+            tUser.setText(tweet.user.name + " ⇆");
+            text = text.replace("RT " + nextHop + ": ","");
+            trt.setText(tweet.retweetedStatus.user.name);
         }
 
         if (nextHop == null) nextHop = "@" + tweet.user.screenName;
 
-        tGoto.setText(String.format(mContext.getString(R.string.gotoHint), nextHop));
-        tGoto.setOnClickListener(new SearchListener(mContext, nextHop));
+        tStats.setText(String.format(
+                mContext.getString(R.string.statsGoto),
+                    tweet.retweetCount,
+                    tweet.favoriteCount,
+                    nextHop)
+        );
+
+        tDate.setOnClickListener(new SearchListener(mContext, nextHop));
+        tStats.setOnClickListener(new SearchListener(mContext, nextHop));
+
+        TweetView orgTweetView = new TweetView(mContext, tweet);
+        ImageView avatar = (ImageView) orgTweetView.findViewById(R.id.tw__tweet_author_avatar);
+        tAvatar.setBackground(avatar.getDrawable());
 
         if (imageful) {
-            TweetView orgTweetView = new TweetView(mContext, tweet);
             orgTweetView.setBackgroundColor(Color.TRANSPARENT);
+
+            View t1 = orgTweetView.findViewById(R.id.tw__twitter_logo);
+            View t2 = orgTweetView.findViewById(R.id.tw__tweet_retweeted_by);
+            View t3 = orgTweetView.findViewById(R.id.tw__tweet_author_full_name);
+            View t4 = orgTweetView.findViewById(R.id.tw__tweet_author_screen_name);
+            View t5 = orgTweetView.findViewById(R.id.tw__tweet_timestamp);
+            t1.setVisibility(View.GONE);
+            t2.setVisibility(View.GONE);
+            t3.setVisibility(View.GONE);
+            t4.setVisibility(View.GONE);
+            t5.setVisibility(View.GONE);
+            avatar.setVisibility(View.GONE);
             tContent.addView(orgTweetView);
             tText.setVisibility(View.GONE);
         } else {
@@ -156,6 +177,18 @@ class TweetAdapter extends BaseAdapter {
             tContent.removeAllViews();
             TweetView orgTweetView = new TweetView(mContext, tweet);
             orgTweetView.setBackgroundColor(Color.TRANSPARENT);
+            View t1 = orgTweetView.findViewById(R.id.tw__twitter_logo);
+            View t2 = orgTweetView.findViewById(R.id.tw__tweet_retweeted_by);
+            View t3 = orgTweetView.findViewById(R.id.tw__tweet_author_avatar);
+            View t4 = orgTweetView.findViewById(R.id.tw__tweet_author_full_name);
+            View t5 = orgTweetView.findViewById(R.id.tw__tweet_author_screen_name);
+            View t6 = orgTweetView.findViewById(R.id.tw__tweet_timestamp);
+            t1.setVisibility(View.GONE);
+            t2.setVisibility(View.GONE);
+            t3.setVisibility(View.GONE);
+            t4.setVisibility(View.GONE);
+            t5.setVisibility(View.GONE);
+            t6.setVisibility(View.GONE);
             tContent.addView(orgTweetView);
         }
     }

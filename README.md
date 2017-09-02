@@ -34,6 +34,7 @@ You can get a signed APK from here (Android 4.1+): [APK](https://raw.githubuserc
 ![Twthaar - v1.5](screenshot3.png)
 ![Twthaar - send a tweet](screenshot4.png)
 ![Twthaar preferences](screenshot6.png)
+![Twthaar - v1.70 new Tweet Design](screenshot7.png)
 
 ## How to get API Codes
 
