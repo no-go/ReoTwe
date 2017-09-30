@@ -119,15 +119,25 @@ class TweetAdapter extends BaseAdapter {
             View t5 = orgTweetView.findViewById(R.id.tw__tweet_timestamp);
             TextView t6 = (TextView) orgTweetView.findViewById(R.id.tw__tweet_text);
             FrameLayout fl = (FrameLayout) orgTweetView.findViewById(R.id.quote_tweet_holder);
-            TextView qut = null;
-            if (fl != null) qut = (TextView) fl.findViewById(R.id.tw__tweet_text);
+            TextView qut0 = null;
+            TextView qut1 = null;
+            TextView qut2 = null;
+            if (fl != null) {
+                qut0 = (TextView) fl.findViewById(R.id.tw__tweet_text);
+                qut1 = (TextView) fl.findViewById(R.id.tw__tweet_author_full_name);
+                qut2 = (TextView) fl.findViewById(R.id.tw__tweet_author_screen_name);
+            }
             t1.setVisibility(View.GONE);
             t2.setVisibility(View.GONE);
             t3.setVisibility(View.GONE);
             t4.setVisibility(View.GONE);
             t5.setVisibility(View.GONE);
             t6.setTextColor(ContextCompat.getColor(mContext, R.color.textFront));
-            if (qut != null) qut.setTextColor(ContextCompat.getColor(mContext, R.color.textFront));
+            if (qut0 != null) {
+                qut0.setTextColor(ContextCompat.getColor(mContext, R.color.textFront));
+                qut1.setTextColor(ContextCompat.getColor(mContext, R.color.textFront));
+                qut2.setTextColor(ContextCompat.getColor(mContext, R.color.textFrontLight));
+            }
             avatar.setVisibility(View.GONE);
             tContent.addView(orgTweetView);
             tText.setVisibility(View.GONE);
@@ -184,19 +194,35 @@ class TweetAdapter extends BaseAdapter {
         public void onClick(View v) {
             tContent.removeAllViews();
             TweetView orgTweetView = new TweetView(mContext, tweet);
+            ImageView avatar = (ImageView) orgTweetView.findViewById(R.id.tw__tweet_author_avatar);
             orgTweetView.setBackgroundColor(Color.TRANSPARENT);
             View t1 = orgTweetView.findViewById(R.id.tw__twitter_logo);
             View t2 = orgTweetView.findViewById(R.id.tw__tweet_retweeted_by);
-            View t3 = orgTweetView.findViewById(R.id.tw__tweet_author_avatar);
-            View t4 = orgTweetView.findViewById(R.id.tw__tweet_author_full_name);
-            View t5 = orgTweetView.findViewById(R.id.tw__tweet_author_screen_name);
-            View t6 = orgTweetView.findViewById(R.id.tw__tweet_timestamp);
+            View t3 = orgTweetView.findViewById(R.id.tw__tweet_author_full_name);
+            View t4 = orgTweetView.findViewById(R.id.tw__tweet_author_screen_name);
+            View t5 = orgTweetView.findViewById(R.id.tw__tweet_timestamp);
+            TextView t6 = (TextView) orgTweetView.findViewById(R.id.tw__tweet_text);
+            FrameLayout fl = (FrameLayout) orgTweetView.findViewById(R.id.quote_tweet_holder);
+            TextView qut0 = null;
+            TextView qut1 = null;
+            TextView qut2 = null;
+            if (fl != null) {
+                qut0 = (TextView) fl.findViewById(R.id.tw__tweet_text);
+                qut1 = (TextView) fl.findViewById(R.id.tw__tweet_author_full_name);
+                qut2 = (TextView) fl.findViewById(R.id.tw__tweet_author_screen_name);
+            }
             t1.setVisibility(View.GONE);
             t2.setVisibility(View.GONE);
             t3.setVisibility(View.GONE);
             t4.setVisibility(View.GONE);
             t5.setVisibility(View.GONE);
-            t6.setVisibility(View.GONE);
+            t6.setTextColor(ContextCompat.getColor(mContext, R.color.textFront));
+            if (qut0 != null) {
+                qut0.setTextColor(ContextCompat.getColor(mContext, R.color.textFront));
+                qut1.setTextColor(ContextCompat.getColor(mContext, R.color.textFront));
+                qut2.setTextColor(ContextCompat.getColor(mContext, R.color.textFrontLight));
+            }
+            avatar.setVisibility(View.GONE);
             tContent.addView(orgTweetView);
         }
     }
