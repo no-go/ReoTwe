@@ -7,12 +7,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,7 +31,6 @@ import android.widget.Toast;
 
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
@@ -33,21 +38,22 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.User;
 import com.twitter.sdk.android.tweetcomposer.ComposerActivity;
-import com.twitter.sdk.android.tweetui.SearchTimeline;
-import com.twitter.sdk.android.tweetui.TimelineResult;
-import com.twitter.sdk.android.tweetui.UserTimeline;
+import com.twitter.sdk.android.tweetui.TweetView;
+
+import android.support.design.widget.NavigationView;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
 import java.util.Stack;
 
 import retrofit2.Call;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
+
     public ListView mListView;
     public ArrayList<Tweet> tweetArrayList;
     public TweetAdapter adapter;
@@ -104,18 +110,6 @@ public class MainActivity extends AppCompatActivity {
                     searchBox.setVisibility(View.GONE);
                 }
                 break;
-            case R.id.action_makeTweet:
-                if (username.equals("")) {
-                    loginButton.callOnClick();
-                } else {
-                    String[] qeris = editText.getText().toString().split(",");
-                    final Intent intent = new ComposerActivity.Builder(MainActivity.this)
-                            .session(session)
-                            .text(qeris[0])
-                            .createIntent();
-                    startActivity(intent);
-                }
-                break;
             case R.id.action_allImages:
                 if (item.isChecked()) {
                     adapter.imageful = false;
@@ -151,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.together);
         umm = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);
 
         try {
@@ -238,6 +232,26 @@ public class MainActivity extends AppCompatActivity {
             username = session.getUserName();
         }
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (username.equals("")) {
+                    loginButton.callOnClick();
+                } else {
+                    String[] qeris = editText.getText().toString().split(",");
+                    final Intent intent = new ComposerActivity.Builder(MainActivity.this)
+                            .session(session)
+                            .text(qeris[0])
+                            .createIntent();
+                    startActivity(intent);
+                }
+            }
+        });
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         button.callOnClick();
     }
 
@@ -271,6 +285,30 @@ public class MainActivity extends AppCompatActivity {
                 false
         );
         call.enqueue(new FriendCallback(query));
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        /*
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.action_allImages) {
+
+        }
+        */
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
+        Snackbar.make(
+                drawer,
+                "Replace with your own action",
+                Snackbar.LENGTH_LONG
+        ).setAction("Action", null).show();
+
+        return true;
     }
 
 
