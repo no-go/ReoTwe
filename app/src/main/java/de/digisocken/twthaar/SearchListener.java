@@ -42,7 +42,7 @@ public class SearchListener implements View.OnClickListener {
 
         for (String q : queries) {
             q = q.trim();
-            if (q.contains("#")) {
+            if (q.startsWith("#")) {
                 q = q.replace("#","");
                 SearchTimeline searchTimeline = new SearchTimeline.Builder()
                         .query(q)

@@ -4,18 +4,24 @@
     <string name="projPage">Project Page</string>
     <string name="preferences">PREFERENCES</string>
     <string name="apihint">get it on http://apps.twitter.com</string>
-    <string name="search">search @user or #tag</string>
+    <string name="search">search @userA or @userB,#tag1,#tag2</string>
     <string name="imageful">Full image stuff</string>
     <string name="statsGoto"> ⇆ %1$d ★ %2$d %3$s &gt;</string>
-    <!-- \@go_nix,@adblockfast,@lostincologne,@dierosarotechi,@profiamateurin,@anneschuessler,@Atari_MegaSTe,@natschaska,@kifferbarbie,@zubesuchhier,@Phollux,@SophiePassmann,@UnusuaIlmages,@N3I_3,@The_Pi_Hole,@istdasvegan,@TariTarina,@SenfundKrenn,@steffitalks,@ESP8266COM,@kenshirriff,@co_bebe_,@FeeKKanzler,@cm_krefeld,@Calvinn_Hobbes,@NicolasGassmann,@bomelino,@ayamira_taddi,@Pat130485,@9823 -->
-    <string name="defaultStarts">\@GeneHunt,@The_Pi_Hole,@amnesty,@adafruit,@Princessofwifi,#Friday,@istdasvegan,#wetter,#wochenende,@Der_Postillon</string>
+    <string name="defaultStarts">\@GeneHunt,@The_Pi_Hole,@amnesty,@adafruit,@Princessofwifi,#Friday,@istdasvegan,#wetter,#wochenende,@MartinSonneborn,@DLF,@evalodde,@ProletDo,@ViccoVonBuelow,@tazgezwitscher</string>
     <string name="no">no</string>
     <string name="yes">yes</string>
     <string name="closing">Closing %1$s ?</string>
     <string name="sureToClose">Are you sure you want to close me?</string>
-    <string name="usersAndTags">Home users and tags</string>
+    <string name="usersAndTags">Favourite users and tags</string>
+    <string name="favAdded">Favourite(s) added</string>
     <string name="usersAndTags_summary">e.g.: @user1,@user32,#tagImportant42,@fails,#epic69,...</string>
     <string name="makeTweet">make tweet …</string>
     <string name="youNeedApiKey">You need a valid API Key and Secret, too!</string>
     <string name="ready">ready.</string>
+
+    <string name="nightmode">Nightmode (good on Android &gt; 6)</string>
+    <string name="nightmode_summary">between a timespan the App is optimized for a dark environment</string>
+    <string name="nightmode_use">dark</string>
+    <string name="nightmode_use_start">from …:00 o\'clock</string>
+    <string name="nightmode_use_stop">to …:59 o\'clock</string>
 </resources>

@@ -2,6 +2,8 @@ package de.digisocken.twthaar;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,9 +88,9 @@ class TweetAdapter extends BaseAdapter {
                 if (dummy.size() > 0) nextHop = dummy.get(0);
             }
         } else {
-            tUser.setText(tweet.user.name + " ⇆");
+            tUser.setText(tweet.retweetedStatus.user.name);
             text = text.replace("RT " + nextHop + ": ","");
-            trt.setText(tweet.retweetedStatus.user.name);
+            trt.setText(tweet.user.name + " ⇆");
         }
 
         if (nextHop == null) nextHop = "@" + tweet.user.screenName;
@@ -115,11 +117,17 @@ class TweetAdapter extends BaseAdapter {
             View t3 = orgTweetView.findViewById(R.id.tw__tweet_author_full_name);
             View t4 = orgTweetView.findViewById(R.id.tw__tweet_author_screen_name);
             View t5 = orgTweetView.findViewById(R.id.tw__tweet_timestamp);
+            TextView t6 = (TextView) orgTweetView.findViewById(R.id.tw__tweet_text);
+            FrameLayout fl = (FrameLayout) orgTweetView.findViewById(R.id.quote_tweet_holder);
+            TextView qut = null;
+            if (fl != null) qut = (TextView) fl.findViewById(R.id.tw__tweet_text);
             t1.setVisibility(View.GONE);
             t2.setVisibility(View.GONE);
             t3.setVisibility(View.GONE);
             t4.setVisibility(View.GONE);
             t5.setVisibility(View.GONE);
+            t6.setTextColor(ContextCompat.getColor(mContext, R.color.textFront));
+            if (qut != null) qut.setTextColor(ContextCompat.getColor(mContext, R.color.textFront));
             avatar.setVisibility(View.GONE);
             tContent.addView(orgTweetView);
             tText.setVisibility(View.GONE);

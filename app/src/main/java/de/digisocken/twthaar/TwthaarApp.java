@@ -12,6 +12,7 @@ import com.twitter.sdk.android.core.TwitterConfig;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
 
 public class TwthaarApp extends Application {
@@ -27,6 +28,9 @@ public class TwthaarApp extends Application {
     public static SimpleDateFormat formatIn = new SimpleDateFormat("EEE MMM dd hh:mm:ss z yyyy", Locale.ENGLISH);
     public static SimpleDateFormat formatOut = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH);
 
+    public static final int DEFAULT_NIGHT_START = 18;
+    public static final int DEFAULT_NIGHT_STOP = 6;
+
     public void onCreate() {
         super.onCreate();
 
@@ -37,6 +41,14 @@ public class TwthaarApp extends Application {
             e.printStackTrace();
         }
         mPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        if (!mPreferences.contains("nightmode_use_start")) {
+            mPreferences.edit().putInt("nightmode_use_start", DEFAULT_NIGHT_START).commit();
+        }
+        if (!mPreferences.contains("nightmode_use_stop")) {
+            mPreferences.edit().putInt("nightmode_use_stop", DEFAULT_NIGHT_STOP).commit();
+        }
+
         TwitterConfig config = new TwitterConfig.Builder(this)
                 .logger(new DefaultLogger(Log.DEBUG))
                 .twitterAuthConfig(new TwitterAuthConfig(
@@ -46,5 +58,13 @@ public class TwthaarApp extends Application {
                 .debug(BuildConfig.DEBUG)
                 .build();
         Twitter.initialize(config);
+    }
+
+    public static boolean inTimeSpan(int startH, int stopH) {
+        int nowH = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        if (startH == stopH && startH == nowH) return true;
+        if (startH > stopH && (nowH <= stopH || nowH >= startH)) return true;
+        if (startH < stopH && nowH >= startH && nowH <= stopH) return true;
+        return false;
     }
 }

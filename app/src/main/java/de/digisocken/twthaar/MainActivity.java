@@ -1,12 +1,17 @@
 package de.digisocken.twthaar;
 
+import android.app.UiModeManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,9 +52,12 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<Tweet> tweetArrayList;
     public TweetAdapter adapter;
     public ImageButton button;
+    public ImageButton buttonRevert;
+    public ImageButton buttonAddStart;
     public EditText editText;
     public RelativeLayout searchBox;
     public Stack< String > history;
+    private UiModeManager umm;
 
     private String iniQuery;
 
@@ -144,6 +152,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        umm = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);
+
         try {
             ActionBar ab = getSupportActionBar();
             if(ab != null) {
@@ -151,7 +161,11 @@ public class MainActivity extends AppCompatActivity {
                 ab.setHomeButtonEnabled(true);
                 ab.setDisplayUseLogoEnabled(true);
                 ab.setLogo(R.mipmap.ic_launcher);
-                ab.setTitle(" " + getString(R.string.app_name) + " " + BuildConfig.VERSION_NAME);
+                if (BuildConfig.DEBUG) {
+                    ab.setTitle(" " + getString(R.string.app_name) + " " + BuildConfig.VERSION_NAME);
+                } else {
+                    ab.setTitle(" " + getString(R.string.app_name));
+                }
                 ab.setElevation(10);
             }
         } catch (Exception e) {
@@ -161,12 +175,42 @@ public class MainActivity extends AppCompatActivity {
         searchBox = (RelativeLayout) findViewById(R.id.searchBox);
         mListView = (ListView) findViewById(R.id.list);
         button = (ImageButton) findViewById(R.id.button);
+        buttonRevert = (ImageButton) findViewById(R.id.cleanUpBtn);
+        buttonAddStart = (ImageButton) findViewById(R.id.addStartBtn);
         editText = (EditText) findViewById(R.id.editText);
         loginButton = new TwitterLoginButton(this);
 
         iniQuery = TwthaarApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts));
         editText.setText(iniQuery);
         button.setOnClickListener(new SearchListener(this, ""));
+
+        buttonRevert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editText.setText("");
+            }
+        });
+
+        buttonAddStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String[] queries = editText.getText().toString().split(",");
+                for (String q : queries) {
+                    q = q.trim();
+                    if (q.startsWith("#")) {
+                        if(!iniQuery.contains(q)) {
+                            iniQuery += "," + q;
+                        }
+                    } else if (q.startsWith("@")) {
+                        if(!iniQuery.contains(q)) {
+                            iniQuery += "," + q;
+                        }
+                    }
+                }
+                TwthaarApp.mPreferences.edit().putString("STARTUSERS",iniQuery).apply();
+                Toast.makeText(MainActivity.this, R.string.favAdded, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         tweetArrayList = new ArrayList<>();
         history = new Stack<>();
@@ -295,6 +339,30 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         loginButton.onActivityResult(requestCode, resultCode, data);
+    }
+    @Override
+
+    protected void onResume() {
+        SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        boolean night = mPreferences.getBoolean("nightmode_use", false);
+        if (night) {
+            int startH = mPreferences.getInt("nightmode_use_start", TwthaarApp.DEFAULT_NIGHT_START);
+            int stopH = mPreferences.getInt("nightmode_use_stop", TwthaarApp.DEFAULT_NIGHT_STOP);
+            if (TwthaarApp.inTimeSpan(startH, stopH) && umm.getNightMode() != UiModeManager.MODE_NIGHT_YES) {
+                umm.setNightMode(UiModeManager.MODE_NIGHT_YES);
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            }
+            if (!TwthaarApp.inTimeSpan(startH, stopH) && umm.getNightMode() != UiModeManager.MODE_NIGHT_NO) {
+                umm.setNightMode(UiModeManager.MODE_NIGHT_NO);
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        } else {
+            if (umm.getNightMode() == UiModeManager.MODE_NIGHT_YES) {
+                umm.setNightMode(UiModeManager.MODE_NIGHT_NO);
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        }
+        super.onResume();
     }
 
     public void realExit() {

@@ -8,17 +8,18 @@ Twthaar is a very low level twitter client. You can use the code for build your 
 
  -  Ads free!
  -  fast and efficient
- -  tap on the Tweet text to load the full imageful Tweetview
+ -  tap on the Tweet text to load the full imageful Tweet View
  -  get and add your own API key and secret on apps.twitter.com to authorize the App
  -  lists timeline without images of a given username (+time, likes, retweets)
  -  Browse timelines
      -  extracts username from `RT @username:` and got to that user timeline by a single click
      -  if it is not a retweet, it try to extract the first `@username`
      -  if there is no `@username`, it uses the username of the posting user / publisher
- -  multisearch (comma separated) for `@userTimelines` or `#otherStuff`
+ -  multi search (comma separated) for `@userTimelines` or `#otherStuff`
  -  very simple android code
  -  switch images on/off in preferences
  -  english and german interface
+ -  night mode
  -  it is possible to send text only tweets (you get a login dialog on first try)
  -  if you are logged in, it gets your friend list and at it to the preferences automaticaly (and yourself)
 
@@ -35,6 +36,7 @@ You can get a signed APK from here (Android 4.1+): [APK](https://raw.githubuserc
 ![Twthaar - send a tweet](screenshot4.png)
 ![Twthaar preferences](screenshot6.png)
 ![Twthaar - v1.70 new Tweet Design](screenshot7.png)
+![Twthaar - v1.74 night mode](screenshot8.png)
 
 ## How to get API Codes
 
