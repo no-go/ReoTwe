@@ -2,7 +2,7 @@
     <string name="app_name">Twthaar</string>
     <string name="flattr_this">Micro-Donate !</string>
     <string name="projPage">Project Page</string>
-    <string name="preferences">PREFERENCES</string>
+    <string name="preferences">Preferences</string>
     <string name="apihint">get it on http://apps.twitter.com</string>
     <string name="search">search @userA or @userB,#tag1,#tag2</string>
     <string name="imageful">Full image stuff</string>

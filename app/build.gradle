@@ -7,8 +7,8 @@ android {
         applicationId "de.digisocken.twthaar"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 176
-        versionName "1.76"
+        versionCode 177
+        versionName "1.77"
     }
     buildTypes {
         release {

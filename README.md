@@ -1,6 +1,6 @@
 # Twthaar
 
-Twthaar is a very low level twitter client. You can use the code for build your own cool client or to learn how *Twitter Kit* and API works.
+Twthaar WAS a very low level twitter client. You can use the old code for build your own cool client or to learn how *Twitter Kit* and API works.
 
 ![logo](app/src/main/res/mipmap-hdpi/ic_launcher.png)
 
@@ -20,7 +20,7 @@ Twthaar is a very low level twitter client. You can use the code for build your 
  -  switch images on/off in preferences
  -  english and german interface
  -  night mode
- -  it is possible to send text only tweets (you get a login dialog on first try)
+ -  it is possible to send text only or low resolution picture tweets (you get a login dialog on first try)
  -  if you are logged in, it gets your friend list and at it to the preferences automaticaly (and yourself)
 
 ## Get the App
@@ -37,6 +37,7 @@ You can get a signed APK from here (Android 4.1+): [APK](https://raw.githubuserc
 ![Twthaar preferences](screenshot6.png)
 ![Twthaar - v1.70 new Tweet Design](screenshot7.png)
 ![Twthaar - v1.74 night mode](screenshot8.png)
+![Twthaar - v1.77 info sidebar](screenshot9.png)
 
 ## How to get API Codes
 

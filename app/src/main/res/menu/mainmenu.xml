@@ -9,14 +9,6 @@
         android:title="@string/search"
         android:icon="@android:drawable/ic_menu_search"></item>
 
-    <item
-        android:id="@+id/action_project"
-        android:title="@string/projPage"></item>
-
-    <item
-        android:id="@+id/action_flattr"
-        android:title="@string/flattr_this"></item>
-
     <group android:checkableBehavior="all">
         <item
             android:id="@+id/action_allImages"
@@ -24,8 +16,11 @@
     </group>
 
     <item
-        android:id="@+id/action_preferences"
-        android:title="@string/preferences">
-    </item>
+        android:id="@+id/action_project"
+        android:title="@string/projPage"></item>
+
+    <item
+        android:id="@+id/action_flattr"
+        android:title="@string/flattr_this"></item>
 
 </menu>

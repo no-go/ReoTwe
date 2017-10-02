@@ -5,8 +5,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.hardware.Camera;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,14 +27,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterApiClient;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
@@ -42,6 +50,10 @@ import com.twitter.sdk.android.tweetui.TweetView;
 
 import android.support.design.widget.NavigationView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -73,6 +85,8 @@ public class MainActivity extends AppCompatActivity
     MyTwitterApiClient.FriendsService fs;
     String username = "";
     String friendlist;
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -130,11 +144,6 @@ public class MainActivity extends AppCompatActivity
             case R.id.action_project:
                 Intent intentProj= new Intent(Intent.ACTION_VIEW, Uri.parse(TwthaarApp.PROJECT_LINK));
                 startActivity(intentProj);
-                break;
-            case R.id.action_preferences:
-                Intent intent = new Intent(MainActivity.this, PreferencesActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent);
                 break;
             default:
                 break;
@@ -230,6 +239,30 @@ public class MainActivity extends AppCompatActivity
         session = TwitterCore.getInstance().getSessionManager().getActiveSession();
         if (session != null) {
             username = session.getUserName();
+            
+            TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
+            twitterApiClient.getAccountService().verifyCredentials(true, true, false).enqueue(new Callback<User>() {
+                @Override
+                public void failure(TwitterException e) {}
+
+                @Override
+                public void success(Result<User> userResult) {
+                    if (userResult != null) {
+                        TextView meTxt = (TextView) findViewById(R.id.fullname);
+                        TextView meScrTxt = (TextView) findViewById(R.id.screenname);
+                        TextView favouriteList = (TextView) findViewById(R.id.favouriteList);
+                        meScrTxt.setText("@" + username);
+                        meTxt.setText(userResult.data.name);
+                        favouriteList.setText(
+                                TwthaarApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts)).replace(",","\n")
+                        );
+
+                    }
+                }
+            });
+
+
+
         }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -245,6 +278,27 @@ public class MainActivity extends AppCompatActivity
                             .text(qeris[0])
                             .createIntent();
                     startActivity(intent);
+                }
+            }
+        });
+
+        FloatingActionButton fabCam = (FloatingActionButton) findViewById(R.id.fabCam);
+        int numberOfCameras = Camera.getNumberOfCameras();
+
+        PackageManager pm = getPackageManager();
+        final boolean deviceHasCameraFlag = pm.hasSystemFeature(PackageManager.FEATURE_CAMERA);
+        if( !deviceHasCameraFlag || numberOfCameras==0 ) fabCam.setVisibility(View.GONE);
+
+        fabCam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (username.equals("")) {
+                    loginButton.callOnClick();
+                } else {
+                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                    }
                 }
             }
         });
@@ -291,22 +345,19 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        /*
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.action_allImages) {
-
+        if (id == R.id.action_preferences) {
+            Intent intent = new Intent(MainActivity.this, PreferencesActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent);
+        } else {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            Snackbar.make(
+                    drawer,
+                    "Replace with your own action",
+                    Snackbar.LENGTH_LONG
+            ).setAction("Action", null).show();
         }
-        */
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-
-        Snackbar.make(
-                drawer,
-                "Replace with your own action",
-                Snackbar.LENGTH_LONG
-        ).setAction("Action", null).show();
 
         return true;
     }
@@ -376,10 +427,41 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        loginButton.onActivityResult(requestCode, resultCode, data);
-    }
-    @Override
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            // image preview
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
+            byte[] bitmapdata = bos.toByteArray();
 
+            try {
+                File mTmpFile = File.createTempFile("tmp", ".png", getCacheDir());
+                FileOutputStream fos = new FileOutputStream(mTmpFile);
+                fos.write(bitmapdata);
+                fos.flush();
+                fos.close();
+
+                Uri imgUri = Uri.fromFile(mTmpFile);
+
+                // make image tweet
+                final Intent intent = new ComposerActivity.Builder(MainActivity.this)
+                        .session(session)
+                        .image(imgUri)
+                        .createIntent();
+                startActivity(intent);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            loginButton.onActivityResult(requestCode, resultCode, data);
+        }
+
+    }
+
+    @Override
     protected void onResume() {
         SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         boolean night = mPreferences.getBoolean("nightmode_use", false);
