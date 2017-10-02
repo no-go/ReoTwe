@@ -6,7 +6,8 @@ Twthaar WAS a very low level twitter client. You can use the old code for build 
 
 ## Features
 
- -  Ads free!
+ -  It is **Ads free!**
+ -  reduce addiction to **retweet, like or high resolution selfies**, because it has not this features!
  -  fast and efficient
  -  tap on the Tweet text to load the full imageful Tweet View
  -  get and add your own API key and secret on apps.twitter.com to authorize the App
@@ -30,6 +31,7 @@ You can get a signed APK from here (Android 4.1+): [APK](https://raw.githubuserc
 ## Screenshots
 
 ![Twthaar - v1.77 info sidebar](img/screenshot9.png)
+![Twthaar - picture and pictureless tweet buttons at the buttom](img/screenshot1.png)
 ![Twthaar - v1.74 night mode](img/screenshot8.png)
 ![Twthaar - v1.70 new Tweet Design](img/screenshot7.png)
 ![Twthaar - send a tweet](img/screenshot4.png)
@@ -37,7 +39,6 @@ You can get a signed APK from here (Android 4.1+): [APK](https://raw.githubuserc
 ![Twthaar: display all images](img/screenshot2.png)
 ![Twthaar - v1.5](img/screenshot3.png)
 ![Twthaar preferences](img/screenshot6.png)
-![Twthaar - old version](img/screenshot1.png)
 
 ## How to get API Codes
 
