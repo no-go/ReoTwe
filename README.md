@@ -29,19 +29,57 @@ You can get a signed APK from here (Android 4.1+): [APK](https://raw.githubuserc
 
 ## Screenshots
 
-![Twthaar get images on demand](screenshot5.png)
-![Twthaar - old version](screenshot1.png)
-![Twthaar: display all images](screenshot2.png)
-![Twthaar - v1.5](screenshot3.png)
-![Twthaar - send a tweet](screenshot4.png)
-![Twthaar preferences](screenshot6.png)
-![Twthaar - v1.70 new Tweet Design](screenshot7.png)
-![Twthaar - v1.74 night mode](screenshot8.png)
-![Twthaar - v1.77 info sidebar](screenshot9.png)
+![Twthaar - v1.77 info sidebar](img/screenshot9.png)
+![Twthaar - v1.74 night mode](img/screenshot8.png)
+![Twthaar - v1.70 new Tweet Design](img/screenshot7.png)
+![Twthaar - send a tweet](img/screenshot4.png)
+![Twthaar get images on demand](img/screenshot5.png)
+![Twthaar: display all images](img/screenshot2.png)
+![Twthaar - v1.5](img/screenshot3.png)
+![Twthaar preferences](img/screenshot6.png)
+![Twthaar - old version](img/screenshot1.png)
 
 ## How to get API Codes
 
-... to do 
+I did not share me API Key and Secret ! You have to create your own. Normaly
+all twitter client request go to a man in the middle app-server to analyse
+and cache every request (similar to a proxy). WE DO NOT WANT this man in the
+middle server, who holds API Key and Secret and sending Ad's or do things with
+our private stuff. Thus: Your client have to hold this Keys and you have
+to generate your own, because there are request limits to pretent the
+original twitter servers from to many requests.
+
+To get API Key and Secret you have to create a new App on the twitter development website.
+
+### Visit apps develop website
+
+[https://apps.twitter.com](https://apps.twitter.com)
+
+![visit twitter apps website](img/01_visit_apps.png)
+
+### login to twitter or create new twitter account
+
+![login to twitter](img/02_login_or_createlogin.png)
+
+### after login go back to apps website
+
+![switch to apps](img/03_gobacktoapps.png)
+
+### Create new App
+
+![create new](img/04_create_new_app.png)
+
+### Fill in some defaults
+
+![defaults](img/05_fillin_defaults.png)
+
+### Check settings of your App
+
+![check settings](img/06_check_settings.png)
+
+### Switch to the Key and Secret Tab
+
+![](img/07_get_key_and_secret.png)
 
 ## License
 
