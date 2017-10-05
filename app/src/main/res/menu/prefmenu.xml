@@ -9,4 +9,8 @@
         android:title="@string/preferences">
     </item>
 
+    <item
+        android:id="@+id/action_info"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="@string/projPage"></item>
 </menu>

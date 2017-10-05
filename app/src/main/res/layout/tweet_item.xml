@@ -32,7 +32,7 @@
         android:paddingBottom="5dp"
         android:paddingLeft="2dp"
         android:paddingTop="0dp"
-        android:text="Hans Wurst"
+        android:text="@string/hintFollowUser"
         android:textColor="@color/textFront"
         android:textSize="15dp"
         android:textStyle="bold" />
@@ -64,7 +64,7 @@
             android:layout_below="@+id/tweetUser"
             android:layout_marginTop="0dp"
             android:paddingBottom="5dp"
-            android:text="Velit distinctio aut voluptate hic fugit error voluptatem. Exercitationem atque provident in qui et incidunt exercitationem. Officiis laudantium nam et. Ut est ut maxime nam. Odio aut provident qui voluptatum veritatis. Voluptatem ut quia rem id quae suscipit."
+            android:text="@string/hintClickLoadFull"
             android:textColor="@color/textFront"
             android:textSize="15dp" />
     </FrameLayout>
@@ -77,9 +77,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:elevation="1dp"
-        android:text="2017-08-12 18:45"
-        android:textColor="@color/textFrontLight"
         android:paddingRight="5dp"
+        android:text="@string/hintFollowThis"
+        android:textColor="@color/textFrontLight"
         android:textSize="9dp"
         android:textStyle="bold"
         android:typeface="monospace" />
@@ -93,7 +93,7 @@
         android:layout_below="@+id/tweetDate"
         android:elevation="1dp"
         android:paddingRight="5dp"
-        android:text=" ⇆ 123 ★ 453 #fressen &gt;"
+        android:text=" ⇆ 123 ★ 453 #XYZ &gt;"
         android:textColor="@color/textFrontLight"
         android:textSize="9dp"
         android:textStyle="bold"
@@ -103,12 +103,12 @@
         android:id="@+id/tweetRTname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RT username"
-        android:layout_below="@+id/tweetContent"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textColor="@color/textFrontLight"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tweetContent"
         android:paddingRight="5dp"
+        android:text="@string/hintRTuser"
+        android:textColor="@color/textFrontLight"
         android:textSize="9dp"
         android:textStyle="italic" />
 

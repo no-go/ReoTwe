@@ -48,6 +48,15 @@ public class TwthaarApp extends Application {
         if (!mPreferences.contains("nightmode_use_stop")) {
             mPreferences.edit().putInt("nightmode_use_stop", DEFAULT_NIGHT_STOP).commit();
         }
+        if (!mPreferences.contains("STARTUSERS")) {
+            mPreferences.edit().putString("STARTUSERS", getString(R.string.defaultStarts)).commit();
+        }
+        if (!mPreferences.contains("nightmode_use")) {
+            mPreferences.edit().putBoolean("nightmode_use", true).commit();
+        }
+        if (!mPreferences.contains("imageful")) {
+            mPreferences.edit().putBoolean("imageful", true).commit();
+        }
 
         TwitterConfig config = new TwitterConfig.Builder(this)
                 .logger(new DefaultLogger(Log.DEBUG))

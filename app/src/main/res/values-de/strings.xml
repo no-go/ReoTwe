@@ -10,11 +10,11 @@
     <string name="no">nein</string>
     <string name="yes">ja</string>
     <string name="preferences">Einstellungen</string>
-    <string name="projPage">Projekt Seite</string>
+    <string name="projPage">Info Webseite</string>
     <string name="search">suche nach @userA oder @userB,#tag1,#tag2</string>
     <string name="sureToClose">Willst du mich wirklich beenden?</string>
     <string name="usersAndTags">Favorit User und Tags</string>
-    <string name="favAdded">Favorit(en) zugefügt</string>
+    <string name="favAdded">neue Favorit(en) zugefügt</string>
     <string name="usersAndTags_summary">z.B.: @user1,@user32,#tagImportant42,@fails,#epic69,...</string>
     <string name="makeTweet">Neuer Tweet …</string>
     <string name="youNeedApiKey">Du brauchst auch gültigen API Key + Secret!</string>
@@ -25,4 +25,13 @@
     <string name="nightmode_use">dunkel</string>
     <string name="nightmode_use_start">von …:00 Uhr</string>
     <string name="nightmode_use_stop">bis …:59 Uhr</string>
+
+    <string name="hintFollowUser">Klick hier um zum User zu gehn</string>
+    <string name="hintFollowThis">Klick: geht zu XYZ</string>
+    <string name="hintClickLoadFull">Klick auf den Inhalt, um den #XYZ Tweet mit Bildern zu laden. Ist der Tweet komplett geladen, öffnet ein Klick dessen Medien oder führt zu einer Webseite. Du brauchst außerdem einen API-Key und API-Secret um diese App zu nutzen. Nutze die Einstellungen in der linken Sidebar, um sie bei zufügen.</string>
+    <string name="hintRTuser">Der User, der den Tweet retweetet hat</string>
+
+    <string name="Quit">beenden</string>
+    <string name="exit_title">App Neustart</string>
+    <string name="exit_message">Da möglicherweise wichtige Einstellungen geändert wurden, ist ein Restart der App nicht falsch.</string>
 </resources>

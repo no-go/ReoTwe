@@ -33,7 +33,7 @@ class TweetAdapter extends BaseAdapter {
         mContext = context;
         mDataSource = items;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        imageful = TwthaarApp.mPreferences.getBoolean("imageful", false);
+        imageful = TwthaarApp.mPreferences.getBoolean("imageful", true);
     }
 
     @Override

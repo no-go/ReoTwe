@@ -8,7 +8,7 @@
         android:title="@string/usersAndTags" />
 
     <SwitchPreference
-        android:defaultValue="false"
+        android:defaultValue="true"
         android:key="imageful"
         android:title="@string/imageful" />
 
@@ -28,7 +28,7 @@
         android:title="@string/nightmode" >
 
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="nightmode_use"
             android:summary="@string/nightmode_summary"
             android:title="@string/nightmode_use" />

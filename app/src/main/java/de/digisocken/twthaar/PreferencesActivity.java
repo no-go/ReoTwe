@@ -1,24 +1,20 @@
 package de.digisocken.twthaar;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 public class PreferencesActivity extends AppCompatActivity {
 
-    /**
-     * Diese Methode ermöglicht das Verlassen der Activity über den Home-Button der Action Bar
-     *
-     * @param item
-     * @return
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                onBackPressed();
+                //NavUtils.navigateUpFromSameTask(this);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -34,5 +30,22 @@ public class PreferencesActivity extends AppCompatActivity {
             ab.setDisplayHomeAsUpEnabled(true);
             ab.setTitle(getString(R.string.preferences));
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.exit_message)
+                .setTitle(R.string.exit_title)
+                .setPositiveButton(
+                        R.string.Quit,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                System.exit(0);
+                            }
+                        }
+                );
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

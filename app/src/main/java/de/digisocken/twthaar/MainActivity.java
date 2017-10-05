@@ -23,10 +23,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -36,9 +38,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterApiClient;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterConfig;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
@@ -98,7 +103,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem mi2 = menu.findItem(R.id.action_allImages);
-        mi2.setChecked(TwthaarApp.mPreferences.getBoolean("imageful", false));
+        mi2.setChecked(TwthaarApp.mPreferences.getBoolean("imageful", true));
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -210,6 +215,8 @@ public class MainActivity extends AppCompatActivity
                         }
                     }
                 }
+                TextView favouriteList = (TextView) findViewById(R.id.favouriteList);
+                favouriteList.setText(iniQuery.replace(",","\n"));
                 TwthaarApp.mPreferences.edit().putString("STARTUSERS",iniQuery).apply();
                 Toast.makeText(MainActivity.this, R.string.favAdded, Toast.LENGTH_SHORT).show();
             }
@@ -250,19 +257,15 @@ public class MainActivity extends AppCompatActivity
                     if (userResult != null) {
                         TextView meTxt = (TextView) findViewById(R.id.fullname);
                         TextView meScrTxt = (TextView) findViewById(R.id.screenname);
-                        TextView favouriteList = (TextView) findViewById(R.id.favouriteList);
                         meScrTxt.setText("@" + username);
                         meTxt.setText(userResult.data.name);
+                        TextView favouriteList = (TextView) findViewById(R.id.favouriteList);
                         favouriteList.setText(
                                 TwthaarApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts)).replace(",","\n")
                         );
-
                     }
                 }
             });
-
-
-
         }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -306,6 +309,11 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        if (TwthaarApp.mPreferences.getString("CONSUMER_KEY","").equals("") || TwthaarApp.mPreferences.getString("CONSUMER_SECRET","").equals("") ) {
+            ViewGroup hintView = (ViewGroup) getLayoutInflater().inflate(R.layout.tweet_item, null);
+            mListView.addFooterView(hintView);
+        }
+
         button.callOnClick();
     }
 
@@ -342,6 +350,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public boolean onCreatePanelMenu(int featureId, Menu menu) {
+        TextView favouriteList = (TextView) findViewById(R.id.favouriteList);
+        favouriteList.setText(
+                TwthaarApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts)).replace(",","\n")
+        );
+        return super.onCreatePanelMenu(featureId, menu);
+    }
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
@@ -349,6 +366,9 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, PreferencesActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
+        }else if (id == R.id.action_info) {
+            Intent intentProj= new Intent(Intent.ACTION_VIEW, Uri.parse(TwthaarApp.PROJECT_LINK));
+            startActivity(intentProj);
         } else {
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
@@ -464,7 +484,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        boolean night = mPreferences.getBoolean("nightmode_use", false);
+        boolean night = mPreferences.getBoolean("nightmode_use", true);
         if (night) {
             int startH = mPreferences.getInt("nightmode_use_start", TwthaarApp.DEFAULT_NIGHT_START);
             int stopH = mPreferences.getInt("nightmode_use_stop", TwthaarApp.DEFAULT_NIGHT_STOP);
@@ -482,6 +502,7 @@ public class MainActivity extends AppCompatActivity
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
         }
+
         super.onResume();
     }
 
