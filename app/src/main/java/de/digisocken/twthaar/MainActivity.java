@@ -80,15 +80,11 @@ public class MainActivity extends AppCompatActivity
     public EditText editText;
     public RelativeLayout searchBox;
     public Stack< String > history;
-    private UiModeManager umm;
 
     private String iniQuery;
 
     TwitterLoginButton loginButton;
-    TwitterSession session = null;
-    MyTwitterApiClient twitterApiClient;
     MyTwitterApiClient.FriendsService fs;
-    String username = "";
     String friendlist;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -160,7 +156,6 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.together);
-        umm = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);
 
         try {
             ActionBar ab = getSupportActionBar();
@@ -231,9 +226,9 @@ public class MainActivity extends AppCompatActivity
         loginButton.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
-                session = result.data;
-                username = session.getUserName();
-                startGetFriendlist(username);
+                TwthaarApp.session = result.data;
+                TwthaarApp.username = TwthaarApp.session.getUserName();
+                startGetFriendlist(TwthaarApp.username);
             }
 
             @Override
@@ -243,43 +238,23 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        session = TwitterCore.getInstance().getSessionManager().getActiveSession();
-        if (session != null) {
-            username = session.getUserName();
-            
-            TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
-            twitterApiClient.getAccountService().verifyCredentials(true, true, false).enqueue(new Callback<User>() {
-                @Override
-                public void failure(TwitterException e) {}
-
-                @Override
-                public void success(Result<User> userResult) {
-                    if (userResult != null) {
-                        TextView meTxt = (TextView) findViewById(R.id.fullname);
-                        TextView meScrTxt = (TextView) findViewById(R.id.screenname);
-                        meScrTxt.setText("@" + username);
-                        meTxt.setText(userResult.data.name);
-                        TextView favouriteList = (TextView) findViewById(R.id.favouriteList);
-                        favouriteList.setText(
-                                TwthaarApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts)).replace(",","\n")
-                        );
-                    }
-                }
-            });
-        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (username.equals("")) {
+                if (TwthaarApp.username.equals("")) {
                     loginButton.callOnClick();
                 } else {
                     String[] qeris = editText.getText().toString().split(",");
-                    final Intent intent = new ComposerActivity.Builder(MainActivity.this)
-                            .session(session)
+                    final Intent intent;
+
+                    intent = new ComposerActivity.Builder(MainActivity.this)
+                            .session(TwthaarApp.session)
                             .text(qeris[0])
                             .createIntent();
+                    intent.putExtra("EXTRA_THEME", R.style.ComposerLight);
+                    if (TwthaarApp.night) intent.putExtra("EXTRA_THEME", R.style.ComposerDark);
                     startActivity(intent);
                 }
             }
@@ -295,7 +270,7 @@ public class MainActivity extends AppCompatActivity
         fabCam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (username.equals("")) {
+                if (TwthaarApp.username.equals("")) {
                     loginButton.callOnClick();
                 } else {
                     Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -335,10 +310,7 @@ public class MainActivity extends AppCompatActivity
 
     private void startGetFriendlist(String query) {
         friendlist = "";
-        twitterApiClient = new MyTwitterApiClient(
-                TwitterCore.getInstance().getSessionManager().getActiveSession()
-        );
-        fs = twitterApiClient.getFriendsService();
+        fs = TwthaarApp.twitterApiClient.getFriendsService();
         Call<MyTwitterApiClient.UsersCursor> call = fs.friends(
                 query,
                 null,
@@ -350,12 +322,18 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreatePanelMenu(int featureId, Menu menu) {
+    public boolean onPreparePanel(int featureId, View view, Menu menu) {
         TextView favouriteList = (TextView) findViewById(R.id.favouriteList);
+        TextView meTxt = (TextView) findViewById(R.id.fullname);
+        TextView meScrTxt = (TextView) findViewById(R.id.screenname);
+
+        meScrTxt.setText("@" + TwthaarApp.username);
+        meTxt.setText(TwthaarApp.realname);
+
         favouriteList.setText(
                 TwthaarApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts)).replace(",","\n")
         );
-        return super.onCreatePanelMenu(featureId, menu);
+        return super.onPreparePanel(featureId, view, menu);
     }
 
     @Override
@@ -407,7 +385,7 @@ public class MainActivity extends AppCompatActivity
             } else {
                 // friendlist is ready
                 if (!friendlist.equals("")) {
-                    friendlist = "@" + username + "," + friendlist;
+                    friendlist = "@" + TwthaarApp.username + "," + friendlist;
                     friendlist = friendlist.substring(0, friendlist.lastIndexOf(","));
                     TwthaarApp.mPreferences.edit().putString("STARTUSERS", friendlist).apply();
                 }
@@ -447,6 +425,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             // image preview
             Bundle extras = data.getExtras();
@@ -464,11 +443,15 @@ public class MainActivity extends AppCompatActivity
 
                 Uri imgUri = Uri.fromFile(mTmpFile);
 
+                final Intent intent;
+
                 // make image tweet
-                final Intent intent = new ComposerActivity.Builder(MainActivity.this)
-                        .session(session)
+                intent = new ComposerActivity.Builder(MainActivity.this)
+                        .session(TwthaarApp.session)
                         .image(imgUri)
                         .createIntent();
+                intent.putExtra("EXTRA_THEME", R.style.ComposerLight);
+                if (TwthaarApp.night) intent.putExtra("EXTRA_THEME", R.style.ComposerDark);
                 startActivity(intent);
 
             } catch (IOException e) {
@@ -479,31 +462,6 @@ public class MainActivity extends AppCompatActivity
             loginButton.onActivityResult(requestCode, resultCode, data);
         }
 
-    }
-
-    @Override
-    protected void onResume() {
-        SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        boolean night = mPreferences.getBoolean("nightmode_use", true);
-        if (night) {
-            int startH = mPreferences.getInt("nightmode_use_start", TwthaarApp.DEFAULT_NIGHT_START);
-            int stopH = mPreferences.getInt("nightmode_use_stop", TwthaarApp.DEFAULT_NIGHT_STOP);
-            if (TwthaarApp.inTimeSpan(startH, stopH) && umm.getNightMode() != UiModeManager.MODE_NIGHT_YES) {
-                umm.setNightMode(UiModeManager.MODE_NIGHT_YES);
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            }
-            if (!TwthaarApp.inTimeSpan(startH, stopH) && umm.getNightMode() != UiModeManager.MODE_NIGHT_NO) {
-                umm.setNightMode(UiModeManager.MODE_NIGHT_NO);
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            }
-        } else {
-            if (umm.getNightMode() == UiModeManager.MODE_NIGHT_YES) {
-                umm.setNightMode(UiModeManager.MODE_NIGHT_NO);
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            }
-        }
-
-        super.onResume();
     }
 
     public void realExit() {
