@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Twthaar</string>
+    <string name="app_name">Social Detox</string>
     <string name="closing">%1$s beenden ?</string>
     <string name="defaultStarts">\@GeneHunt,@The_Pi_Hole,@amnesty,@adafruit,@Princessofwifi,#maker,@istdasvegan,@MartinSonneborn,@DLF,@evalodde,@ProletDo,@ViccoVonBuelow,@tazgezwitscher</string>
     <string name="flattr_this">Mikro Spende !</string>

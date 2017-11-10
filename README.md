@@ -1,4 +1,6 @@
-# Twthaar
+# Twthaar - the Social Detox
+
+**You became hooked on social media and Twitter? If you wanna change it, try this App.**
 
 Twthaar WAS a very low level twitter client. You can use the old code for build your own cool client or to learn how *Twitter Kit* and API works.
 
@@ -8,7 +10,7 @@ Twthaar WAS a very low level twitter client. You can use the old code for build 
 
 ## Features
 
- -  It is **Ads free!**
+ -  It is **free of ads**
  -  reduce addiction to **retweet, like or high resolution selfies**, because it has not this features!
  -  fast and efficient
  -  tap on the Tweet text to load the full imageful Tweet View
@@ -19,18 +21,34 @@ Twthaar WAS a very low level twitter client. You can use the old code for build 
      -  if it is not a retweet, it try to extract the first `@username`
      -  if there is no `@username`, it uses the username of the posting user / publisher
  -  multi search (comma separated) for `@userTimelines` or `#otherStuff`
- -  very simple android code
  -  switch images on/off in preferences
  -  english and german interface
  -  night mode
  -  it is possible to send text only or low resolution picture tweets (you get a login dialog on first try)
  -  if you are logged in, it gets your friend list and add it to the preferences automaticaly (and yourself)
 
+## Social Media Detoxification
+
+ -  no private messages
+ -  no profile changes
+ -  no high resolution photo or images sending
+ -  no Tweet details, answering, comments
+ -  no voting
+ -  no stories
+ -  no likes
+ -  no ads
+ -  no file or contacts access and full & maximal privacy
+ -  not easy to install (you need to get API Key and secret)
+ -  no woman, no cry (maybe)
+ -  and many other features, which I will never implement ever!
+
 ## Get the App
 
 You can get a signed APK from here (Android 4.1+): [APK](https://raw.githubusercontent.com/no-go/Twthaar/master/app/app-release.apk)
 
 ## Screenshots
+
+Some screenshots are realy old and the App looks a bit cooler today.
 
 ![Twthaar - v1.77 info sidebar](img/screenshot9.png)
 ![Twthaar - picture and pictureless tweet buttons at the buttom](img/screenshot1.png)
@@ -82,7 +100,7 @@ To get API Key and Secret you have to create a new App on the twitter developmen
 
 ### Switch to the Key and Secret Tab
 
-![](img/07_get_key_and_secret.png)
+![Key and Secret Tab](img/07_get_key_and_secret.png)
 
 ## License
 
