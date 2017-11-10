@@ -50,7 +50,7 @@ You can get a signed APK from here (Android 4.1+): [APK](https://raw.githubuserc
 
 Some screenshots are realy old and the App looks a bit cooler today.
 
-![Twthaar - v1.82 textonly and nightmode](screenshot10.jpg)
+![Twthaar - v1.82 textonly and nightmode](img/screenshot10.jpg)
 ![Twthaar - v1.77 info sidebar](img/screenshot9.png)
 ![Twthaar - picture and pictureless tweet buttons at the buttom](img/screenshot1.png)
 ![Twthaar - v1.74 night mode](img/screenshot8.png)
