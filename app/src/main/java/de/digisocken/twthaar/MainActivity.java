@@ -84,8 +84,7 @@ public class MainActivity extends AppCompatActivity
     private String iniQuery;
 
     TwitterLoginButton loginButton;
-    MyTwitterApiClient.FriendsService fs;
-    String friendlist;
+
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -124,6 +123,11 @@ public class MainActivity extends AppCompatActivity
                     }
                     searchBox.setVisibility(View.GONE);
                 }
+                break;
+            case R.id.action_preferences2:
+                Intent intent = new Intent(MainActivity.this, PreferencesActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
                 break;
             case R.id.action_allImages:
                 if (item.isChecked()) {
@@ -228,7 +232,6 @@ public class MainActivity extends AppCompatActivity
             public void success(Result<TwitterSession> result) {
                 TwthaarApp.session = result.data;
                 TwthaarApp.username = TwthaarApp.session.getUserName();
-                startGetFriendlist(TwthaarApp.username);
             }
 
             @Override
@@ -249,12 +252,21 @@ public class MainActivity extends AppCompatActivity
                     String[] qeris = editText.getText().toString().split(",");
                     final Intent intent;
 
-                    intent = new ComposerActivity.Builder(MainActivity.this)
-                            .session(TwthaarApp.session)
-                            .text(qeris[0])
-                            .createIntent();
-                    intent.putExtra("EXTRA_THEME", R.style.ComposerLight);
-                    if (TwthaarApp.night) intent.putExtra("EXTRA_THEME", R.style.ComposerDark);
+                    if (TwthaarApp.umm.getNightMode() == UiModeManager.MODE_NIGHT_YES) {
+
+                        intent = new ComposerActivity.Builder(MainActivity.this)
+                                .session(TwthaarApp.session)
+                                .text(qeris[0])
+                                .darkTheme()
+                                .createIntent();
+                    } else {
+                        intent = new ComposerActivity.Builder(MainActivity.this)
+                                .session(TwthaarApp.session)
+                                .text(qeris[0])
+                                .createIntent();
+                    }
+                    //intent.putExtra("EXTRA_THEME", R.style.ComposerLight);
+                    //if (TwthaarApp.night) intent.putExtra("EXTRA_THEME", R.style.ComposerDark);
                     startActivity(intent);
                 }
             }
@@ -308,18 +320,7 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    private void startGetFriendlist(String query) {
-        friendlist = "";
-        fs = TwthaarApp.twitterApiClient.getFriendsService();
-        Call<MyTwitterApiClient.UsersCursor> call = fs.friends(
-                query,
-                null,
-                TwthaarApp.DEFAULT_MAX,
-                true,
-                false
-        );
-        call.enqueue(new FriendCallback(query));
-    }
+
 
     @Override
     public boolean onPreparePanel(int featureId, View view, Menu menu) {
@@ -327,8 +328,10 @@ public class MainActivity extends AppCompatActivity
         TextView meTxt = (TextView) findViewById(R.id.fullname);
         TextView meScrTxt = (TextView) findViewById(R.id.screenname);
 
-        meScrTxt.setText("@" + TwthaarApp.username);
-        meTxt.setText(TwthaarApp.realname);
+        if (! TwthaarApp.username.equals("")) {
+            meScrTxt.setText("@" + TwthaarApp.username);
+            meTxt.setText(TwthaarApp.realname);
+        }
 
         favouriteList.setText(
                 TwthaarApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts)).replace(",","\n")
@@ -358,44 +361,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         return true;
-    }
-
-
-    class FriendCallback extends Callback<MyTwitterApiClient.UsersCursor> {
-        String _query;
-
-        FriendCallback(String query) {
-            _query = query;
-        }
-
-        @Override
-        public void success(Result<MyTwitterApiClient.UsersCursor> result) {
-            for (final User user: result.data.users) {
-                friendlist += "@" + user.screenName + ",";
-            }
-            if (result.data.nextCursor > 0) {
-                Call<MyTwitterApiClient.UsersCursor> call = fs.friends(
-                        _query,
-                        (int) result.data.nextCursor,
-                        TwthaarApp.DEFAULT_MAX,
-                        true,
-                        false
-                );
-                call.enqueue(new FriendCallback(_query));
-            } else {
-                // friendlist is ready
-                if (!friendlist.equals("")) {
-                    friendlist = "@" + TwthaarApp.username + "," + friendlist;
-                    friendlist = friendlist.substring(0, friendlist.lastIndexOf(","));
-                    TwthaarApp.mPreferences.edit().putString("STARTUSERS", friendlist).apply();
-                }
-            }
-        }
-
-        @Override
-        public void failure(TwitterException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -446,12 +411,19 @@ public class MainActivity extends AppCompatActivity
                 final Intent intent;
 
                 // make image tweet
-                intent = new ComposerActivity.Builder(MainActivity.this)
-                        .session(TwthaarApp.session)
-                        .image(imgUri)
-                        .createIntent();
-                intent.putExtra("EXTRA_THEME", R.style.ComposerLight);
-                if (TwthaarApp.night) intent.putExtra("EXTRA_THEME", R.style.ComposerDark);
+                if (TwthaarApp.umm.getNightMode() == UiModeManager.MODE_NIGHT_YES) {
+
+                    intent = new ComposerActivity.Builder(MainActivity.this)
+                            .session(TwthaarApp.session)
+                            .image(imgUri)
+                            .darkTheme()
+                            .createIntent();
+                } else {
+                    intent = new ComposerActivity.Builder(MainActivity.this)
+                            .session(TwthaarApp.session)
+                            .image(imgUri)
+                            .createIntent();
+                }
                 startActivity(intent);
 
             } catch (IOException e) {

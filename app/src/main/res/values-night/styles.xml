@@ -2,8 +2,8 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat">
-        <item name="colorPrimary">@color/tw__blue_default</item>
-        <item name="colorPrimaryDark">@color/tw__blue_default</item>
+        <item name="colorPrimary">#303090</item>
+        <item name="colorPrimaryDark">#000050</item>
         <item name="colorAccent">@android:color/holo_orange_light</item>
     </style>
 </resources>

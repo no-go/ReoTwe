@@ -7,7 +7,7 @@
     <string name="search">search @userA or @userB,#tag1,#tag2</string>
     <string name="imageful">Full image stuff</string>
     <string name="statsGoto"> ⇆ %1$d ★ %2$d %3$s &gt;</string>
-    <string name="defaultStarts">\@GeneHunt,@The_Pi_Hole,@amnesty,@adafruit,@Princessofwifi,#Friday,@istdasvegan,#wetter,#wochenende,@MartinSonneborn,@DLF,@evalodde,@ProletDo,@ViccoVonBuelow,@tazgezwitscher</string>
+    <string name="defaultStarts">\@GeneHunt,@The_Pi_Hole,@amnesty,@adafruit,@Princessofwifi,#maker,@istdasvegan,@MartinSonneborn,@DLF,@evalodde,@ProletDo,@ViccoVonBuelow,@tazgezwitscher</string>
     <string name="no">no</string>
     <string name="yes">yes</string>
     <string name="closing">Closing %1$s ?</string>

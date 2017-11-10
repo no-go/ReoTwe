@@ -109,6 +109,8 @@ class TweetAdapter extends BaseAdapter {
         ImageView avatar = (ImageView) orgTweetView.findViewById(R.id.tw__tweet_author_avatar);
         tAvatar.setBackground(avatar.getDrawable());
 
+        TextView fullText = (TextView) orgTweetView.findViewById(R.id.tw__tweet_text);
+
         if (imageful) {
             orgTweetView.setBackgroundColor(Color.TRANSPARENT);
 
@@ -117,7 +119,6 @@ class TweetAdapter extends BaseAdapter {
             View t3 = orgTweetView.findViewById(R.id.tw__tweet_author_full_name);
             View t4 = orgTweetView.findViewById(R.id.tw__tweet_author_screen_name);
             View t5 = orgTweetView.findViewById(R.id.tw__tweet_timestamp);
-            TextView t6 = (TextView) orgTweetView.findViewById(R.id.tw__tweet_text);
             FrameLayout fl = (FrameLayout) orgTweetView.findViewById(R.id.quote_tweet_holder);
             TextView qut0 = null;
             TextView qut1 = null;
@@ -132,7 +133,7 @@ class TweetAdapter extends BaseAdapter {
             t3.setVisibility(View.GONE);
             t4.setVisibility(View.GONE);
             t5.setVisibility(View.GONE);
-            t6.setTextColor(ContextCompat.getColor(mContext, R.color.textFront));
+            fullText.setTextColor(ContextCompat.getColor(mContext, R.color.textFront));
             if (qut0 != null) {
                 qut0.setTextColor(ContextCompat.getColor(mContext, R.color.textFront));
                 qut1.setTextColor(ContextCompat.getColor(mContext, R.color.textFront));
@@ -142,7 +143,9 @@ class TweetAdapter extends BaseAdapter {
             tContent.addView(orgTweetView);
             tText.setVisibility(View.GONE);
         } else {
-            tText.setText(text);
+            tText.setText(fullText.getText());
+            // tText.setText(text);
+
             tText.setVisibility(View.VISIBLE);
             tText.setOnClickListener(new TweetViewOnClick(tContent, tweet));
         }

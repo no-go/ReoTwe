@@ -46,6 +46,7 @@ public class SearchListener implements View.OnClickListener {
                 q = q.replace("#","");
                 SearchTimeline searchTimeline = new SearchTimeline.Builder()
                         .query(q)
+                        .resultType(SearchTimeline.ResultType.POPULAR)
                         .maxItemsPerRequest(TwthaarApp.DEFAULT_MAX)
                         .build();
 

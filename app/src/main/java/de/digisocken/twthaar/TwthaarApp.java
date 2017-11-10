@@ -26,6 +26,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import retrofit2.Call;
+
 public class TwthaarApp extends Application {
     public static final String TAG = TwthaarApp.class.getSimpleName();
     public static SharedPreferences mPreferences;
@@ -43,12 +45,13 @@ public class TwthaarApp extends Application {
     public static final int DEFAULT_NIGHT_STOP = 6;
 
     public static UiModeManager umm;
-    public static boolean night = false;
     public static TwitterSession session = null;
     public static String username = "";
     public static String realname = "";
     public static MyTwitterApiClient twitterApiClient;
 
+    public MyTwitterApiClient.FriendsService fs;
+    public String friendlist;
 
     public void onCreate() {
         super.onCreate();
@@ -84,18 +87,15 @@ public class TwthaarApp extends Application {
             if (inTimeSpan(startH, stopH) && umm.getNightMode() != UiModeManager.MODE_NIGHT_YES) {
                 umm.setNightMode(UiModeManager.MODE_NIGHT_YES);
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                night = true;
             }
             if (!inTimeSpan(startH, stopH) && umm.getNightMode() != UiModeManager.MODE_NIGHT_NO) {
                 umm.setNightMode(UiModeManager.MODE_NIGHT_NO);
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                night = false;
             }
         } else {
             if (umm.getNightMode() == UiModeManager.MODE_NIGHT_YES) {
                 umm.setNightMode(UiModeManager.MODE_NIGHT_NO);
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                night = false;
             }
         }
 
@@ -127,10 +127,24 @@ public class TwthaarApp extends Application {
                 public void success(Result<User> userResult) {
                     if (userResult != null) {
                         realname = userResult.data.name;
+                        startGetFriendlist(username);
                     }
                 }
             });
         }
+    }
+
+    private void startGetFriendlist(String query) {
+        friendlist = "";
+        fs = TwthaarApp.twitterApiClient.getFriendsService();
+        Call<MyTwitterApiClient.UsersCursor> call = fs.friends(
+                query,
+                null,
+                TwthaarApp.DEFAULT_MAX,
+                true,
+                false
+        );
+        call.enqueue(new FriendCallback(query));
     }
 
     public static boolean inTimeSpan(int startH, int stopH) {
@@ -139,5 +153,43 @@ public class TwthaarApp extends Application {
         if (startH > stopH && (nowH <= stopH || nowH >= startH)) return true;
         if (startH < stopH && nowH >= startH && nowH <= stopH) return true;
         return false;
+    }
+
+    public class FriendCallback extends Callback<MyTwitterApiClient.UsersCursor> {
+        String _query;
+
+        FriendCallback(String query) {
+            _query = query;
+        }
+
+        @Override
+        public void success(Result<MyTwitterApiClient.UsersCursor> result) {
+            for (final User user: result.data.users) {
+                friendlist += "@" + user.screenName + ",";
+            }
+
+            if (result.data.nextCursor > 0) {
+                Call<MyTwitterApiClient.UsersCursor> call = fs.friends(
+                        _query,
+                        (int) result.data.nextCursor,
+                        TwthaarApp.DEFAULT_MAX,
+                        true,
+                        false
+                );
+                call.enqueue(new FriendCallback(_query));
+            } else {
+                // friendlist is ready
+                if (!friendlist.equals("")) {
+                    friendlist = "@" + username + "," + friendlist;
+                    friendlist = friendlist.substring(0, friendlist.lastIndexOf(","));
+                    TwthaarApp.mPreferences.edit().putString("STARTUSERS", friendlist).apply();
+                }
+            }
+        }
+
+        @Override
+        public void failure(TwitterException e) {
+            e.printStackTrace();
+        }
     }
 }
