@@ -4,7 +4,7 @@
 
 Twthaar WAS a very low level twitter client. You can use the old code for build your own cool client or to learn how *Twitter Kit* and API works.
 
-![logo](app/src/main/res/mipmap-hdpi/ic_launcher.png)
+![logo](logo.png)
 
 [Twthaar Website](https://no-go.github.io/Twthaar/)
 
