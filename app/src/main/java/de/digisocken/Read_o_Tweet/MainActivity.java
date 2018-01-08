@@ -1,15 +1,12 @@
-package de.digisocken.twthaar;
+package de.digisocken.Read_o_Tweet;
 
 import android.app.UiModeManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.net.Uri;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -17,19 +14,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -38,20 +30,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterApiClient;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterConfig;
-import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.models.User;
 import com.twitter.sdk.android.tweetcomposer.ComposerActivity;
-import com.twitter.sdk.android.tweetui.TweetView;
 
 import android.support.design.widget.NavigationView;
 
@@ -65,8 +49,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Stack;
-
-import retrofit2.Call;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -98,7 +80,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem mi2 = menu.findItem(R.id.action_allImages);
-        mi2.setChecked(TwthaarApp.mPreferences.getBoolean("imageful", true));
+        mi2.setChecked(ReadOTweetApp.mPreferences.getBoolean("imageful", true));
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -132,22 +114,22 @@ public class MainActivity extends AppCompatActivity
             case R.id.action_allImages:
                 if (item.isChecked()) {
                     adapter.imageful = false;
-                    TwthaarApp.mPreferences.edit().putBoolean("imageful", false).apply();
+                    ReadOTweetApp.mPreferences.edit().putBoolean("imageful", false).apply();
                     item.setChecked(false);
                     adapter.notifyDataSetChanged();
                 } else {
                     adapter.imageful = true;
-                    TwthaarApp.mPreferences.edit().putBoolean("imageful", true).apply();
+                    ReadOTweetApp.mPreferences.edit().putBoolean("imageful", true).apply();
                     item.setChecked(true);
                     adapter.notifyDataSetChanged();
                 }
                 break;
             case R.id.action_flattr:
-                Intent intentFlattr = new Intent(Intent.ACTION_VIEW, Uri.parse(TwthaarApp.FLATTR_LINK));
+                Intent intentFlattr = new Intent(Intent.ACTION_VIEW, Uri.parse(ReadOTweetApp.FLATTR_LINK));
                 startActivity(intentFlattr);
                 break;
             case R.id.action_project:
-                Intent intentProj= new Intent(Intent.ACTION_VIEW, Uri.parse(TwthaarApp.PROJECT_LINK));
+                Intent intentProj= new Intent(Intent.ACTION_VIEW, Uri.parse(ReadOTweetApp.PROJECT_LINK));
                 startActivity(intentProj);
                 break;
             default:
@@ -187,7 +169,7 @@ public class MainActivity extends AppCompatActivity
         editText = (EditText) findViewById(R.id.editText);
         loginButton = new TwitterLoginButton(this);
 
-        iniQuery = TwthaarApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts));
+        iniQuery = ReadOTweetApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts));
         editText.setText(iniQuery);
         button.setOnClickListener(new SearchListener(this, ""));
 
@@ -216,7 +198,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 TextView favouriteList = (TextView) findViewById(R.id.favouriteList);
                 favouriteList.setText(iniQuery.replace(",","\n"));
-                TwthaarApp.mPreferences.edit().putString("STARTUSERS",iniQuery).apply();
+                ReadOTweetApp.mPreferences.edit().putString("STARTUSERS",iniQuery).apply();
                 Toast.makeText(MainActivity.this, R.string.favAdded, Toast.LENGTH_SHORT).show();
             }
         });
@@ -230,8 +212,8 @@ public class MainActivity extends AppCompatActivity
         loginButton.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
-                TwthaarApp.session = result.data;
-                TwthaarApp.username = TwthaarApp.session.getUserName();
+                ReadOTweetApp.session = result.data;
+                ReadOTweetApp.username = ReadOTweetApp.session.getUserName();
             }
 
             @Override
@@ -246,27 +228,27 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TwthaarApp.username.equals("")) {
+                if (ReadOTweetApp.username.equals("")) {
                     loginButton.callOnClick();
                 } else {
                     String[] qeris = editText.getText().toString().split(",");
                     final Intent intent;
 
-                    if (TwthaarApp.umm.getNightMode() == UiModeManager.MODE_NIGHT_YES) {
+                    if (ReadOTweetApp.umm.getNightMode() == UiModeManager.MODE_NIGHT_YES) {
 
                         intent = new ComposerActivity.Builder(MainActivity.this)
-                                .session(TwthaarApp.session)
+                                .session(ReadOTweetApp.session)
                                 .text(qeris[0])
                                 .darkTheme()
                                 .createIntent();
                     } else {
                         intent = new ComposerActivity.Builder(MainActivity.this)
-                                .session(TwthaarApp.session)
+                                .session(ReadOTweetApp.session)
                                 .text(qeris[0])
                                 .createIntent();
                     }
                     //intent.putExtra("EXTRA_THEME", R.style.ComposerLight);
-                    //if (TwthaarApp.night) intent.putExtra("EXTRA_THEME", R.style.ComposerDark);
+                    //if (ReadOTweetApp.night) intent.putExtra("EXTRA_THEME", R.style.ComposerDark);
                     startActivity(intent);
                 }
             }
@@ -282,7 +264,7 @@ public class MainActivity extends AppCompatActivity
         fabCam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TwthaarApp.username.equals("")) {
+                if (ReadOTweetApp.username.equals("")) {
                     loginButton.callOnClick();
                 } else {
                     Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -296,7 +278,10 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if (TwthaarApp.mPreferences.getString("CONSUMER_KEY","").equals("") || TwthaarApp.mPreferences.getString("CONSUMER_SECRET","").equals("") ) {
+        if (
+                ReadOTweetApp.mPreferences.getString("CONSUMER_KEY","").equals("") ||
+                ReadOTweetApp.mPreferences.getString("CONSUMER_SECRET","").equals("")
+        ) {
             ViewGroup hintView = (ViewGroup) getLayoutInflater().inflate(R.layout.tweet_item, null);
             mListView.addFooterView(hintView);
         }
@@ -309,8 +294,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public int compare(Tweet t2, Tweet t1) {
                 try {
-                    Date parsedDate1 = TwthaarApp.formatIn.parse(t1.createdAt);
-                    Date parsedDate2 = TwthaarApp.formatIn.parse(t2.createdAt);
+                    Date parsedDate1 = ReadOTweetApp.formatIn.parse(t1.createdAt);
+                    Date parsedDate2 = ReadOTweetApp.formatIn.parse(t2.createdAt);
                     return parsedDate1.compareTo(parsedDate2);
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -328,13 +313,13 @@ public class MainActivity extends AppCompatActivity
         TextView meTxt = (TextView) findViewById(R.id.fullname);
         TextView meScrTxt = (TextView) findViewById(R.id.screenname);
 
-        if (! TwthaarApp.username.equals("")) {
-            meScrTxt.setText("@" + TwthaarApp.username);
-            meTxt.setText(TwthaarApp.realname);
+        if (! ReadOTweetApp.username.equals("")) {
+            meScrTxt.setText("@" + ReadOTweetApp.username);
+            meTxt.setText(ReadOTweetApp.realname);
         }
 
         favouriteList.setText(
-                TwthaarApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts)).replace(",","\n")
+                ReadOTweetApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts)).replace(",","\n")
         );
         return super.onPreparePanel(featureId, view, menu);
     }
@@ -348,7 +333,7 @@ public class MainActivity extends AppCompatActivity
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
         }else if (id == R.id.action_info) {
-            Intent intentProj= new Intent(Intent.ACTION_VIEW, Uri.parse(TwthaarApp.PROJECT_LINK));
+            Intent intentProj= new Intent(Intent.ACTION_VIEW, Uri.parse(ReadOTweetApp.PROJECT_LINK));
             startActivity(intentProj);
         } else {
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -411,16 +396,16 @@ public class MainActivity extends AppCompatActivity
                 final Intent intent;
 
                 // make image tweet
-                if (TwthaarApp.umm.getNightMode() == UiModeManager.MODE_NIGHT_YES) {
+                if (ReadOTweetApp.umm.getNightMode() == UiModeManager.MODE_NIGHT_YES) {
 
                     intent = new ComposerActivity.Builder(MainActivity.this)
-                            .session(TwthaarApp.session)
+                            .session(ReadOTweetApp.session)
                             .image(imgUri)
                             .darkTheme()
                             .createIntent();
                 } else {
                     intent = new ComposerActivity.Builder(MainActivity.this)
-                            .session(TwthaarApp.session)
+                            .session(ReadOTweetApp.session)
                             .image(imgUri)
                             .createIntent();
                 }

@@ -1,4 +1,4 @@
-# Twthaar - the Social Detox
+# Read-o-Tweet (Twthaar)
 
 **You became hooked on social media and Twitter? If you wanna change it, try this App.**
 

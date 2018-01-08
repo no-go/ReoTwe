@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 26
+    //buildToolsVersion "26.0.1"
     defaultConfig {
-        applicationId "de.digisocken.twthaar"
+        applicationId "de.digisocken.read_o_tweet"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 182
-        versionName "1.82"
+        versionCode 183
+        versionName "1.83"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -16,15 +17,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.twitter.sdk.android:twitter-core:3.1.1'
-    compile 'com.twitter.sdk.android:tweet-ui:3.1.1'
-    compile 'com.twitter.sdk.android:tweet-composer:3.1.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:design:26.1.0'
+    compile 'com.twitter.sdk.android:twitter-core:3.2.0'
+    compile 'com.twitter.sdk.android:tweet-ui:3.2.0'
+    compile 'com.twitter.sdk.android:tweet-composer:3.2.0'
+    compile 'com.android.support:recyclerview-v7:26.1.0'
 }

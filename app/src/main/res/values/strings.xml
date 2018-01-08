@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Social Detox</string>
+    <string name="app_name">Read-o-Tweet</string>
     <string name="flattr_this">Micro-Donate !</string>
     <string name="projPage">Info Website</string>
     <string name="preferences">Preferences</string>
@@ -19,7 +19,7 @@
     <string name="youNeedApiKey">You need a valid API Key and Secret, too!</string>
     <string name="ready">ready.</string>
 
-    <string name="nightmode">Nightmode (good on Android &gt; 6)</string>
+    <string name="nightmode">Nightmode</string>
     <string name="nightmode_summary">between a timespan the App is optimized for a dark environment</string>
     <string name="nightmode_use">dark</string>
     <string name="nightmode_use_start">from …:00 o\'clock</string>
@@ -27,11 +27,14 @@
 
     <string name="hintFollowUser">click here to go to user</string>
     <string name="hintFollowThis">click here to go to XYZ</string>
-    <string name="hintClickLoadFull">Click on content to see the imageful total #XYZ tweet. If the full tweet is loaded, a click opens or plays media or it opens a website. You need an API-Key and API-Secret to run this app. Use the preferences in the left sidebar to add these keys.</string>
+    <string name="hintClickLoadFull">Click on content to see the imageful total #XYZ tweet. If the full tweet is loaded, a click opens or plays media or it opens a website. You need your own API-Key and API-Secret to run this app. Use the preferences in the left sidebar to add these keys.</string>
+    <string name="hintOoops">The Twitter request was with stupid. You need a *VALID* API-key and API-Secret to run this app. Use the preferences in the left sidebar to add these keys.</string>
     <string name="hintRTuser">the username, who retweet this tweet</string>
 
     <string name="Quit">Quit</string>
+    <string name="Ooops">Ooops!</string>
     <string name="exit_title">Restart App Now</string>
     <string name="exit_message">Because you may changed some important preferences, it is better to restart the App.</string>
+    <string name="SessionFail">Twitter Session fail. Maybe your API Key &amp; Secret is wrong?</string>
 
 </resources>

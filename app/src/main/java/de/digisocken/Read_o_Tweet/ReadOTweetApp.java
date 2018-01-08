@@ -1,4 +1,4 @@
-package de.digisocken.twthaar;
+package de.digisocken.Read_o_Tweet;
 
 import android.app.Application;
 import android.app.UiModeManager;
@@ -7,13 +7,11 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterApiClient;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
 import com.twitter.sdk.android.core.TwitterCore;
@@ -28,8 +26,8 @@ import java.util.Locale;
 
 import retrofit2.Call;
 
-public class TwthaarApp extends Application {
-    public static final String TAG = TwthaarApp.class.getSimpleName();
+public class ReadOTweetApp extends Application {
+    public static final String TAG = ReadOTweetApp.class.getSimpleName();
     public static SharedPreferences mPreferences;
 
     public static final String PROJECT_LINK = "https://no-go.github.io/Twthaar/";
@@ -38,7 +36,7 @@ public class TwthaarApp extends Application {
 
     public static final int DEFAULT_MAX = 40;
 
-    public static SimpleDateFormat formatIn = new SimpleDateFormat("EEE MMM dd hh:mm:ss z yyyy", Locale.ENGLISH);
+    public static SimpleDateFormat formatIn = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
     public static SimpleDateFormat formatOut = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH);
 
     public static final int DEFAULT_NIGHT_START = 18;
@@ -82,8 +80,8 @@ public class TwthaarApp extends Application {
         }
 
         if (mPreferences.getBoolean("nightmode_use", true)) {
-            int startH = mPreferences.getInt("nightmode_use_start", TwthaarApp.DEFAULT_NIGHT_START);
-            int stopH = mPreferences.getInt("nightmode_use_stop", TwthaarApp.DEFAULT_NIGHT_STOP);
+            int startH = mPreferences.getInt("nightmode_use_start", ReadOTweetApp.DEFAULT_NIGHT_START);
+            int stopH = mPreferences.getInt("nightmode_use_stop", ReadOTweetApp.DEFAULT_NIGHT_STOP);
             if (inTimeSpan(startH, stopH) && umm.getNightMode() != UiModeManager.MODE_NIGHT_YES) {
                 umm.setNightMode(UiModeManager.MODE_NIGHT_YES);
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -111,13 +109,11 @@ public class TwthaarApp extends Application {
 
         session = TwitterCore.getInstance().getSessionManager().getActiveSession();
 
-        if (TwthaarApp.session != null) {
-            username = TwthaarApp.session.getUserName();
+        if (ReadOTweetApp.session != null) {
+            username = ReadOTweetApp.session.getUserName();
             //twitterApiClient = TwitterCore.getInstance().getApiClient();
 
-            twitterApiClient = new MyTwitterApiClient(
-                    TwitterCore.getInstance().getSessionManager().getActiveSession()
-            );
+            twitterApiClient = new MyTwitterApiClient(session);
 
             twitterApiClient.getAccountService().verifyCredentials(true, true, false).enqueue(new Callback<User>() {
                 @Override
@@ -136,11 +132,11 @@ public class TwthaarApp extends Application {
 
     private void startGetFriendlist(String query) {
         friendlist = "";
-        fs = TwthaarApp.twitterApiClient.getFriendsService();
+        fs = ReadOTweetApp.twitterApiClient.getFriendsService();
         Call<MyTwitterApiClient.UsersCursor> call = fs.friends(
                 query,
                 null,
-                TwthaarApp.DEFAULT_MAX,
+                ReadOTweetApp.DEFAULT_MAX,
                 true,
                 false
         );
@@ -172,7 +168,7 @@ public class TwthaarApp extends Application {
                 Call<MyTwitterApiClient.UsersCursor> call = fs.friends(
                         _query,
                         (int) result.data.nextCursor,
-                        TwthaarApp.DEFAULT_MAX,
+                        ReadOTweetApp.DEFAULT_MAX,
                         true,
                         false
                 );
@@ -182,7 +178,7 @@ public class TwthaarApp extends Application {
                 if (!friendlist.equals("")) {
                     friendlist = "@" + username + "," + friendlist;
                     friendlist = friendlist.substring(0, friendlist.lastIndexOf(","));
-                    TwthaarApp.mPreferences.edit().putString("STARTUSERS", friendlist).apply();
+                    ReadOTweetApp.mPreferences.edit().putString("STARTUSERS", friendlist).apply();
                 }
             }
         }

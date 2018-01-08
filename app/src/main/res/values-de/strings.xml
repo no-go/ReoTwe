@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Social Detox</string>
+    <string name="app_name">Read-o-Tweet</string>
     <string name="closing">%1$s beenden ?</string>
     <string name="defaultStarts">\@GeneHunt,@The_Pi_Hole,@amnesty,@adafruit,@Princessofwifi,#maker,@istdasvegan,@MartinSonneborn,@DLF,@evalodde,@ProletDo,@ViccoVonBuelow,@tazgezwitscher</string>
     <string name="flattr_this">Mikro Spende !</string>
@@ -20,7 +20,7 @@
     <string name="youNeedApiKey">Du brauchst auch gültigen API Key + Secret!</string>
     <string name="ready">fertig</string>
 
-    <string name="nightmode">Nachtmodus (zuverlässig ab Android 6)</string>
+    <string name="nightmode">Nachtmodus</string>
     <string name="nightmode_summary">Stellt die App für eine Zeitspanne auf ein dunkles, nicht blendendes Design um</string>
     <string name="nightmode_use">dunkel</string>
     <string name="nightmode_use_start">von …:00 Uhr</string>
@@ -28,10 +28,14 @@
 
     <string name="hintFollowUser">Klick hier um zum User zu gehn</string>
     <string name="hintFollowThis">Klick: geht zu XYZ</string>
-    <string name="hintClickLoadFull">Klick auf den Inhalt, um den #XYZ Tweet mit Bildern zu laden. Ist der Tweet komplett geladen, öffnet ein Klick dessen Medien oder führt zu einer Webseite. Du brauchst außerdem einen API-Key und API-Secret um diese App zu nutzen. Nutze die Einstellungen in der linken Sidebar, um sie bei zufügen.</string>
+    <string name="hintClickLoadFull">Klick auf den Inhalt, um den #XYZ Tweet mit Bildern zu laden. Ist der Tweet komplett geladen, öffnet ein Klick dessen Medien oder führt zu einer Webseite. Du brauchst außerdem einen eigenen API-Key und API-Secret um diese App zu nutzen. Nutze die Einstellungen in der linken Sidebar, um sie bei zu fügen.</string>
+    <string name="hintOoops">Bei der Twitter-Anfrage lief was schief. Du brauchst einen *KORREKTEN* API-Key und API-Secret um diese App zu nutzen. Nutze die Einstellungen in der linken Sidebar, um sie bei zu fügen.</string>
     <string name="hintRTuser">Der User, der den Tweet retweetet hat</string>
 
     <string name="Quit">beenden</string>
+    <string name="Ooops">Ooops!</string>
     <string name="exit_title">App Neustart</string>
     <string name="exit_message">Da möglicherweise wichtige Einstellungen geändert wurden, ist ein Restart der App nicht falsch.</string>
+    <string name="SessionFail">Twitter Sitzung schlug fehl. Ist der API Key &amp; Secret falsch?</string>
+
 </resources>

@@ -1,4 +1,4 @@
-package de.digisocken.twthaar;
+package de.digisocken.Read_o_Tweet;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

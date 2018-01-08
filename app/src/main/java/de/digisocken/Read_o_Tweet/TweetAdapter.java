@@ -1,10 +1,8 @@
-package de.digisocken.twthaar;
+package de.digisocken.Read_o_Tweet;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.tweetcomposer.ComposerView;
 import com.twitter.sdk.android.tweetui.TweetView;
 
 import java.text.ParseException;
@@ -33,7 +30,7 @@ class TweetAdapter extends BaseAdapter {
         mContext = context;
         mDataSource = items;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        imageful = TwthaarApp.mPreferences.getBoolean("imageful", true);
+        imageful = ReadOTweetApp.mPreferences.getBoolean("imageful", true);
     }
 
     @Override
@@ -70,8 +67,8 @@ class TweetAdapter extends BaseAdapter {
         trt.setText("");
 
         try {
-            Date parsedDate = TwthaarApp.formatIn.parse(tweet.createdAt);
-            tDate.setText(TwthaarApp.formatOut.format(parsedDate));
+            Date parsedDate = ReadOTweetApp.formatIn.parse(tweet.createdAt);
+            tDate.setText(ReadOTweetApp.formatOut.format(parsedDate));
         } catch (ParseException e) {
             e.printStackTrace();
             tDate.setText(tweet.createdAt);
