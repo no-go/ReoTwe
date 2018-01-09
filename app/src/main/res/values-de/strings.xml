@@ -38,4 +38,7 @@
     <string name="exit_message">Da möglicherweise wichtige Einstellungen geändert wurden, ist ein Restart der App nicht falsch.</string>
     <string name="SessionFail">Twitter Sitzung schlug fehl. Ist der API Key &amp; Secret falsch?</string>
 
+    <string name="tw__composer_hint">Was gibt’s Neues?</string>
+    <string name="tw__max_tweet_chars">280</string>
+    <string name="tw__post_tweet">Twittern</string>
 </resources>

@@ -35,7 +35,7 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.tweetcomposer.ComposerActivity;
+import de.digisocken.Read_o_Tweet.tweetcomposer.ComposerActivity;
 
 import android.support.design.widget.NavigationView;
 

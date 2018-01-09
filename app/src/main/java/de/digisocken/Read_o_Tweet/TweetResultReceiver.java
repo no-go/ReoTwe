@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.twitter.sdk.android.tweetcomposer.TweetUploadService;
+import de.digisocken.Read_o_Tweet.tweetcomposer.TweetUploadService;
 
 public class TweetResultReceiver extends BroadcastReceiver {
     @Override

@@ -37,4 +37,7 @@
     <string name="exit_message">Because you may changed some important preferences, it is better to restart the App.</string>
     <string name="SessionFail">Twitter Session fail. Maybe your API Key &amp; Secret is wrong?</string>
 
+    <string name="tw__composer_hint">What\'s Happening?</string>
+    <string name="tw__post_tweet">Tweet</string>
+    <string name="tw__max_tweet_chars">280</string>
 </resources>

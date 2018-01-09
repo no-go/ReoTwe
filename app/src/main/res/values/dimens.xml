@@ -4,4 +4,22 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="nav_header_vertical_spacing">80dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="tw__composer_close_size">48dp</dimen>
+    <dimen name="tw__composer_logo_height">20dp</dimen>
+    <dimen name="tw__composer_logo_width">24dp</dimen>
+    <dimen name="tw__composer_avatar_size">32dp</dimen>
+    <dimen name="tw__composer_divider_height">1dp</dimen>
+    <dimen name="tw__composer_tweet_btn_height">36dp</dimen>
+    <dimen name="tw__composer_tweet_btn_radius">4dp</dimen>
+    <dimen name="tw__composer_char_count_height">36dp</dimen>
+
+    <!-- Common spacing -->
+    <dimen name="tw__composer_spacing_small">4dp</dimen>
+    <dimen name="tw__composer_spacing_medium">8dp</dimen>
+    <dimen name="tw__composer_spacing_large">16dp</dimen>
+
+    <!--text sixes-->
+    <dimen name="tw__composer_font_size_small">14sp</dimen>
+
 </resources>

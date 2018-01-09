@@ -36,7 +36,16 @@
                 <action android:name="com.twitter.sdk.android.tweetcomposer.TWEET_COMPOSE_CANCEL"/>
             </intent-filter>
         </receiver>
-
+        
+        <activity
+            android:name=".tweetcomposer.ComposerActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize|stateVisible"/>
+        <service
+            android:name=".tweetcomposer.TweetUploadService"
+            android:enabled="true"
+            android:exported="false"/>
+            
     </application>
 
 </manifest>
