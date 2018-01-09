@@ -11,7 +11,7 @@ Twthaar WAS a very low level twitter client. You can use the old code for build 
 ## Features
 
  -  It is **free of ads**
- -  reduce addiction to **retweet, like or high resolution selfies**, because it has not this features!
+ -  reduce addiction to **retweet, like or high resolution selfies**, because **it has not** this features!
  -  fast and efficient
  -  tap on the Tweet text to load the full imageful Tweet View
  -  get and add your own API key and secret on apps.twitter.com to authorize the App
@@ -26,7 +26,7 @@ Twthaar WAS a very low level twitter client. You can use the old code for build 
  -  night mode
  -  it is possible to send text only or low resolution picture tweets (you get a login dialog on first try)
  -  if you are logged in, it gets your friend list and add it to the preferences automaticaly (and yourself)
- -  com.twitter.tweet-composer added and modified with stupid Validator (280 characters are possible, now!!!)
+ -  com.twitter.tweet-composer added and modified with stupid Validator, **280 characters** are possible, now.
 
 ## Social Media Detoxification
 
@@ -37,6 +37,7 @@ Twthaar WAS a very low level twitter client. You can use the old code for build 
  -  no voting
  -  no stories
  -  no likes
+ -  no retweets
  -  no ads
  -  no file or contacts access and full & maximal privacy
  -  not easy to install (you need to get API Key and secret)
