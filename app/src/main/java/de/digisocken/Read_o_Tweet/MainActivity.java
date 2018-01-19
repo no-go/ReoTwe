@@ -149,12 +149,8 @@ public class MainActivity extends AppCompatActivity
                 ab.setDisplayShowHomeEnabled(true);
                 ab.setHomeButtonEnabled(true);
                 ab.setDisplayUseLogoEnabled(true);
-                ab.setLogo(R.mipmap.ic_launcher);
-                if (BuildConfig.DEBUG) {
-                    ab.setTitle(" " + getString(R.string.app_name) + " " + BuildConfig.VERSION_NAME);
-                } else {
-                    ab.setTitle(" " + getString(R.string.app_name));
-                }
+                ab.setLogo(R.mipmap.ic_launcher_white);
+                ab.setTitle("");
                 ab.setElevation(10);
             }
         } catch (Exception e) {
@@ -332,9 +328,6 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, PreferencesActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
-        }else if (id == R.id.action_info) {
-            Intent intentProj= new Intent(Intent.ACTION_VIEW, Uri.parse(ReadOTweetApp.PROJECT_LINK));
-            startActivity(intentProj);
         } else {
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
@@ -424,4 +417,5 @@ public class MainActivity extends AppCompatActivity
     public void realExit() {
         super.onBackPressed();
     }
+
 }

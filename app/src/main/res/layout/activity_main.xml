@@ -18,7 +18,7 @@
             android:id="@+id/searchBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/tw__blue_default"
+            android:background="@color/primColor"
             android:elevation="10dp"
             android:padding="5dp"
             android:visibility="gone">
