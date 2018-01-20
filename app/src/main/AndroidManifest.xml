@@ -20,6 +20,8 @@
             android:label="@string/intro">
         </activity>
 
+        <activity android:name="de.digisocken.ReoTwe.LogoActivity" android:theme="@style/Theme.Transparent"></activity>
+
         <activity
             android:name="de.digisocken.ReoTwe.MainActivity"
             android:configChanges="orientation|screenSize|keyboard">

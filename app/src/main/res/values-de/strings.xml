@@ -43,4 +43,13 @@
     <string name="tw__post_tweet">Twittern</string>
 
     <string name="intro">Anleitung</string>
+    <string name="welcome">Willkommen!</string>
+    <string name="welcomeHint">Das ist ReoTwé, ein inoffizieller, stark reduzierter Twitter Client.</string>
+
+    <string name="slidePriv">Maximale Privatsphäre, aber …</string>
+    <string name="slidePrivHint">… wenn du ein Foto twittern willst, dann braucht die App Kamerazugriff (aber kein Dateizugriff!)</string>
+
+    <string name="slideAlpha">Noch eine Alpha Version</string>
+    <string name="slideAlphaHint">Ich muss hier noch Slides machen, um API Key, Bedienung und (anti-)Features zu erklären.</string>
+
 </resources>

@@ -42,5 +42,13 @@
     <string name="tw__max_tweet_chars">280</string>
 
     <string name="intro">Introduction</string>
+    <string name="welcome">Welcome!</string>
+    <string name="welcomeHint">This is ReoTwé, a unofficial very reduced twitter client.</string>
+
+    <string name="slidePriv">Maximal Privacy, but …</string>
+    <string name="slidePrivHint">… if you want to take a picture, the App needs cam access (but not file access!)</string>
+
+    <string name="slideAlpha">Still Alpha Version</string>
+    <string name="slideAlphaHint">I have to create slides to give hints to API Key, usage and (anti)features</string>
 
 </resources>

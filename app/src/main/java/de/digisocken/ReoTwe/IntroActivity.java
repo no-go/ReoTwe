@@ -14,26 +14,31 @@ public class IntroActivity extends AppIntro {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addSlide(AppIntroFragment.newInstance(
-                "Welcome !",
+                getString(R.string.welcome),
                 "bold",
-                "This is ReoTwé, a unofficial very reduced twitter client.",
+                getString(R.string.welcomeHint),
                 "normal",
                 R.drawable.ic_logo,
                 ContextCompat.getColor(this, R.color.textBack),
                 ContextCompat.getColor(this, R.color.textFront),
                 ContextCompat.getColor(this, R.color.textFront)
         ));
+
         addSlide(AppIntroFragment.newInstance(
-                "Maximal Privacy, but ...",
-                "... if you want to take a picture, the App needs cam access (but not file access!)",
+                getString(R.string.slidePriv),
+                "bold",
+                getString(R.string.slidePrivHint),
+                "normal",
                 android.R.drawable.ic_menu_camera,
-                ContextCompat.getColor(this, R.color.primColor)
+                ContextCompat.getColor(this, R.color.textBack),
+                ContextCompat.getColor(this, R.color.textFront),
+                ContextCompat.getColor(this, R.color.textFront)
         ));
 
         addSlide(AppIntroFragment.newInstance(
-                "To Do !",
+                getString(R.string.slideAlpha),
                 "bold",
-                "translate the slides and give hints to API Key, usage und (anti)features",
+                getString(R.string.slideAlphaHint),
                 "normal",
                 android.R.drawable.ic_menu_help,
                 ContextCompat.getColor(this, android.R.color.holo_orange_dark),

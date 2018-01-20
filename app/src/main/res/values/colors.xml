@@ -10,5 +10,5 @@
     <color name="tw__composer_black">#ff292f33</color>
     <color name="tw__composer_deep_gray">#ff8899A6</color>
     <color name="tw__composer_light_gray">#ffccd6dd</color>
-    <color name="tw__composer_red">#ffe81c4f</color>
+    <color name="tw__composer_red">#e81c4f</color>
 </resources>

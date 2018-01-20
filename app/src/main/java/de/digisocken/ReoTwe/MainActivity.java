@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
+import android.media.tv.TvContract;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -145,11 +146,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(0, 0);
         setContentView(R.layout.together);
 
         if (App.mPreferences.getBoolean("show_intro", true)) {
             App.mPreferences.edit().putBoolean("show_intro", false).commit();
             Intent intent = new Intent(MainActivity.this, IntroActivity.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(MainActivity.this, LogoActivity.class);
             startActivity(intent);
         }
 
