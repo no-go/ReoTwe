@@ -1,4 +1,4 @@
-package de.digisocken.Read_o_Tweet;
+package de.digisocken.ReoTwe;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

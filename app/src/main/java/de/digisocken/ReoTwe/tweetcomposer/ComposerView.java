@@ -15,7 +15,7 @@
  *
  */
 
-package de.digisocken.Read_o_Tweet.tweetcomposer;
+package de.digisocken.ReoTwe.tweetcomposer;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -34,8 +34,8 @@ import com.squareup.picasso.Picasso;
 import com.twitter.sdk.android.core.internal.UserUtils;
 import com.twitter.sdk.android.core.models.User;
 
-import de.digisocken.Read_o_Tweet.R;
-import de.digisocken.Read_o_Tweet.tweetcomposer.internal.util.ObservableScrollView;
+import de.digisocken.ReoTwe.R;
+import de.digisocken.ReoTwe.tweetcomposer.internal.util.ObservableScrollView;
 
 import java.util.Locale;
 

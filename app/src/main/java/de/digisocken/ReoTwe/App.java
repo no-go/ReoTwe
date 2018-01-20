@@ -1,4 +1,4 @@
-package de.digisocken.Read_o_Tweet;
+package de.digisocken.ReoTwe;
 
 import android.app.Application;
 import android.app.UiModeManager;
@@ -26,11 +26,11 @@ import java.util.Locale;
 
 import retrofit2.Call;
 
-public class ReadOTweetApp extends Application {
-    public static final String TAG = ReadOTweetApp.class.getSimpleName();
+public class App extends Application {
+    public static final String TAG = App.class.getSimpleName();
     public static SharedPreferences mPreferences;
 
-    public static final String PROJECT_LINK = "https://no-go.github.io/Twthaar/";
+    public static final String PROJECT_LINK = "https://no-go.github.io/ReoTwe/";
     public static final String FLATTR_ID = "o6wo7q";
     public static String FLATTR_LINK;
 
@@ -83,8 +83,8 @@ public class ReadOTweetApp extends Application {
         }
 
         if (mPreferences.getBoolean("nightmode_use", true)) {
-            int startH = mPreferences.getInt("nightmode_use_start", ReadOTweetApp.DEFAULT_NIGHT_START);
-            int stopH = mPreferences.getInt("nightmode_use_stop", ReadOTweetApp.DEFAULT_NIGHT_STOP);
+            int startH = mPreferences.getInt("nightmode_use_start", App.DEFAULT_NIGHT_START);
+            int stopH = mPreferences.getInt("nightmode_use_stop", App.DEFAULT_NIGHT_STOP);
             if (inTimeSpan(startH, stopH) && umm.getNightMode() != UiModeManager.MODE_NIGHT_YES) {
                 umm.setNightMode(UiModeManager.MODE_NIGHT_YES);
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -112,8 +112,8 @@ public class ReadOTweetApp extends Application {
 
         session = TwitterCore.getInstance().getSessionManager().getActiveSession();
 
-        if (ReadOTweetApp.session != null) {
-            username = ReadOTweetApp.session.getUserName();
+        if (App.session != null) {
+            username = App.session.getUserName();
             //twitterApiClient = TwitterCore.getInstance().getApiClient();
 
             twitterApiClient = new MyTwitterApiClient(session);
@@ -135,11 +135,11 @@ public class ReadOTweetApp extends Application {
 
     private void startGetFriendlist(String query) {
         friendlist = "";
-        fs = ReadOTweetApp.twitterApiClient.getFriendsService();
+        fs = App.twitterApiClient.getFriendsService();
         Call<MyTwitterApiClient.UsersCursor> call = fs.friends(
                 query,
                 null,
-                ReadOTweetApp.DEFAULT_MAX,
+                App.DEFAULT_MAX,
                 true,
                 false
         );
@@ -171,7 +171,7 @@ public class ReadOTweetApp extends Application {
                 Call<MyTwitterApiClient.UsersCursor> call = fs.friends(
                         _query,
                         (int) result.data.nextCursor,
-                        ReadOTweetApp.DEFAULT_MAX,
+                        App.DEFAULT_MAX,
                         true,
                         false
                 );
@@ -181,7 +181,7 @@ public class ReadOTweetApp extends Application {
                 if (!friendlist.equals("")) {
                     friendlist = "@" + username + "," + friendlist;
                     friendlist = friendlist.substring(0, friendlist.lastIndexOf(","));
-                    ReadOTweetApp.mPreferences.edit().putString("STARTUSERS", friendlist).apply();
+                    App.mPreferences.edit().putString("STARTUSERS", friendlist).apply();
                 }
             }
         }

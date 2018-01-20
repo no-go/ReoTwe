@@ -15,7 +15,7 @@
  *
  */
 
-package de.digisocken.Read_o_Tweet.tweetcomposer;
+package de.digisocken.ReoTwe.tweetcomposer;
 
 import android.annotation.TargetApi;
 import android.content.ContentResolver;

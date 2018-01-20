@@ -15,7 +15,7 @@
  *
  */
 
-package de.digisocken.Read_o_Tweet.tweetcomposer;
+package de.digisocken.ReoTwe.tweetcomposer;
 
 import android.app.Activity;
 import android.content.Context;
@@ -27,7 +27,7 @@ import com.twitter.Regex;
 import com.twitter.sdk.android.core.TwitterAuthToken;
 import com.twitter.sdk.android.core.TwitterSession;
 
-import de.digisocken.Read_o_Tweet.R;
+import de.digisocken.ReoTwe.R;
 
 public class ComposerActivity extends Activity {
     static final String EXTRA_USER_TOKEN = "EXTRA_USER_TOKEN";

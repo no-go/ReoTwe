@@ -15,7 +15,7 @@
  *
  */
 
-package de.digisocken.Read_o_Tweet.tweetcomposer.internal.util;
+package de.digisocken.ReoTwe.tweetcomposer.internal.util;
 
 import android.annotation.TargetApi;
 import android.content.Context;

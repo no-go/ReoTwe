@@ -1,4 +1,4 @@
-package de.digisocken.Read_o_Tweet;
+package de.digisocken.ReoTwe;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -30,7 +30,7 @@ class TweetAdapter extends BaseAdapter {
         mContext = context;
         mDataSource = items;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        imageful = ReadOTweetApp.mPreferences.getBoolean("imageful", true);
+        imageful = App.mPreferences.getBoolean("imageful", true);
     }
 
     @Override
@@ -67,8 +67,8 @@ class TweetAdapter extends BaseAdapter {
         trt.setText("");
 
         try {
-            Date parsedDate = ReadOTweetApp.formatIn.parse(tweet.createdAt);
-            tDate.setText(ReadOTweetApp.formatOut.format(parsedDate));
+            Date parsedDate = App.formatIn.parse(tweet.createdAt);
+            tDate.setText(App.formatOut.format(parsedDate));
         } catch (ParseException e) {
             e.printStackTrace();
             tDate.setText(tweet.createdAt);

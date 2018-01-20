@@ -4,11 +4,11 @@ android {
     compileSdkVersion 26
     //buildToolsVersion "26.0.1"
     defaultConfig {
-        applicationId "de.digisocken.read_o_tweet"
+        applicationId "de.digisocken.reotwe"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 184
-        versionName "1.85"
+        versionCode 190
+        versionName "1.90"
         multiDexEnabled true
     }
     buildTypes {

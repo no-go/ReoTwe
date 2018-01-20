@@ -15,16 +15,22 @@
  *
  */
 
-package de.digisocken.Read_o_Tweet.tweetcomposer;
-
-import com.twitter.sdk.android.core.internal.scribe.EventNamespace;
-import com.twitter.sdk.android.core.internal.scribe.ScribeItem;
-
-import java.util.List;
+package de.digisocken.ReoTwe.tweetcomposer;
 
 /**
- * ScribeClient writes tweet-composer scribe events.
+ * ComposerScribeClient represents scribe events of Tweet Composer components.
  */
-interface ScribeClient {
-    void scribe(EventNamespace eventNamespace, List<ScribeItem> items);
+interface ComposerScribeClient {
+
+
+    /**
+     * Scribes an impression of the Tweet Composer.
+     */
+    void impression();
+
+
+    /**
+     * Scribes a click on the Tweet Composer 'Tweet' or 'Cancel' button element.
+     */
+    void click(String element);
 }

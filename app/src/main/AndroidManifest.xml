@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.digisocken.Read_o_Tweet">
+    package="de.digisocken.ReoTwe">
 
     <uses-feature android:name="android.hardware.camera" android:required="false" />
     <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
@@ -9,19 +9,19 @@
 
     <application
         android:allowBackup="true"
-        android:name="de.digisocken.Read_o_Tweet.ReadOTweetApp"
+        android:name="de.digisocken.ReoTwe.App"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="de.digisocken.Read_o_Tweet.IntroActivity"
+            android:name="de.digisocken.ReoTwe.IntroActivity"
             android:label="@string/intro">
         </activity>
 
         <activity
-            android:name="de.digisocken.Read_o_Tweet.MainActivity"
+            android:name="de.digisocken.ReoTwe.MainActivity"
             android:configChanges="orientation|screenSize|keyboard">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,13 +30,13 @@
         </activity>
 
         <activity
-            android:name="de.digisocken.Read_o_Tweet.PreferencesActivity"
-            android:parentActivityName="de.digisocken.Read_o_Tweet.MainActivity" />
+            android:name="de.digisocken.ReoTwe.PreferencesActivity"
+            android:parentActivityName="de.digisocken.ReoTwe.MainActivity" />
 
         <activity android:name="com.twitter.sdk.android.core.identity.OAuthActivity" />
 
         <receiver
-            android:name="de.digisocken.Read_o_Tweet.TweetResultReceiver"
+            android:name="de.digisocken.ReoTwe.TweetResultReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.twitter.sdk.android.tweetcomposer.UPLOAD_SUCCESS"/>
@@ -46,12 +46,12 @@
         </receiver>
         
         <activity
-            android:name=".tweetcomposer.ComposerActivity"
+            android:name="de.digisocken.ReoTwe.tweetcomposer.ComposerActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize|stateVisible"/>
 
         <service
-            android:name=".tweetcomposer.TweetUploadService"
+            android:name="de.digisocken.ReoTwe.tweetcomposer.TweetUploadService"
             android:enabled="true"
             android:exported="false"/>
             

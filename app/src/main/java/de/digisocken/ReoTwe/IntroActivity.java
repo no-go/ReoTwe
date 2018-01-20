@@ -1,8 +1,6 @@
-package de.digisocken.Read_o_Tweet;
+package de.digisocken.ReoTwe;
 
 import android.Manifest;
-import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,8 +9,6 @@ import android.support.v4.content.ContextCompat;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
-import java.lang.reflect.Type;
-
 public class IntroActivity extends AppIntro {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -20,9 +16,9 @@ public class IntroActivity extends AppIntro {
         addSlide(AppIntroFragment.newInstance(
                 "Welcome !",
                 "bold",
-                "This is Reet-o-Tweet (or just ReoTwee), a unofficial very reduced twitter client",
+                "This is ReoTwé, a unofficial very reduced twitter client.",
                 "normal",
-                R.mipmap.ic_launcher,
+                R.drawable.ic_logo,
                 ContextCompat.getColor(this, R.color.textBack),
                 ContextCompat.getColor(this, R.color.textFront),
                 ContextCompat.getColor(this, R.color.textFront)

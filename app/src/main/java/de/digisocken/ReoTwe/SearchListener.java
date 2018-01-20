@@ -1,4 +1,4 @@
-package de.digisocken.Read_o_Tweet;
+package de.digisocken.ReoTwe;
 
 import android.content.Context;
 import android.util.Log;
@@ -48,7 +48,7 @@ public class SearchListener implements View.OnClickListener {
                 SearchTimeline searchTimeline = new SearchTimeline.Builder()
                         .query(q)
                         .resultType(SearchTimeline.ResultType.POPULAR)
-                        .maxItemsPerRequest(ReadOTweetApp.DEFAULT_MAX)
+                        .maxItemsPerRequest(App.DEFAULT_MAX)
                         .build();
 
                 searchTimeline.next(null, new Callback<TimelineResult<Tweet>>() {
@@ -56,7 +56,7 @@ public class SearchListener implements View.OnClickListener {
                     public void success(Result<TimelineResult<Tweet>> result) {
                         for(final Tweet tweet : result.data.items) {
                             mainActivity.tweetArrayList.add(tweet);
-                            if (BuildConfig.DEBUG) Log.d(ReadOTweetApp.TAG, "tweet created at " + tweet.createdAt);
+                            if (BuildConfig.DEBUG) Log.d(App.TAG, "tweet created at " + tweet.createdAt);
                         }
                         loaded++;
                         if (loaded == queries.length) {
@@ -68,8 +68,8 @@ public class SearchListener implements View.OnClickListener {
                     @Override
                     public void failure(TwitterException e) {
                         if (
-                                !ReadOTweetApp.mPreferences.getString("CONSUMER_KEY","").equals("") ||
-                                !ReadOTweetApp.mPreferences.getString("CONSUMER_SECRET","").equals("")
+                                !App.mPreferences.getString("CONSUMER_KEY","").equals("") ||
+                                !App.mPreferences.getString("CONSUMER_SECRET","").equals("")
                         ) {
                             View v = mainActivity.getLayoutInflater().inflate(R.layout.tweet_oops, null);
                             mainActivity.mListView.addFooterView(v);
@@ -81,7 +81,7 @@ public class SearchListener implements View.OnClickListener {
                 q = q.replace("@","");
                 UserTimeline userTimeline = new UserTimeline.Builder()
                         .screenName(q)
-                        .maxItemsPerRequest(ReadOTweetApp.DEFAULT_MAX)
+                        .maxItemsPerRequest(App.DEFAULT_MAX)
                         .build();
 
                 userTimeline.next(null, new Callback<TimelineResult<Tweet>>() {
@@ -89,7 +89,7 @@ public class SearchListener implements View.OnClickListener {
                     public void success(Result<TimelineResult<Tweet>> result) {
                         for(final Tweet tweet : result.data.items) {
                             mainActivity.tweetArrayList.add(tweet);
-                            if (BuildConfig.DEBUG) Log.d(ReadOTweetApp.TAG, "tweet created at " + tweet.createdAt);
+                            if (BuildConfig.DEBUG) Log.d(App.TAG, "tweet created at " + tweet.createdAt);
                         }
                         loaded++;
                         if (loaded == queries.length) {
@@ -101,8 +101,8 @@ public class SearchListener implements View.OnClickListener {
                     @Override
                     public void failure(TwitterException e) {
                         if (
-                                !ReadOTweetApp.mPreferences.getString("CONSUMER_KEY","").equals("") ||
-                                !ReadOTweetApp.mPreferences.getString("CONSUMER_SECRET","").equals("")
+                                !App.mPreferences.getString("CONSUMER_KEY","").equals("") ||
+                                !App.mPreferences.getString("CONSUMER_SECRET","").equals("")
                         ) {
                             View v = mainActivity.getLayoutInflater().inflate(R.layout.tweet_oops, null);
                             mainActivity.mListView.addFooterView(v);

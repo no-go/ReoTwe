@@ -15,7 +15,7 @@
  *
  */
 
-package de.digisocken.Read_o_Tweet.tweetcomposer;
+package de.digisocken.ReoTwe.tweetcomposer;
 
 import com.twitter.sdk.android.core.internal.scribe.DefaultScribeClient;
 import com.twitter.sdk.android.core.internal.scribe.EventNamespace;

@@ -15,7 +15,7 @@
  *
  */
 
-package de.digisocken.Read_o_Tweet.tweetcomposer;
+package de.digisocken.ReoTwe.tweetcomposer;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -106,7 +106,7 @@ public class TweetComposer {
         private Uri imageUri;
 
         /**
-         * Initializes a new {@link de.digisocken.Read_o_Tweet.tweetcomposer.TweetComposer.Builder}
+         * Initializes a new {@link de.digisocken.ReoTwe.tweetcomposer.TweetComposer.Builder}
          */
         public Builder(Context context) {
             if (context == null) {
@@ -165,7 +165,7 @@ public class TweetComposer {
         }
 
         /**
-         * Creates {@link android.content.Intent} based on data in {@link de.digisocken.Read_o_Tweet.tweetcomposer.TweetComposer.Builder}
+         * Creates {@link android.content.Intent} based on data in {@link de.digisocken.ReoTwe.tweetcomposer.TweetComposer.Builder}
          * @return an Intent to the Twitter for Android or a web intent.
          */
         public Intent createIntent() {
@@ -226,7 +226,7 @@ public class TweetComposer {
         }
 
         /**
-         * Starts the intent created in {@link de.digisocken.Read_o_Tweet.tweetcomposer.TweetComposer.Builder#createIntent()}
+         * Starts the intent created in {@link de.digisocken.ReoTwe.tweetcomposer.TweetComposer.Builder#createIntent()}
          */
         public void show() {
             final Intent intent = createIntent();

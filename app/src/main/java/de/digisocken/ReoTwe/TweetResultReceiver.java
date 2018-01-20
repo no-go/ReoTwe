@@ -1,10 +1,10 @@
-package de.digisocken.Read_o_Tweet;
+package de.digisocken.ReoTwe;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import de.digisocken.Read_o_Tweet.tweetcomposer.TweetUploadService;
+import de.digisocken.ReoTwe.tweetcomposer.TweetUploadService;
 
 public class TweetResultReceiver extends BroadcastReceiver {
     @Override

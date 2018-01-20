@@ -15,7 +15,7 @@
  *
  */
 
-package de.digisocken.Read_o_Tweet.tweetcomposer;
+package de.digisocken.ReoTwe.tweetcomposer;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -29,9 +29,9 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.models.User;
 
-import de.digisocken.Read_o_Tweet.R;
+import de.digisocken.ReoTwe.R;
 
-import static de.digisocken.Read_o_Tweet.tweetcomposer.TweetUploadService.TWEET_COMPOSE_CANCEL;
+import static de.digisocken.ReoTwe.tweetcomposer.TweetUploadService.TWEET_COMPOSE_CANCEL;
 
 class ComposerController {
     public final static int MAX_TWEET_LENGTH = 280;

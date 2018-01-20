@@ -15,7 +15,7 @@
  *
  */
 
-package de.digisocken.Read_o_Tweet.tweetcomposer;
+package de.digisocken.ReoTwe.tweetcomposer;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -39,11 +39,11 @@ import okhttp3.RequestBody;
 
 public class TweetUploadService extends IntentService {
     public static final String UPLOAD_SUCCESS
-            = "de.digisocken.Read_o_Tweet.tweetcomposer.UPLOAD_SUCCESS";
+            = "de.digisocken.ReoTwe.tweetcomposer.UPLOAD_SUCCESS";
     public static final String UPLOAD_FAILURE
-            = "de.digisocken.Read_o_Tweet.tweetcomposer.UPLOAD_FAILURE";
+            = "de.digisocken.ReoTwe.tweetcomposer.UPLOAD_FAILURE";
     public static final String TWEET_COMPOSE_CANCEL =
-            "de.digisocken.Read_o_Tweet.tweetcomposer.TWEET_COMPOSE_CANCEL";
+            "de.digisocken.ReoTwe.tweetcomposer.TWEET_COMPOSE_CANCEL";
     public static final String EXTRA_TWEET_ID = "EXTRA_TWEET_ID";
     public static final String EXTRA_RETRY_INTENT = "EXTRA_RETRY_INTENT";
 

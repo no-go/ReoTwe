@@ -1,4 +1,4 @@
-package de.digisocken.Read_o_Tweet;
+package de.digisocken.ReoTwe;
 
 import com.google.gson.annotations.SerializedName;
 import com.twitter.sdk.android.core.TwitterApiClient;

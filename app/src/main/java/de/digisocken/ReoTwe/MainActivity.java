@@ -1,4 +1,4 @@
-package de.digisocken.Read_o_Tweet;
+package de.digisocken.ReoTwe;
 
 import android.app.UiModeManager;
 import android.content.DialogInterface;
@@ -35,7 +35,7 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.twitter.sdk.android.core.models.Tweet;
-import de.digisocken.Read_o_Tweet.tweetcomposer.ComposerActivity;
+import de.digisocken.ReoTwe.tweetcomposer.ComposerActivity;
 
 import android.support.design.widget.NavigationView;
 
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem mi2 = menu.findItem(R.id.action_allImages);
-        mi2.setChecked(ReadOTweetApp.mPreferences.getBoolean("imageful", true));
+        mi2.setChecked(App.mPreferences.getBoolean("imageful", true));
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -114,18 +114,18 @@ public class MainActivity extends AppCompatActivity
             case R.id.action_allImages:
                 if (item.isChecked()) {
                     adapter.imageful = false;
-                    ReadOTweetApp.mPreferences.edit().putBoolean("imageful", false).apply();
+                    App.mPreferences.edit().putBoolean("imageful", false).apply();
                     item.setChecked(false);
                     adapter.notifyDataSetChanged();
                 } else {
                     adapter.imageful = true;
-                    ReadOTweetApp.mPreferences.edit().putBoolean("imageful", true).apply();
+                    App.mPreferences.edit().putBoolean("imageful", true).apply();
                     item.setChecked(true);
                     adapter.notifyDataSetChanged();
                 }
                 break;
             case R.id.action_flattr:
-                Intent intentFlattr = new Intent(Intent.ACTION_VIEW, Uri.parse(ReadOTweetApp.FLATTR_LINK));
+                Intent intentFlattr = new Intent(Intent.ACTION_VIEW, Uri.parse(App.FLATTR_LINK));
                 startActivity(intentFlattr);
                 break;
             case R.id.action_intro:
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intentIntro);
                 break;
             case R.id.action_project:
-                Intent intentProj= new Intent(Intent.ACTION_VIEW, Uri.parse(ReadOTweetApp.PROJECT_LINK));
+                Intent intentProj= new Intent(Intent.ACTION_VIEW, Uri.parse(App.PROJECT_LINK));
                 startActivity(intentProj);
                 break;
             default:
@@ -147,8 +147,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.together);
 
-        if (ReadOTweetApp.mPreferences.getBoolean("show_intro", true)) {
-            ReadOTweetApp.mPreferences.edit().putBoolean("show_intro", false).commit();
+        if (App.mPreferences.getBoolean("show_intro", true)) {
+            App.mPreferences.edit().putBoolean("show_intro", false).commit();
             Intent intent = new Intent(MainActivity.this, IntroActivity.class);
             startActivity(intent);
         }
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity
         editText = (EditText) findViewById(R.id.editText);
         loginButton = new TwitterLoginButton(this);
 
-        iniQuery = ReadOTweetApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts));
+        iniQuery = App.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts));
         editText.setText(iniQuery);
         button.setOnClickListener(new SearchListener(this, ""));
 
@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 TextView favouriteList = (TextView) findViewById(R.id.favouriteList);
                 favouriteList.setText(iniQuery.replace(",","\n"));
-                ReadOTweetApp.mPreferences.edit().putString("STARTUSERS",iniQuery).apply();
+                App.mPreferences.edit().putString("STARTUSERS",iniQuery).apply();
                 Toast.makeText(MainActivity.this, R.string.favAdded, Toast.LENGTH_SHORT).show();
             }
         });
@@ -218,8 +218,8 @@ public class MainActivity extends AppCompatActivity
         loginButton.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
-                ReadOTweetApp.session = result.data;
-                ReadOTweetApp.username = ReadOTweetApp.session.getUserName();
+                App.session = result.data;
+                App.username = App.session.getUserName();
             }
 
             @Override
@@ -234,27 +234,27 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ReadOTweetApp.username.equals("")) {
+                if (App.username.equals("")) {
                     loginButton.callOnClick();
                 } else {
                     String[] qeris = editText.getText().toString().split(",");
                     final Intent intent;
 
-                    if (ReadOTweetApp.umm.getNightMode() == UiModeManager.MODE_NIGHT_YES) {
+                    if (App.umm.getNightMode() == UiModeManager.MODE_NIGHT_YES) {
 
                         intent = new ComposerActivity.Builder(MainActivity.this)
-                                .session(ReadOTweetApp.session)
+                                .session(App.session)
                                 .text(qeris[0])
                                 .darkTheme()
                                 .createIntent();
                     } else {
                         intent = new ComposerActivity.Builder(MainActivity.this)
-                                .session(ReadOTweetApp.session)
+                                .session(App.session)
                                 .text(qeris[0])
                                 .createIntent();
                     }
                     //intent.putExtra("EXTRA_THEME", R.style.ComposerLight);
-                    //if (ReadOTweetApp.night) intent.putExtra("EXTRA_THEME", R.style.ComposerDark);
+                    //if (App.night) intent.putExtra("EXTRA_THEME", R.style.ComposerDark);
                     startActivity(intent);
                 }
             }
@@ -270,7 +270,7 @@ public class MainActivity extends AppCompatActivity
         fabCam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ReadOTweetApp.username.equals("")) {
+                if (App.username.equals("")) {
                     loginButton.callOnClick();
                 } else {
                     Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -285,8 +285,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         if (
-                ReadOTweetApp.mPreferences.getString("CONSUMER_KEY","").equals("") ||
-                ReadOTweetApp.mPreferences.getString("CONSUMER_SECRET","").equals("")
+                App.mPreferences.getString("CONSUMER_KEY","").equals("") ||
+                App.mPreferences.getString("CONSUMER_SECRET","").equals("")
         ) {
             ViewGroup hintView = (ViewGroup) getLayoutInflater().inflate(R.layout.tweet_item, null);
             mListView.addFooterView(hintView);
@@ -300,8 +300,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public int compare(Tweet t2, Tweet t1) {
                 try {
-                    Date parsedDate1 = ReadOTweetApp.formatIn.parse(t1.createdAt);
-                    Date parsedDate2 = ReadOTweetApp.formatIn.parse(t2.createdAt);
+                    Date parsedDate1 = App.formatIn.parse(t1.createdAt);
+                    Date parsedDate2 = App.formatIn.parse(t2.createdAt);
                     return parsedDate1.compareTo(parsedDate2);
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -319,13 +319,13 @@ public class MainActivity extends AppCompatActivity
         TextView meTxt = (TextView) findViewById(R.id.fullname);
         TextView meScrTxt = (TextView) findViewById(R.id.screenname);
 
-        if (! ReadOTweetApp.username.equals("")) {
-            meScrTxt.setText("@" + ReadOTweetApp.username);
-            meTxt.setText(ReadOTweetApp.realname);
+        if (! App.username.equals("")) {
+            meScrTxt.setText("@" + App.username);
+            meTxt.setText(App.realname);
         }
 
         favouriteList.setText(
-                ReadOTweetApp.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts)).replace(",","\n")
+                App.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts)).replace(",","\n")
         );
         return super.onPreparePanel(featureId, view, menu);
     }
@@ -399,16 +399,16 @@ public class MainActivity extends AppCompatActivity
                 final Intent intent;
 
                 // make image tweet
-                if (ReadOTweetApp.umm.getNightMode() == UiModeManager.MODE_NIGHT_YES) {
+                if (App.umm.getNightMode() == UiModeManager.MODE_NIGHT_YES) {
 
                     intent = new ComposerActivity.Builder(MainActivity.this)
-                            .session(ReadOTweetApp.session)
+                            .session(App.session)
                             .image(imgUri)
                             .darkTheme()
                             .createIntent();
                 } else {
                     intent = new ComposerActivity.Builder(MainActivity.this)
-                            .session(ReadOTweetApp.session)
+                            .session(App.session)
                             .image(imgUri)
                             .createIntent();
                 }
