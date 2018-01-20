@@ -128,6 +128,10 @@ public class MainActivity extends AppCompatActivity
                 Intent intentFlattr = new Intent(Intent.ACTION_VIEW, Uri.parse(ReadOTweetApp.FLATTR_LINK));
                 startActivity(intentFlattr);
                 break;
+            case R.id.action_intro:
+                Intent intentIntro = new Intent(MainActivity.this, IntroActivity.class);
+                startActivity(intentIntro);
+                break;
             case R.id.action_project:
                 Intent intentProj= new Intent(Intent.ACTION_VIEW, Uri.parse(ReadOTweetApp.PROJECT_LINK));
                 startActivity(intentProj);
@@ -143,6 +147,12 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.together);
 
+        if (ReadOTweetApp.mPreferences.getBoolean("show_intro", true)) {
+            ReadOTweetApp.mPreferences.edit().putBoolean("show_intro", false).commit();
+            Intent intent = new Intent(MainActivity.this, IntroActivity.class);
+            startActivity(intent);
+        }
+
         try {
             ActionBar ab = getSupportActionBar();
             if(ab != null) {
@@ -150,7 +160,7 @@ public class MainActivity extends AppCompatActivity
                 ab.setHomeButtonEnabled(true);
                 ab.setDisplayUseLogoEnabled(true);
                 ab.setLogo(R.mipmap.ic_launcher_white);
-                ab.setTitle("");
+                ab.setTitle(" " + getString(R.string.app_name));
                 ab.setElevation(10);
             }
         } catch (Exception e) {

@@ -66,6 +66,9 @@ public class ReadOTweetApp extends Application {
         if (!mPreferences.contains("nightmode_use_start")) {
             mPreferences.edit().putInt("nightmode_use_start", DEFAULT_NIGHT_START).commit();
         }
+        if (!mPreferences.contains("show_intro")) {
+            mPreferences.edit().putBoolean("show_intro", true).commit();
+        }
         if (!mPreferences.contains("nightmode_use_stop")) {
             mPreferences.edit().putInt("nightmode_use_stop", DEFAULT_NIGHT_STOP).commit();
         }

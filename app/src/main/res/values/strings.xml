@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Read-o-Tweet</string>
+    <string name="app_name">ReoTwee</string>
     <string name="flattr_this">Micro-Donate !</string>
     <string name="projPage">Info Website</string>
     <string name="preferences">Preferences</string>
@@ -40,4 +40,5 @@
     <string name="tw__composer_hint">What\'s Happening?</string>
     <string name="tw__post_tweet">Tweet</string>
     <string name="tw__max_tweet_chars">280</string>
+    <string name="intro">Introduction</string>
 </resources>

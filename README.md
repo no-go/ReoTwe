@@ -1,10 +1,10 @@
-# Read-o-Tweet (Twthaar)
+# ReoTwee (Read-o-Tweet or Twthaar)
 
 **You became hooked on social media and Twitter? If you wanna change it, try this App.**
 
 Twthaar WAS a very low level twitter client. You can use the old code for build your own cool client or to learn how *Twitter Kit* and API works.
 
-![logo](app/src/main/res/mipmap-hdpi/ic_launcher.png)
+![logo](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 
 [Twthaar Website](https://no-go.github.io/Twthaar/)
 
@@ -24,11 +24,17 @@ Twthaar WAS a very low level twitter client. You can use the old code for build 
  -  switch images on/off in preferences
  -  english and german interface
  -  night mode
+ -  small Welcome intro
  -  it is possible to send text only or low resolution picture tweets (you get a login dialog on first try)
  -  if you are logged in, it gets your friend list and add it to the preferences automaticaly (and yourself)
  -  com.twitter.tweet-composer added and modified with stupid Validator, **280 characters** are possible, now.
 
 ## Social Media Detoxification
+
+ -  no ads
+ -  maximal privacy
+
+but ...
 
  -  no private messages
  -  no profile changes
@@ -38,11 +44,11 @@ Twthaar WAS a very low level twitter client. You can use the old code for build 
  -  no stories
  -  no likes
  -  no retweets
- -  no ads
+ -  no beep, blink or any other notification
  -  no file or contacts access and full & maximal privacy
  -  not easy to install (you need to get API Key and secret)
  -  no woman, no cry (maybe)
- -  and many other features, which I will never implement ever!
+ -  and many other features, which I will never implement ever (but I could)
 
 ## Get the App
 

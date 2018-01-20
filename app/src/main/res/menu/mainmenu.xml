@@ -24,6 +24,10 @@
         android:title="@string/flattr_this"></item>
 
     <item
+        android:id="@+id/action_intro"
+        android:title="@string/intro"></item>
+
+    <item
         android:id="@+id/action_preferences2"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="@string/preferences">

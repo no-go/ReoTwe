@@ -3,6 +3,7 @@
     package="de.digisocken.Read_o_Tweet">
 
     <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -14,7 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="de.digisocken.Read_o_Tweet.MainActivity" android:configChanges="orientation|screenSize|keyboard">
+        <activity
+            android:name="de.digisocken.Read_o_Tweet.IntroActivity"
+            android:label="@string/intro">
+        </activity>
+
+        <activity
+            android:name="de.digisocken.Read_o_Tweet.MainActivity"
+            android:configChanges="orientation|screenSize|keyboard">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -41,6 +49,7 @@
             android:name=".tweetcomposer.ComposerActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize|stateVisible"/>
+
         <service
             android:name=".tweetcomposer.TweetUploadService"
             android:enabled="true"
