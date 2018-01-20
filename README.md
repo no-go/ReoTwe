@@ -52,7 +52,7 @@ but ...
 
 ## Get the App
 
-You can get a signed APK from here (Android 4.1+): [APK](https://raw.githubusercontent.com/no-go/Twthaar/master/app/app-release.apk)
+You can get a signed APK from here (Android 4.1+): [APK](https://github.com/no-go/Twthaar/raw/master/app/release/app-release.apk)
 
 ## Screenshots
 
