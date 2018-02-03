@@ -2,12 +2,15 @@ package de.digisocken.ReoTwe;
 
 import android.Manifest;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
+import com.github.paolorotolo.appintro.model.SliderPage;
 
 public class IntroActivity extends AppIntro {
     @Override
@@ -42,6 +45,17 @@ public class IntroActivity extends AppIntro {
                 "normal",
                 android.R.drawable.ic_menu_help,
                 ContextCompat.getColor(this, android.R.color.holo_orange_dark),
+                ContextCompat.getColor(this, R.color.textFront),
+                ContextCompat.getColor(this, R.color.textFront)
+        ));
+
+        addSlide(AppIntroFragment.newInstance(
+                getString(R.string.slideHomepage),
+                "bold",
+                getString(R.string.slideHomepageHint, App.PROJECT_LINK),
+                "normal",
+                R.drawable.homehint,
+                ContextCompat.getColor(this, R.color.textBack),
                 ContextCompat.getColor(this, R.color.textFront),
                 ContextCompat.getColor(this, R.color.textFront)
         ));

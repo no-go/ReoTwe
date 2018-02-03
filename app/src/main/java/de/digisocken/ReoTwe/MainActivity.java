@@ -51,21 +51,13 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Stack;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     public ListView mListView;
     public ArrayList<Tweet> tweetArrayList;
     public TweetAdapter adapter;
-    public ImageButton button;
-    public ImageButton buttonRevert;
-    public ImageButton buttonAddStart;
-    public EditText editText;
-    public RelativeLayout searchBox;
-    public Stack< String > history;
-
-    private String iniQuery;
-
+    public SearchListener searchListener;
+    public String iniQuery;
     TwitterLoginButton loginButton;
 
 
@@ -88,25 +80,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_toggleSearch:
-                if (searchBox.getVisibility() == View.GONE) {
-                    try {
-                        ActionBar ab = getSupportActionBar();
-                        if(ab != null) ab.setElevation(0);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    searchBox.setVisibility(View.VISIBLE);
-                } else {
-                    try {
-                        ActionBar ab = getSupportActionBar();
-                        if(ab != null) ab.setElevation(10);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    searchBox.setVisibility(View.GONE);
-                }
-                break;
             case R.id.action_preferences2:
                 Intent intent = new Intent(MainActivity.this, PreferencesActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -172,51 +145,13 @@ public class MainActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        searchBox = (RelativeLayout) findViewById(R.id.searchBox);
         mListView = (ListView) findViewById(R.id.list);
-        button = (ImageButton) findViewById(R.id.button);
-        buttonRevert = (ImageButton) findViewById(R.id.cleanUpBtn);
-        buttonAddStart = (ImageButton) findViewById(R.id.addStartBtn);
-        editText = (EditText) findViewById(R.id.editText);
         loginButton = new TwitterLoginButton(this);
 
         iniQuery = App.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts));
-        editText.setText(iniQuery);
-        button.setOnClickListener(new SearchListener(this, ""));
-
-        buttonRevert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editText.setText("");
-            }
-        });
-
-        buttonAddStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final String[] queries = editText.getText().toString().split(",");
-                for (String q : queries) {
-                    q = q.trim();
-                    if (q.startsWith("#")) {
-                        if(!iniQuery.contains(q)) {
-                            iniQuery += "," + q;
-                        }
-                    } else if (q.startsWith("@")) {
-                        if(!iniQuery.contains(q)) {
-                            iniQuery += "," + q;
-                        }
-                    }
-                }
-                TextView favouriteList = (TextView) findViewById(R.id.favouriteList);
-                favouriteList.setText(iniQuery.replace(",","\n"));
-                App.mPreferences.edit().putString("STARTUSERS",iniQuery).apply();
-                Toast.makeText(MainActivity.this, R.string.favAdded, Toast.LENGTH_SHORT).show();
-            }
-        });
+        searchListener = new SearchListener(this, iniQuery);
 
         tweetArrayList = new ArrayList<>();
-        history = new Stack<>();
-        history.push(iniQuery);
         adapter = new TweetAdapter(this, tweetArrayList);
         mListView.setAdapter(adapter);
 
@@ -242,24 +177,19 @@ public class MainActivity extends AppCompatActivity
                 if (App.username.equals("")) {
                     loginButton.callOnClick();
                 } else {
-                    String[] qeris = editText.getText().toString().split(",");
                     final Intent intent;
 
                     if (App.umm.getNightMode() == UiModeManager.MODE_NIGHT_YES) {
 
                         intent = new ComposerActivity.Builder(MainActivity.this)
                                 .session(App.session)
-                                .text(qeris[0])
                                 .darkTheme()
                                 .createIntent();
                     } else {
                         intent = new ComposerActivity.Builder(MainActivity.this)
                                 .session(App.session)
-                                .text(qeris[0])
                                 .createIntent();
                     }
-                    //intent.putExtra("EXTRA_THEME", R.style.ComposerLight);
-                    //if (App.night) intent.putExtra("EXTRA_THEME", R.style.ComposerDark);
                     startActivity(intent);
                 }
             }
@@ -286,9 +216,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
         if (
                 App.mPreferences.getString("CONSUMER_KEY","").equals("") ||
                 App.mPreferences.getString("CONSUMER_SECRET","").equals("")
@@ -296,8 +223,7 @@ public class MainActivity extends AppCompatActivity
             ViewGroup hintView = (ViewGroup) getLayoutInflater().inflate(R.layout.tweet_item, null);
             mListView.addFooterView(hintView);
         }
-
-        button.callOnClick();
+        searchListener.run(null);
     }
 
     public void sortTweetArrayList() {
@@ -317,67 +243,23 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
-    @Override
-    public boolean onPreparePanel(int featureId, View view, Menu menu) {
-        TextView favouriteList = (TextView) findViewById(R.id.favouriteList);
-        TextView meTxt = (TextView) findViewById(R.id.fullname);
-        TextView meScrTxt = (TextView) findViewById(R.id.screenname);
-
-        if (! App.username.equals("")) {
-            meScrTxt.setText("@" + App.username);
-            meTxt.setText(App.realname);
-        }
-
-        favouriteList.setText(
-                App.mPreferences.getString("STARTUSERS", getString(R.string.defaultStarts)).replace(",","\n")
-        );
-        return super.onPreparePanel(featureId, view, menu);
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_preferences) {
-            Intent intent = new Intent(MainActivity.this, PreferencesActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(intent);
-        } else {
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            Snackbar.make(
-                    drawer,
-                    "Replace with your own action",
-                    Snackbar.LENGTH_LONG
-            ).setAction("Action", null).show();
-        }
-
-        return true;
-    }
-
     @Override
     public void onBackPressed() {
-        if (history.size() > 0) {
-            editText.setText(history.pop());
-            button.callOnClick();
-        } else {
-            history.push(iniQuery);
-            new AlertDialog.Builder(this)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setTitle(String.format(getString(R.string.closing), getString(R.string.app_name)))
-                    .setMessage(getString(R.string.sureToClose))
-                    .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            realExit();
-                        }
 
-                    })
-                    .setNegativeButton(getString(R.string.no), null)
-                    .show();
-        }
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle(String.format(getString(R.string.closing), getString(R.string.app_name)))
+                .setMessage(getString(R.string.sureToClose))
+                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        realExit();
+                    }
+
+                })
+                .setNegativeButton(getString(R.string.no), null)
+                .show();
     }
 
     @Override

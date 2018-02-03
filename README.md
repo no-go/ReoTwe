@@ -4,9 +4,9 @@
 
 The App WAS a very low level twitter client. You can use the old code for build your own cool client or to learn how *Twitter Kit* and API works.
 
-![logo](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+![logo](img/ic_launcher.png)
 
-[Twthaar Website](https://no-go.github.io/ReoTwe/)
+[ReoTwe Website](https://no-go.github.io/ReoTwe/)
 
 ## Features
 
@@ -20,7 +20,6 @@ The App WAS a very low level twitter client. You can use the old code for build 
      -  extracts username from `RT @username:` and got to that user timeline by a single click
      -  if it is not a retweet, it try to extract the first `@username`
      -  if there is no `@username`, it uses the username of the posting user / publisher
- -  multi search (comma separated) for `@userTimelines` or `#otherStuff`
  -  switch images on/off in preferences
  -  english and german interface
  -  night mode
@@ -53,21 +52,6 @@ but ...
 ## Get the App
 
 You can get a signed APK from here (Android 4.1+): [APK](https://github.com/no-go/ReoTwe/raw/master/app/release/app-release.apk)
-
-## Screenshots
-
-Some screenshots are realy old and the App looks a bit cooler today.
-
-![ReoTwe - v1.82 textonly and nightmode](img/screenshot10.jpg)
-![ReoTwe - v1.77 info sidebar](img/screenshot9.png)
-![ReoTwe - picture and pictureless tweet buttons at the buttom](img/screenshot1.png)
-![ReoTwe - v1.74 night mode](img/screenshot8.png)
-![ReoTwe - v1.70 new Tweet Design](img/screenshot7.png)
-![ReoTwe - send a tweet](img/screenshot4.png)
-![ReoTwe get images on demand](img/screenshot5.png)
-![ReoTwe display all images](img/screenshot2.png)
-![ReoTwe - v1.5](img/screenshot3.png)
-![ReoTwe preferences](img/screenshot6.png)
 
 ## How to get API Codes
 
@@ -149,3 +133,32 @@ I use both to build the app. I did not add any google or ad keys or codes for ma
 ### Privacy Questions.
 
 If you have any questions or concerns about my Privacy Policy or data processing, please contact me.
+
+## Screenshots
+
+![Img 01](img/00.png)
+
+![Img 02](img/01.png)
+
+![Img 03](img/02.png)
+
+![Img 04](img/03.png)
+
+![Img 05](img/04.png)
+
+![Img 06](img/05.png)
+
+## Todo und Issues (german)
+
+- Zurückgehen (history) neu implementieren
+- Such-Dialog neu implementieren (ohne komma oder at und hashtag, intuitiver)
+- bessere Pflege der Suchbegriffe und User
+- Browsen debuggen
+- Intro nach erstinstallations: Gifs und Hinweise, warum die ANTI-FEATURES gewünscht sind !!
+- nach Linkverfolgung nach oben scrollen 
+- nach Tweeten und Autorisieren den Inhalt neu aufbauen bzw. Refresh
+- auf Android 4.1 testen
+- Screenshots 7 Zoll
+- Tweet teilen ...
+- bei f-droid comitten
+- text only cache

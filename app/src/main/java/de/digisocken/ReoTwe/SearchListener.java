@@ -15,30 +15,23 @@ import com.twitter.sdk.android.tweetui.UserTimeline;
 
 public class SearchListener implements View.OnClickListener {
     MainActivity mainActivity;
-    String iniQuery;
     volatile int loaded;
+    private String _query;
 
     public SearchListener(Context mContext, String q) {
         mainActivity = (MainActivity) mContext;
-        iniQuery = q;
+        _query = q;
         loaded = 0;
     }
 
-    @Override
-    public void onClick(View v) {
+    public void run(String query) {
+
         if (mainActivity.tweetArrayList != null) {
             mainActivity.tweetArrayList.clear();
         }
 
-        String query = iniQuery;
-        if (iniQuery.equals("")) {
-            query = mainActivity.editText.getText().toString();
-        } else {
-            mainActivity.editText.setText(query);
-            mainActivity.history.push(query);
-        }
-
-        final String[] queries = query.split(",");
+        if (query != null) _query = query;
+        final String[] queries = _query.split(",");
         loaded = 0;
 
         for (String q : queries) {
@@ -69,8 +62,8 @@ public class SearchListener implements View.OnClickListener {
                     public void failure(TwitterException e) {
                         if (
                                 !App.mPreferences.getString("CONSUMER_KEY","").equals("") ||
-                                !App.mPreferences.getString("CONSUMER_SECRET","").equals("")
-                        ) {
+                                        !App.mPreferences.getString("CONSUMER_SECRET","").equals("")
+                                ) {
                             View v = mainActivity.getLayoutInflater().inflate(R.layout.tweet_oops, null);
                             mainActivity.mListView.addFooterView(v);
                         }
@@ -102,8 +95,8 @@ public class SearchListener implements View.OnClickListener {
                     public void failure(TwitterException e) {
                         if (
                                 !App.mPreferences.getString("CONSUMER_KEY","").equals("") ||
-                                !App.mPreferences.getString("CONSUMER_SECRET","").equals("")
-                        ) {
+                                        !App.mPreferences.getString("CONSUMER_SECRET","").equals("")
+                                ) {
                             View v = mainActivity.getLayoutInflater().inflate(R.layout.tweet_oops, null);
                             mainActivity.mListView.addFooterView(v);
                         }
@@ -111,5 +104,11 @@ public class SearchListener implements View.OnClickListener {
                 });
             }
         }
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        run(null);
     }
 }
