@@ -6,7 +6,11 @@ The App WAS a very low level twitter client. You can use the old code for build 
 
 ![logo](img/ic_launcher.png)
 
+<<<<<<< HEAD
 [ReoTwe Website](https://no-go.github.io/ReoTwe/)
+=======
+[Twthaar Website](https://no-go.github.io/ReoTwe/)
+>>>>>>> acd56ce82c6ac29860cc9255f059a3e3929d9a12
 
 ## Features
 
@@ -51,7 +55,26 @@ but ...
 
 ## Get the App
 
+<<<<<<< HEAD
 You can get a signed APK from here (Android 4.1+): [APK](https://github.com/no-go/ReoTwe/raw/HEAD/app/release/app-release.apk)
+=======
+You can get a signed APK from here (Android 4.1+): [APK](https://github.com/no-go/ReoTwe/raw/master/app/release/app-release.apk)
+
+## Screenshots
+
+Some screenshots are realy old and the App looks a bit cooler today.
+
+![ReoTwe - v1.82 textonly and nightmode](img/screenshot10.jpg)
+![ReoTwe - v1.77 info sidebar](img/screenshot9.png)
+![ReoTwe - picture and pictureless tweet buttons at the buttom](img/screenshot1.png)
+![ReoTwe - v1.74 night mode](img/screenshot8.png)
+![ReoTwe - v1.70 new Tweet Design](img/screenshot7.png)
+![ReoTwe - send a tweet](img/screenshot4.png)
+![ReoTwe get images on demand](img/screenshot5.png)
+![ReoTwe display all images](img/screenshot2.png)
+![ReoTwe - v1.5](img/screenshot3.png)
+![ReoTwe preferences](img/screenshot6.png)
+>>>>>>> acd56ce82c6ac29860cc9255f059a3e3929d9a12
 
 ## How to get API Codes
 
