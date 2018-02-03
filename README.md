@@ -1,17 +1,17 @@
-# Twthaar - the Social Detox
+# ReoTwé (Read-or-Tweet)
 
 **You became hooked on social media and Twitter? If you wanna change it, try this App.**
 
-Twthaar WAS a very low level twitter client. You can use the old code for build your own cool client or to learn how *Twitter Kit* and API works.
+The App WAS a very low level twitter client. You can use the old code for build your own cool client or to learn how *Twitter Kit* and API works.
 
-![logo](logo.png)
+![logo](img/ic_launcher.png)
 
-[Twthaar Website](https://no-go.github.io/Twthaar/)
+[ReoTwe Website](https://no-go.github.io/ReoTwe/)
 
 ## Features
 
  -  It is **free of ads**
- -  reduce addiction to **retweet, like or high resolution selfies**, because it has not this features!
+ -  reduce addiction to **retweet, like or high resolution selfies**, because **it has not** this features!
  -  fast and efficient
  -  tap on the Tweet text to load the full imageful Tweet View
  -  get and add your own API key and secret on apps.twitter.com to authorize the App
@@ -20,14 +20,20 @@ Twthaar WAS a very low level twitter client. You can use the old code for build 
      -  extracts username from `RT @username:` and got to that user timeline by a single click
      -  if it is not a retweet, it try to extract the first `@username`
      -  if there is no `@username`, it uses the username of the posting user / publisher
- -  multi search (comma separated) for `@userTimelines` or `#otherStuff`
  -  switch images on/off in preferences
  -  english and german interface
  -  night mode
+ -  small Welcome intro
  -  it is possible to send text only or low resolution picture tweets (you get a login dialog on first try)
  -  if you are logged in, it gets your friend list and add it to the preferences automaticaly (and yourself)
+ -  com.twitter.tweet-composer added and modified with stupid Validator, **280 characters** are possible, now.
 
 ## Social Media Detoxification
+
+ -  no ads
+ -  maximal privacy
+
+but ...
 
  -  no private messages
  -  no profile changes
@@ -36,30 +42,16 @@ Twthaar WAS a very low level twitter client. You can use the old code for build 
  -  no voting
  -  no stories
  -  no likes
- -  no ads
+ -  no retweets
+ -  no beep, blink or any other notification
  -  no file or contacts access and full & maximal privacy
  -  not easy to install (you need to get API Key and secret)
  -  no woman, no cry (maybe)
- -  and many other features, which I will never implement ever!
+ -  and many other features, which I will never implement ever (but I could)
 
 ## Get the App
 
-You can get a signed APK from here (Android 4.1+): [APK](https://raw.githubusercontent.com/no-go/Twthaar/master/app/app-release.apk)
-
-## Screenshots
-
-Some screenshots are realy old and the App looks a bit cooler today.
-
-![Twthaar - v1.82 textonly and nightmode](img/screenshot10.jpg)
-![Twthaar - v1.77 info sidebar](img/screenshot9.png)
-![Twthaar - picture and pictureless tweet buttons at the buttom](img/screenshot1.png)
-![Twthaar - v1.74 night mode](img/screenshot8.png)
-![Twthaar - v1.70 new Tweet Design](img/screenshot7.png)
-![Twthaar - send a tweet](img/screenshot4.png)
-![Twthaar get images on demand](img/screenshot5.png)
-![Twthaar: display all images](img/screenshot2.png)
-![Twthaar - v1.5](img/screenshot3.png)
-![Twthaar preferences](img/screenshot6.png)
+You can get a signed APK from here (Android 4.1+): [APK](https://github.com/no-go/ReoTwe/raw/HEAD/app/release/app-release.apk)
 
 ## How to get API Codes
 
@@ -115,6 +107,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 For more information, please refer to [http://unlicense.org](http://unlicense.org)
 
+Some third party code parts (Twitterkit, AppIntro) uses other OpenSource licenses - look at their code to get further informations.
+
 ## Privacy Policy
 
 ### Personal information.
@@ -139,3 +133,32 @@ I use both to build the app. I did not add any google or ad keys or codes for ma
 ### Privacy Questions.
 
 If you have any questions or concerns about my Privacy Policy or data processing, please contact me.
+
+## Screenshots
+
+![Img 01](img/00.png)
+
+![Img 02](img/01.png)
+
+![Img 03](img/02.png)
+
+![Img 04](img/03.png)
+
+![Img 05](img/04.png)
+
+![Img 06](img/05.png)
+
+## Todo und Issues (german)
+
+- Zurückgehen (history) neu implementieren
+- Such-Dialog neu implementieren (ohne komma oder at und hashtag, intuitiver)
+- bessere Pflege der Suchbegriffe und User
+- Browsen debuggen
+- Intro nach erstinstallations: Gifs und Hinweise, warum die ANTI-FEATURES gewünscht sind !!
+- nach Linkverfolgung nach oben scrollen 
+- nach Tweeten und Autorisieren den Inhalt neu aufbauen bzw. Refresh
+- auf Android 4.1 testen
+- Screenshots 7 Zoll
+- Tweet teilen ...
+- bei f-droid comitten
+- text only cache
