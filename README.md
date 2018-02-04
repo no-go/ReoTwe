@@ -4,7 +4,7 @@
 
 The App WAS a very low level twitter client. You can use the old code for build your own cool client or to learn how *Twitter Kit* and API works.
 
-![logo](img/ic_launcher.png)
+![Detox](img/06.png)
 
 [ReoTwe Website](https://no-go.github.io/ReoTwe/)
 
@@ -23,6 +23,7 @@ The App WAS a very low level twitter client. You can use the old code for build 
  -  switch images on/off in preferences
  -  english and german interface
  -  night mode
+ -  search `@username` and keywords
  -  small Welcome intro
  -  it is possible to send text only or low resolution picture tweets (you get a login dialog on first try)
  -  if you are logged in, it gets your friend list and add it to the preferences automaticaly (and yourself)
@@ -55,12 +56,12 @@ You can get a signed APK from here (Android 4.1+): [APK](https://github.com/no-g
 
 ## How to get API Codes
 
-I did not share me API Key and Secret ! You have to create your own. Normaly
+I did not share my API Key and Secret ! You have to create your own. Normally
 all twitter client request go to a man in the middle app-server to analyse
 and cache every request (similar to a proxy). WE DO NOT WANT this man in the
 middle server, who holds API Key and Secret and sending Ad's or do things with
 our private stuff. Thus: Your client have to hold this Keys and you have
-to generate your own, because there are request limits to pretent the
+to generate your own, because there are request limits to pretend the
 original twitter servers from to many requests.
 
 To get API Key and Secret you have to create a new App on the twitter development website.

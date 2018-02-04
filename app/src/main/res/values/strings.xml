@@ -45,8 +45,35 @@
     <string name="welcome">Welcome!</string>
     <string name="welcomeHint">This is ReoTwé, a unofficial very reduced twitter client.</string>
 
+    <string name="slideDetox">Social Media Detox</string>
+    <string name="slideDetoxHint">
+        You became hooked on social media and Twitter? If you want to change it, try this App.
+        No likes, no retweets, no comments, no notifications to pretend you from addiction.
+    </string>
+
     <string name="slidePriv">Maximal Privacy, but …</string>
     <string name="slidePrivHint">… if you want to take a picture, the App needs cam access (but not file access!)</string>
+
+    <string name="slideApi1">ReoTwé is different</string>
+    <string name="slideApiHint1">
+Normally all twitter client request go to a man in the middle to analyse
+and cache every request.
+    </string>
+    <string name="slideApi2">No Ads, No BigData</string>
+    <string name="slideApiHint2">
+WE DO NOT WANT this man in the middle server, who holds API Key and
+Secret and sending Ad\'s or do things with our private stuff!
+    </string>
+    <string name="slideApi3">Your API Key and Secret</string>
+    <string name="slideApiHint3">
+Your CLIENT ReoTwé have to hold this Keys and YOU have
+to generate your own Keys! Visit apps.twitter.com
+    </string>
+    <string name="slideApi4">Request Limits</string>
+    <string name="slideApiHint4">
+There are request limits to pretend the
+original twitter servers from to many requests.
+    </string>
 
     <string name="slideAlpha">Still Beta Version</string>
     <string name="slideAlphaHint">I have to create slides to give hints to API Key, usage and (anti)features</string>

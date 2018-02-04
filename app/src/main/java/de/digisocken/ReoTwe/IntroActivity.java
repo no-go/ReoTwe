@@ -1,16 +1,14 @@
 package de.digisocken.ReoTwe;
 
 import android.Manifest;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
-import com.github.paolorotolo.appintro.model.SliderPage;
 
 public class IntroActivity extends AppIntro {
     @Override
@@ -28,6 +26,17 @@ public class IntroActivity extends AppIntro {
         ));
 
         addSlide(AppIntroFragment.newInstance(
+                getString(R.string.slideDetox),
+                "bold",
+                getString(R.string.slideDetoxHint),
+                "normal",
+                R.drawable.wtfemoji,
+                Color.BLACK,
+                Color.WHITE,
+                Color.WHITE
+        ));
+
+        addSlide(AppIntroFragment.newInstance(
                 getString(R.string.slidePriv),
                 "bold",
                 getString(R.string.slidePrivHint),
@@ -37,6 +46,58 @@ public class IntroActivity extends AppIntro {
                 ContextCompat.getColor(this, R.color.textFront),
                 ContextCompat.getColor(this, R.color.textFront)
         ));
+
+
+
+
+        addSlide(AppIntroFragment.newInstance(
+                getString(R.string.slideApi1),
+                "bold",
+                getString(R.string.slideApiHint1),
+                "normal",
+                android.R.drawable.ic_menu_info_details,
+                ContextCompat.getColor(this, R.color.textBack),
+                ContextCompat.getColor(this, R.color.textFront),
+                ContextCompat.getColor(this, R.color.textFront)
+        ));
+
+        addSlide(AppIntroFragment.newInstance(
+                getString(R.string.slideApi2),
+                "bold",
+                getString(R.string.slideApiHint2),
+                "normal",
+                android.R.drawable.ic_lock_lock,
+                ContextCompat.getColor(this, R.color.textBack),
+                ContextCompat.getColor(this, R.color.textFront),
+                ContextCompat.getColor(this, R.color.textFront)
+        ));
+
+        addSlide(AppIntroFragment.newInstance(
+                getString(R.string.slideApi3),
+                "bold",
+                getString(R.string.slideApiHint3),
+                "normal",
+                android.R.drawable.ic_menu_add,
+                ContextCompat.getColor(this, R.color.textBack),
+                ContextCompat.getColor(this, R.color.textFront),
+                ContextCompat.getColor(this, R.color.textFront)
+        ));
+
+        addSlide(AppIntroFragment.newInstance(
+                getString(R.string.slideApi4),
+                "bold",
+                getString(R.string.slideApiHint4),
+                "normal",
+                android.R.drawable.ic_menu_today,
+                ContextCompat.getColor(this, R.color.textBack),
+                ContextCompat.getColor(this, R.color.textFront),
+                ContextCompat.getColor(this, R.color.textFront)
+        ));
+
+
+
+
+
 
         addSlide(AppIntroFragment.newInstance(
                 getString(R.string.slideAlpha),
@@ -61,7 +122,7 @@ public class IntroActivity extends AppIntro {
         ));
 
         setFadeAnimation();
-        askForPermissions(new String[]{Manifest.permission.CAMERA}, 2);
+        askForPermissions(new String[]{Manifest.permission.CAMERA}, 3);
         setBarColor(ContextCompat.getColor(this, R.color.primColor));
     }
 

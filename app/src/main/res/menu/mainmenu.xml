@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item android:id="@+id/action_search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:title="@string/search"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="always|collapseActionView" />
+
     <group android:checkableBehavior="all">
         <item
             android:id="@+id/action_allImages"

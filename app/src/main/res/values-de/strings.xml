@@ -46,8 +46,37 @@
     <string name="welcome">Willkommen!</string>
     <string name="welcomeHint">Das ist ReoTwé, ein inoffizieller, stark reduzierter Twitter Client.</string>
 
+    <string name="slideDetox">Social Media Entzug</string>
+    <string name="slideDetoxHint">
+        Du bist süchtig nach Social Media und Twitter? Wenn du das ändern willst, nutze diese App.
+        Keine Likes, keine Retweets, keine Kommentare, kein Piepen oder Blinken bei neuen
+        News - dies soll ein Suchtverhalten vermeiden.
+    </string>
+
     <string name="slidePriv">Maximale Privatsphäre, aber …</string>
     <string name="slidePrivHint">… wenn du ein Foto twittern willst, dann braucht die App Kamerazugriff (aber kein Dateizugriff!)</string>
+
+    <string name="slideApi1">ReoTwé ist anders</string>
+    <string name="slideApiHint1">
+Normalerweise sendet ein Twitter Client eine Anfrage an ein System (Man in the Middle)
+wo eine Analyse stattfindet und Anfragen zwischengespeichert werden.
+    </string>
+    <string name="slideApi2">Keine Werbung, kein BigData</string>
+    <string name="slideApiHint2">
+WIR WOLLEN DAS NICHT! Dieser dritte Verbindungspartner, der einen API Key und
+Secret speichert, sendet dir Werbung und analysiert (neben Twitter) deine Daten
+und Anfragen.
+    </string>
+    <string name="slideApi3">Dein API Key + Secret</string>
+    <string name="slideApiHint3">
+Der CLIENT ReoTwé speichert deine Keys und umgeht so eine twitterfremde Analyse.
+Unter apps.twitter.com musst du mit deinem Twitter-Account diese privaten Keys selber erzeugen.
+    </string>
+    <string name="slideApi4">Anfragen Limit</string>
+    <string name="slideApiHint4">
+Um die original Twitter Server nicht zu überlasten, gibt es für jede App (jeden Key)
+ein Anfragelimit.
+    </string>
 
     <string name="slideAlpha">Noch eine Beta Version</string>
     <string name="slideAlphaHint">Ich muss hier noch Slides machen, um API Key, Bedienung und (anti-)Features zu erklären.</string>

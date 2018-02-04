@@ -30,7 +30,7 @@ public class SearchListener implements View.OnClickListener {
             mainActivity.tweetArrayList.clear();
         }
 
-        if (query != null) _query = query;
+        if (query != null) _query = query.replace(" ", ",");
         final String[] queries = _query.split(",");
         loaded = 0;
 
