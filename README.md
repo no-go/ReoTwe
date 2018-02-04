@@ -8,6 +8,8 @@ The App WAS a very low level twitter client. You can use the old code for build 
 
 [ReoTwe Website](https://no-go.github.io/ReoTwe/)
 
+![Detox](img/06.png)
+
 ## Features
 
  -  It is **free of ads**
@@ -24,6 +26,7 @@ The App WAS a very low level twitter client. You can use the old code for build 
  -  english and german interface
  -  night mode
  -  small Welcome intro
+ -  search `@username` and keywords
  -  it is possible to send text only or low resolution picture tweets (you get a login dialog on first try)
  -  if you are logged in, it gets your friend list and add it to the preferences automaticaly (and yourself)
  -  com.twitter.tweet-composer added and modified with stupid Validator, **280 characters** are possible, now.
