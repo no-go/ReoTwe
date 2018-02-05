@@ -28,7 +28,7 @@
 
     <string name="hintFollowUser">Klick hier um zum User zu gehn</string>
     <string name="hintFollowThis">Klick: geht zu XYZ</string>
-    <string name="hintClickLoadFull">Klick auf den Inhalt, um den #XYZ Tweet mit Bildern zu laden. Ist der Tweet komplett geladen, öffnet ein Klick dessen Medien oder führt zu einer Webseite. Du brauchst außerdem einen eigenen API-Key und API-Secret um diese App zu nutzen. Nutze die Einstellungen in der linken Sidebar, um sie bei zu fügen.</string>
+    <string name="hintClickLoadFull">Klick auf den Inhalt, um den #XYZ Tweet mit Bildern zu laden. Ist der Tweet komplett geladen, öffnet ein Klick dessen Medien oder führt zu einer Webseite. Du brauchst außerdem einen eigenen API-Key und API-Secret um diese App zu nutzen. Nutze die Einstellungen im Options-Menü, um sie bei zu fügen.</string>
     <string name="hintOoops">Bei der Twitter-Anfrage lief was schief. Du brauchst einen *KORREKTEN* API-Key und API-Secret um diese App zu nutzen. Nutze die Einstellungen in der linken Sidebar, um sie bei zu fügen.</string>
     <string name="hintRTuser">Der User, der den Tweet retweetet hat</string>
 

@@ -27,7 +27,7 @@
 
     <string name="hintFollowUser">click here to go to user</string>
     <string name="hintFollowThis">click here to go to XYZ</string>
-    <string name="hintClickLoadFull">Click on content to see the imageful total #XYZ tweet. If the full tweet is loaded, a click opens or plays media or it opens a website. You need your own API-Key and API-Secret to run this app. Use the preferences in the left sidebar to add these keys.</string>
+    <string name="hintClickLoadFull">Click on content to see the imageful total #XYZ tweet. If the full tweet is loaded, a click opens or plays media or it opens a website. You need your own API-Key and API-Secret to run this app. Use the preferences (options menu) to add these keys.</string>
     <string name="hintOoops">The Twitter request was with stupid. You need a *VALID* API-key and API-Secret to run this app. Use the preferences in the left sidebar to add these keys.</string>
     <string name="hintRTuser">the username, who retweet this tweet</string>
 
