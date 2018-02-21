@@ -163,3 +163,4 @@ If you have any questions or concerns about my Privacy Policy or data processing
 - Tweet teilen ...
 - bei f-droid comitten
 - text only cache
+- bessere Favouriten Pflege (statt Textfeld mit Komma)
