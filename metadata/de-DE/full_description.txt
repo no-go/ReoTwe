@@ -1,0 +1,18 @@
+Die (süchtig machenden) Twitter Client Funktionen wie Likes, Retweets, Kommentare und Piepen oder Blinken bei neuen Infos sind von mir absichtlich nicht eingebaut. Außerdem lassen sich nur Vorschaubilder Twittern (ein einzelnes) um auch das ständige twittern von "Hey, wie sehe ich aus!?" Tweets zu vermeiden.
+
+Als Student kann ich mir zur Zeit keinen Server leisten und will auch nicht euren Twitter-Content analysieren oder zwischenspeichern. Werbung mag ich auch nicht (mit dem ich den Server finanzieren könnte). Aus diesem Grund müsst ihr mit eurem Twitter Account einen API Key + Secret erstellen. Auf der <a href="https://no-go.github.io/ReoTwe/">App-Webseite</a> und in der App wird dies erklärt. <b>Ohne diese Keys FUNKTIONIERT DIE APP nicht!</b>
+
+Trotz aller Funktionsreduzierung kann die App:
+
+✔️ Twittern (280 Zeichen)
+✔️ Suchen (nicht perfekt)
+✔️ Bilder zeigen, Videos abspielen
+✔️ Timelines mehrerer User anzeigen (nur neue Einträge)
+✔️ Via Klick Usern und Hashtags folgen
+✔️ alternativ alle Tweets auf Textmodus stellen
+✔️ Tweets im Browser öffnen
+✔️ Sortiert Einträge nach Uhrzeit
+✔️ ein Nacht-Modus
+✔️ Hat ein App Intro (auf das ich stolz bin)
+
+Ich bastle schon länger an der App und nun ist sie in einem Zustand, den man veröffentlichen kann. Sie ist OpenSource (FOSS = free open source software) und kann gerne von anderen Menschen weiterentwickelt werden.

@@ -7,8 +7,8 @@ android {
         applicationId "de.digisocken.reotwe"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 202
-        versionName "2.02"
+        versionCode 203
+        versionName "2.03"
         multiDexEnabled true
     }
     buildTypes {

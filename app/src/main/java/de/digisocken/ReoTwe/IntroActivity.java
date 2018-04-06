@@ -95,10 +95,7 @@ public class IntroActivity extends AppIntro {
         ));
 
 
-
-
-
-
+/*
         addSlide(AppIntroFragment.newInstance(
                 getString(R.string.slideAlpha),
                 "bold",
@@ -109,6 +106,7 @@ public class IntroActivity extends AppIntro {
                 ContextCompat.getColor(this, R.color.textFront),
                 ContextCompat.getColor(this, R.color.textFront)
         ));
+*/
 
         addSlide(AppIntroFragment.newInstance(
                 getString(R.string.slideHomepage),

@@ -1,0 +1,53 @@
+You became hooked on social media and Twitter? If you wanna change it, try this App.
+
+The App WAS a very low level twitter client. You can use the old code for build your own cool client or to learn how <i>Twitter Kit</i> API works.
+
+<b>Features</b>
+
+👉 It is <i>free of ads</i>
+👉 reduce addiction to <i>retweet, like or high resolution selfies</i>, because <i>it has not</i> this features!
+👉 fast and efficient
+👉 tap on the Tweet text to load the full imageful Tweet View
+👉 get and add your own API key and secret on apps.twitter.com to authorize the App
+👉 lists timeline without images of a given username (+time, likes, retweets)
+👉 Browse timelines
+   👉 extracts username from <tt>RT @username:</tt> and got to that user timeline by a single click
+   👉 if it is not a retweet, it try to extract the first <tt>@username</tt>
+   👉 if there is no <tt>@username</tt>, it uses the username of the posting user / publisher
+👉 switch images on/off in preferences
+👉 english and german interface
+👉 night mode
+👉 search <tt>@username</tt> and keywords
+👉 small Welcome intro
+👉 it is possible to send text only or low resolution picture tweets (you get a login dialog on first try)
+👉 if you are logged in, it gets your friend list and add it to the preferences automaticaly (and yourself)
+👉 com.twitter.tweet-composer added and modified with stupid Validator, <i>280 characters</i> are possible, now.
+
+<b>Social Media Detoxification</b>
+
+👉 no ads
+👉 maximal privacy
+
+but ...
+
+⚡ no private messages
+⚡ no profile changes
+⚡ no high resolution photo or images sending
+⚡ no Tweet details, answering, comments
+⚡ no voting
+⚡ no stories
+⚡ no likes
+⚡ no retweets
+⚡ no beep, blink or any other notification
+⚡ no file or contacts access and full & maximal privacy
+⚡ not easy to install (you need to get API Key and secret)
+⚡ no woman, no cry (maybe)
+⚡ and many other features, which I will never implement ever (but I could)
+
+
+<b>How to get API Codes</b>
+
+I did not share my API Key and Secret! You have to create your own. Normally all twitter client request go to a man in the middle app-server to analyse and cache every request (similar to a proxy). WE DO NOT WANT this man in the middle server, who holds API Key and Secret and sending Ad's or do things with our private stuff. Thus: Your client have to hold this Keys and you have to generate your own, because there are request limits to pretend the original twitter servers from to many requests.
+
+To get API Key and Secret you have to create a "new App" on the twitter development website. <a href="https://no-go.github.io/ReoTwe/">Details</a>
+
