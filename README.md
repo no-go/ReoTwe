@@ -56,6 +56,11 @@ but ...
 
 You can get a signed APK from here (Android 4.1+): [APK](https://github.com/no-go/ReoTwe/raw/HEAD/app/release/app-release.apk)
 
+<a href="https://f-droid.org/repository/browse/?fdid=de.digisocken.reotwe" target="_blank">
+<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="90"/></a>
+<a href="https://play.google.com/store/apps/details?id=de.digisocken.reotwe" target="_blank">
+<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/></a>
+
 ## How to get API Codes
 
 I did not share me API Key and Secret ! You have to create your own. Normaly
@@ -151,17 +156,14 @@ If you have any questions or concerns about my Privacy Policy or data processing
 
 ![Img 06](img/05.png)
 
-## Todo und Issues (german)
+## Todo und Issues
 
-- Zurückgehen (history) neu implementieren
-- Such-Dialog neu implementieren (ohne komma oder at und hashtag, intuitiver)
-- bessere Pflege der Suchbegriffe und User
-- Browsen debuggen
-- Intro nach erstinstallations: Gifs und Hinweise, warum die ANTI-FEATURES gewünscht sind !!
-- nach Linkverfolgung nach oben scrollen 
-- nach Tweeten und Autorisieren den Inhalt neu aufbauen bzw. Refresh
-- auf Android 4.1 testen
-- Screenshots 7 Zoll
-- Tweet teilen ...
-- bei f-droid comitten
+- better favourite editing (not a single, stupid textfield)
+- browse/follow a link: scroll to top of the list
+- after sending a tweet and authorising do a refresh
+- implement a history function
+- more intuitive search function
+- Tweet share ...
 - text only cache
+- test on Android 4.1
+- Screenshots 7 Zoll
