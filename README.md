@@ -156,12 +156,12 @@ If you have any questions or concerns about my Privacy Policy or data processing
 
 ## Todo und Issues
 
-- better favourite editing (not a single, stupid textfield)
 - browse/follow a link: scroll to top of the list
 - after sending a tweet and authorising do a refresh
 - implement a history function
 - more intuitive search function
-- Tweet share ...
+- Tweet share with ...
 - text only cache
 - test on Android 4.1
+- switch to android 8.0 api (evil)
 - Screenshots 7 Zoll

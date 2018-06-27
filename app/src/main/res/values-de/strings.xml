@@ -13,9 +13,9 @@
     <string name="projPage">Info Webseite</string>
     <string name="search">suche nach @userA oder @userB,#tag1,#tag2</string>
     <string name="sureToClose">Willst du mich wirklich beenden?</string>
-    <string name="usersAndTags">Favorit User und Tags</string>
+    <string name="usersAndTags">User und Tags</string>
     <string name="favAdded">neue Favorit(en) zugefügt</string>
-    <string name="usersAndTags_summary">z.B.: @user1,@user32,#tagImportant42,@fails,#epic69,...</string>
+    <string name="usersAndTags_summary">In diesen Zeilen kannst du deine lieblings User, Suchworte und Hashtags pflegen. Z.B.: @user1,@user32,#tagImportant42,@fails,#epic69,...</string>
     <string name="makeTweet">Neuer Tweet …</string>
     <string name="youNeedApiKey">Du brauchst auch gültigen API Key + Secret!</string>
     <string name="ready">fertig</string>
@@ -42,7 +42,7 @@
     <string name="tw__max_tweet_chars">280</string>
     <string name="tw__post_tweet">Twittern</string>
 
-    <string name="intro">Hilfe/Intro</string>
+    <string name="intro">Info &amp; Berechtigungen</string>
     <string name="welcome">Willkommen!</string>
     <string name="welcomeHint">Das ist ReoTwé, ein inoffizieller, stark reduzierter Twitter Client.</string>
 

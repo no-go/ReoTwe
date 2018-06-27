@@ -6,7 +6,7 @@
     <item android:id="@+id/action_search"
         app:actionViewClass="android.support.v7.widget.SearchView"
         android:title="@string/search"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/baseline_search_white_24"
         app:showAsAction="always|collapseActionView" />
 
     <group android:checkableBehavior="all">
@@ -26,6 +26,10 @@
     <item
         android:id="@+id/action_intro"
         android:title="@string/intro"></item>
+
+    <item
+        android:id="@+id/action_user_tags"
+        android:title="@string/usersAndTags"></item>
 
     <item
         android:id="@+id/action_preferences2"

@@ -50,9 +50,11 @@ public class App extends Application {
 
     public MyTwitterApiClient.FriendsService fs;
     public String friendlist;
+    private static Context contextOfApplication;
 
     public void onCreate() {
         super.onCreate();
+        contextOfApplication = getApplicationContext();
 
         try {
             FLATTR_LINK = "https://flattr.com/submit/auto?fid="+FLATTR_ID+"&url="+
@@ -144,6 +146,10 @@ public class App extends Application {
                 false
         );
         call.enqueue(new FriendCallback(query));
+    }
+
+    public static Context getContextOfApplication() {
+        return contextOfApplication;
     }
 
     public static boolean inTimeSpan(int startH, int stopH) {

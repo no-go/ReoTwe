@@ -12,9 +12,9 @@
     <string name="yes">yes</string>
     <string name="closing">Closing %1$s ?</string>
     <string name="sureToClose">Are you sure you want to close me?</string>
-    <string name="usersAndTags">Favourite users and tags</string>
+    <string name="usersAndTags">users and tags</string>
     <string name="favAdded">new favourite(s) added</string>
-    <string name="usersAndTags_summary">e.g.: @user1,@user32,#tagImportant42,@fails,#epic69,...</string>
+    <string name="usersAndTags_summary">You can add your favourit users, keywords and hastags in these lines. E.g.: @user1,@user32,#tagImportant42,@fails,#epic69,...</string>
     <string name="makeTweet">make tweet …</string>
     <string name="youNeedApiKey">You need a valid API Key and Secret, too!</string>
     <string name="ready">ready.</string>
@@ -41,7 +41,7 @@
     <string name="tw__post_tweet">Tweet</string>
     <string name="tw__max_tweet_chars">280</string>
 
-    <string name="intro">Help/Intro</string>
+    <string name="intro">info &amp; permissions</string>
     <string name="welcome">Welcome!</string>
     <string name="welcomeHint">This is ReoTwé, a unofficial very reduced twitter client.</string>
 

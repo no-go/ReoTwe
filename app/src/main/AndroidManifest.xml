@@ -35,6 +35,10 @@
             android:name="de.digisocken.ReoTwe.PreferencesActivity"
             android:parentActivityName="de.digisocken.ReoTwe.MainActivity" />
 
+        <activity
+            android:name="de.digisocken.ReoTwe.FeedSourcesActivity"
+            android:parentActivityName="de.digisocken.ReoTwe.MainActivity" />
+
         <activity android:name="com.twitter.sdk.android.core.identity.OAuthActivity" />
 
         <receiver

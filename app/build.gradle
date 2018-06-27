@@ -7,8 +7,9 @@ android {
         applicationId "de.digisocken.reotwe"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 203
-        versionName "2.03"
+        // google play is the upload key
+        versionCode 204
+        versionName "2.04"
         multiDexEnabled true
     }
     buildTypes {

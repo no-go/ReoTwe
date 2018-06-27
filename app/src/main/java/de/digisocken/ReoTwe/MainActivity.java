@@ -139,6 +139,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentIntro = new Intent(MainActivity.this, IntroActivity.class);
                 startActivity(intentIntro);
                 break;
+            case R.id.action_user_tags:
+                Intent intentUt = new Intent(MainActivity.this, FeedSourcesActivity.class);
+                startActivity(intentUt);
+                break;
             case R.id.action_project:
                 Intent intentProj= new Intent(Intent.ACTION_VIEW, Uri.parse(App.PROJECT_LINK));
                 startActivity(intentProj);
