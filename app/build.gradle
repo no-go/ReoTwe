@@ -8,8 +8,8 @@ android {
         minSdkVersion 16
         targetSdkVersion 26
         // google play is the upload key
-        versionCode 204
-        versionName "2.04"
+        versionCode 205
+        versionName "2.05"
         multiDexEnabled true
     }
     buildTypes {
@@ -30,9 +30,9 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.android.support:design:26.1.0'
-    implementation 'com.twitter.sdk.android:twitter-core:3.2.0'
-    implementation 'com.twitter.sdk.android:tweet-ui:3.2.0'
-    implementation 'com.twitter.sdk.android:tweet-composer:3.2.0' // :-( to get some com.twitter.Regex and other stuff
+    implementation 'com.twitter.sdk.android:twitter-core:3.3.0'
+    implementation 'com.twitter.sdk.android:tweet-ui:3.3.0'
+    implementation 'com.twitter.sdk.android:tweet-composer:3.3.0' // :-( to get some com.twitter.Regex and other stuff
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.github.apl-devs:appintro:v4.2.2'
 }

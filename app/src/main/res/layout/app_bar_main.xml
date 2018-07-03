@@ -15,6 +15,7 @@
         android:layout_gravity="bottom|start"
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@color/primColor"
+        android:visibility="gone"
         app:srcCompat="@drawable/baseline_photo_camera_white_24" />
 
     <android.support.design.widget.FloatingActionButton
@@ -24,6 +25,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@color/primColor"
+        android:visibility="gone"
         app:srcCompat="@drawable/baseline_create_white_24" />
 
 </android.support.design.widget.CoordinatorLayout>

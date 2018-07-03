@@ -8,6 +8,13 @@ The App WAS a very low level twitter client. You can use the old code for build 
 
 [ReoTwe Website](https://no-go.github.io/ReoTwe/)
 
+
+## Twitter Service Issue - BreakingMyTwitter
+
+Since june twitter makes big ugly changes on their servers. Some changes are really ok. I use twitterkit from the official twitter developers, but twitterkit is unable to set a callback url in the twitter login button. Thus all login features of my App are removed by twitter. Please twitter to TwitterDev, why they do this to opensource developers :-(
+
+[apps-of-a-feather.com](http://apps-of-a-feather.com/)
+
 ## Features
 
  -  It is **free of ads**

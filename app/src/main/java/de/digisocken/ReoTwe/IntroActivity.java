@@ -26,6 +26,17 @@ public class IntroActivity extends AppIntro {
         ));
 
         addSlide(AppIntroFragment.newInstance(
+                "I am sorry",
+                "bold",
+                "since june twitter needs callback url, but in official twitterkit this is not supported :-O Thus login features are removed :-(",
+                "normal",
+                android.R.drawable.ic_dialog_info,
+                ContextCompat.getColor(this, android.R.color.holo_red_light),
+                ContextCompat.getColor(this, R.color.textFront),
+                ContextCompat.getColor(this, R.color.textFront)
+        ));
+
+        addSlide(AppIntroFragment.newInstance(
                 getString(R.string.slideDetox),
                 "bold",
                 getString(R.string.slideDetoxHint),

@@ -1,5 +1,11 @@
 Die (süchtig machenden) Twitter Client Funktionen wie Likes, Retweets, Kommentare und Piepen oder Blinken bei neuen Infos sind von mir absichtlich nicht eingebaut. Außerdem lassen sich nur Vorschaubilder Twittern (ein einzelnes) um auch das ständige twittern von "Hey, wie sehe ich aus!?" Tweets zu vermeiden.
 
+<b>Twitter Service Issue - BreakingMyTwitter</b>
+
+Seit ende Juni hat twitter massive Änderungen vorgenommen und weitere folgen. Ein paar dieser Änderungen kann ich auch nachvollziehen. Allderings nutze ich das offizielle twitterkit der Twitter Entwickler, nur leider habe es diese versäumt, im Twitter Login Button das setzen einer Callback URL an zu geben. Daher fallen somit alle Funktionen, die mit einem Einloggen bei Twitter verbunden sind, in meiner App weg. Bitte schreibt via Twitter an TwitterDev, warum sie sowas opensource Entwicklern antun :-(
+
+http://apps-of-a-feather.com/
+
 Als Student kann ich mir zur Zeit keinen Server leisten und will auch nicht euren Twitter-Content analysieren oder zwischenspeichern. Werbung mag ich auch nicht (mit dem ich den Server finanzieren könnte). Aus diesem Grund müsst ihr mit eurem Twitter Account einen API Key + Secret erstellen. Auf der <a href="https://no-go.github.io/ReoTwe/">App-Webseite</a> und in der App wird dies erklärt. <b>Ohne diese Keys FUNKTIONIERT DIE APP nicht!</b>
 
 Trotz aller Funktionsreduzierung kann die App:
