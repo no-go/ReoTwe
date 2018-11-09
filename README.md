@@ -18,7 +18,7 @@ Since june Twitter makes big ugly changes on their servers. Some changes are rea
 ## Features
 
  -  It is **free of ads**
- -  reduce addiction to **retweets, like sor high resolution selfies**, because **it does not** have these features!
+ -  reduce addiction to **retweets, likes or high resolution selfies**, because **it does not** have these features!
  -  fast and efficient
  -  tap on the Tweet text to load the full imageful Tweet View
  -  get and add your own API key and secret on apps.twitter.com to authorize the App
