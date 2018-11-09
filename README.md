@@ -1,8 +1,8 @@
 # ReoTwé (Read-or-Tweet)
 
-**You became hooked on social media and Twitter? If you wanna change it, try this App.**
+**You became hooked with social media and Twitter? If you wanna change that, try this App.**
 
-The App WAS a very low level twitter client. You can use the old code for build your own cool client or to learn how *Twitter Kit* and API works.
+The App WAS a very low level twitter client. You can use the old code to build your own cool client or to learn how *Twitter Kit* and API works.
 
 ![Detox](img/06.png)
 
@@ -11,14 +11,14 @@ The App WAS a very low level twitter client. You can use the old code for build 
 
 ## Twitter Service Issue - BreakingMyTwitter
 
-Since june twitter makes big ugly changes on their servers. Some changes are really ok. I use twitterkit from the official twitter developers, but twitterkit is unable to set a callback url in the twitter login button. Thus all login features of my App are removed by twitter. Please twitter to TwitterDev, why they do this to opensource developers :-(
+Since june Twitter makes big ugly changes on their servers. Some changes are really ok. I use TwitterKit from the official Twitter developers, but TwitterKit is unable to set a callback url in the Twitter login button. Thus all login features of my App are removed by Twitter. Please tweet to [@TwitterDev](https://twitter.com/TwitterDev), why do they do this to open-source developers :-(
 
 [apps-of-a-feather.com](http://apps-of-a-feather.com/)
 
 ## Features
 
  -  It is **free of ads**
- -  reduce addiction to **retweet, like or high resolution selfies**, because **it has not** this features!
+ -  reduce addiction to **retweets, like sor high resolution selfies**, because **it does not** have these features!
  -  fast and efficient
  -  tap on the Tweet text to load the full imageful Tweet View
  -  get and add your own API key and secret on apps.twitter.com to authorize the App
@@ -45,7 +45,7 @@ but ...
 
  -  no private messages
  -  no profile changes
- -  no high resolution photo or images sending
+ -  no high resolution photos or images sending
  -  no Tweet details, answering, comments
  -  no voting
  -  no stories
@@ -68,15 +68,15 @@ You can get a signed APK from here (Android 4.1+): [APK](https://github.com/no-g
 
 ## How to get API Codes
 
-I did not share my API Key and Secret ! You have to create your own. Normally
-all twitter client request go to a man in the middle app-server to analyse
+I did not share my API Key and Secret! You have to create your own. Normally
+all Twitter client request go to a man in the middle app-server to analyse
 and cache every request (similar to a proxy). WE DO NOT WANT this man in the
 middle server, who holds API Key and Secret and sending Ad's or do things with
-our private stuff. Thus: Your client have to hold this Keys and you have
+our private stuff. Thus: Your client has to hold these Keys and you have
 to generate your own, because there are request limits to pretend the
-original twitter servers from to many requests.
+original Twitter servers from to many requests.
 
-To get API Key and Secret you have to create a new App on the twitter development website.
+To get API Key and Secret you have to create a new App on the Twitter development website.
 
 ### Visit apps develop website
 
@@ -88,7 +88,7 @@ To get API Key and Secret you have to create a new App on the twitter developmen
 
 ![login to twitter](img/02_login_or_createlogin.png)
 
-### after login go back to apps website
+### after logging in go back to apps website
 
 ![switch to apps](img/03_gobacktoapps.png)
 
@@ -135,11 +135,11 @@ I DO NOT collect non-personal information like user's behavior:
  -  to solve App problems
  -  to show personalized ads
 
-The google play store collect non-personal information such as the data of install (country and equipment). 
+The Google Play Store collects non-personal information such as the data of install (country and equipment). 
 
 ### Twitter Kit and Twitter API
 
-I use both to build the app. I did not add any google or ad keys or codes for marketing feedback, Ads or payment systems. BUT PLEASE read the *Privacy Policy* of the twitter API, too!
+I use both to build the app. I did not add any Google or ad keys or codes for marketing feedback, Ads or payment systems. BUT PLEASE read the *Privacy Policy* of the Twitter API, too!
 
 [https://dev.twitter.com/overview/terms/agreement-and-policy](https://dev.twitter.com/overview/terms/agreement-and-policy)
 
