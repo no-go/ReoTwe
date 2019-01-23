@@ -61,10 +61,8 @@ but ...
 
 You can get a signed APK from here (Android 4.1+): [APK](https://github.com/no-go/ReoTwe/raw/master/app/release/app-release.apk)
 
-<a href="https://f-droid.org/repository/browse/?fdid=de.digisocken.reotwe" target="_blank">
-<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="90"/></a>
-<a href="https://play.google.com/store/apps/details?id=de.digisocken.reotwe" target="_blank">
-<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/></a>
+<a href="https://f-droid.org/packages/de.digisocken.reotwe/" target="_blank">
+<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80"/></a>
 
 ## How to get API Codes
 
