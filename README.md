@@ -8,13 +8,6 @@ The App WAS a very low level twitter client. You can use the old code to build y
 
 [ReoTwe Website](https://no-go.github.io/ReoTwe/)
 
-
-## Twitter Service Issue - BreakingMyTwitter
-
-Since june Twitter makes big ugly changes on their servers. Some changes are really ok. I use TwitterKit from the official Twitter developers, but TwitterKit is unable to set a callback url in the Twitter login button. Thus all login features of my App are removed by Twitter. Please tweet to [@TwitterDev](https://twitter.com/TwitterDev), why do they do this to open-source developers :-(
-
-[apps-of-a-feather.com](http://apps-of-a-feather.com/)
-
 ## Features
 
  -  It is **free of ads**
@@ -59,7 +52,7 @@ but ...
 
 ## Get the App
 
-You can get a signed APK from here (Android 4.1+): [APK](https://github.com/no-go/ReoTwe/raw/master/app/release/app-release.apk)
+You can get a signed APK from here (Android 4.1+): [APK](https://github.com/no-go/ReoTwe/raw/master/app/release/de.digisocken.reotwe.apk)
 
 <a href="https://f-droid.org/packages/de.digisocken.reotwe/" target="_blank">
 <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80"/></a>

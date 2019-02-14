@@ -20,10 +20,6 @@
         android:title="@string/projPage"></item>
 
     <item
-        android:id="@+id/action_flattr"
-        android:title="@string/flattr_this"></item>
-
-    <item
         android:id="@+id/action_intro"
         android:title="@string/intro"></item>
 

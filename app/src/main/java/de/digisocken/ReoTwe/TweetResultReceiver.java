@@ -4,7 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.twitter.sdk.android.tweetcomposer.TweetUploadService;
+import de.digisocken.ReoTwe.tweetcomposer.TweetUploadService;
+//import com.twitter.sdk.android.tweetcomposer.TweetUploadService;
 
 
 public class TweetResultReceiver extends BroadcastReceiver {

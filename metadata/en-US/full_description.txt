@@ -2,12 +2,6 @@ You became hooked with social media and Twitter? If you wanna change that, try t
 
 The App WAS a very low level twitter client. You can use the old code to build your own cool client or to learn how <i>Twitter Kit</i> and API works.
 
-<b>Twitter Service Issue - BreakingMyTwitter</b>
-
-Since june Twitter makes big ugly changes on their servers. Some changes are really ok. I use TwitterKit from the official Twitter developers, but TwitterKit is unable to set a callback url in the Twitter login button. Thus all login features of my App are removed by Twitter. Please tweet to <a href="https://twitter.com/TwitterDev">TwitterDev</a>, why do they do this to open-source developers :-(
-
-http://apps-of-a-feather.com/
-
 <b>Features</b>
 
 👉 It is <i>free of ads</i>

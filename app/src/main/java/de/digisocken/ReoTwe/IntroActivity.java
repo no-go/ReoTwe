@@ -25,6 +25,7 @@ public class IntroActivity extends AppIntro {
                 ContextCompat.getColor(this, R.color.textFront)
         ));
 
+        /*
         addSlide(AppIntroFragment.newInstance(
                 "I am sorry",
                 "bold",
@@ -35,7 +36,7 @@ public class IntroActivity extends AppIntro {
                 ContextCompat.getColor(this, R.color.textFront),
                 ContextCompat.getColor(this, R.color.textFront)
         ));
-
+        */
         addSlide(AppIntroFragment.newInstance(
                 getString(R.string.slideDetox),
                 "bold",

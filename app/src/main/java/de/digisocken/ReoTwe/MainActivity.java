@@ -29,7 +29,9 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.tweetcomposer.ComposerActivity;
+
+import de.digisocken.ReoTwe.tweetcomposer.ComposerActivity;
+//import com.twitter.sdk.android.tweetcomposer.ComposerActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -40,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -118,10 +121,6 @@ public class MainActivity extends AppCompatActivity {
                     item.setChecked(true);
                     adapter.notifyDataSetChanged();
                 }
-                break;
-            case R.id.action_flattr:
-                Intent intentFlattr = new Intent(Intent.ACTION_VIEW, Uri.parse(App.FLATTR_LINK));
-                startActivity(intentFlattr);
                 break;
             case R.id.action_intro:
                 Intent intentIntro = new Intent(MainActivity.this, IntroActivity.class);
